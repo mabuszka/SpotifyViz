@@ -318,3 +318,9 @@ country_by_date <- function(search_queries, start_date, end_date){
     ylab("How many searches") +
     scale_color_brewer(palette="Accent")
 }
+
+##
+
+test  = seq(1:10)
+
+
