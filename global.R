@@ -79,50 +79,48 @@ search_queries <- make_search_queries_df("www")
 
 ### creating dataframe with names of playlists and list with contained songs
 make_playlist_df <- function(folder_path) {
-  song_names_function <- function(x)
+  song_names_function <- function(x) {
     return(df[[2]][[x]][[1]][[1]])
-  
-  artist_names_function <- function(x)
+  }
+  artist_names_function <- function(x) {
     return(df[[2]][[x]][[1]][[2]])
-  
+  }
   files_path <- list.files(folder_path, "Playlist")
   if (folder_path != ".")
     files_path <- paste(folder_path, files_path, sep = "/")
   df <- jsonlite::fromJSON(files_path)
   df <- select(df[[1]], name, items)
-  df <-
-    transmute(
-      df,
-      name,
-      "song_names" = sapply(1:nrow(df), song_names_function),
-      "artist_names" = sapply(1:nrow(df), artist_names_function)
+  
+  
+  playlists = lapply(1 : nrow(df), function(x) {
+    data.table(
+      playlist_name = df[x, 1],
+      track_name = song_names_function(x),
+      artist_name = artist_names_function(x)
     )
+  }) %>%
+    bind_rows()
+  
+  setkey(playlists, track_name, artist_name)
+  
+  playlists
 }
 
 # creating dataframe similar to streaming_history_complete, but this one has additional 
 #column which has string of playlists that including that song, separated by ;
-make_streaming_history_with_playlists <- function(folder_path) {
+str_his_with_playlists <- function(folder_path) {
   playlist_df <- make_playlist_df(folder_path)
-  str_his_comp <- make_streaming_history_complete(folder_path)
-  in_which_playlists <- function(song_row) {
-    in_playlist <- function(playlist_row) {
-      position_in_playlist <- function(position_number) {
-        if (((str_his_comp[song_row, 2] == playlist_df[playlist_row, 3][[1]][position_number])) &
-            (str_his_comp[song_row, 3] == playlist_df[playlist_row, 2][[1]][position_number]))
-          
-          playlist_df[playlist_row, 1]
-      }
-      unlist(unique(lapply(
-        1:length(playlist_df[playlist_row, 3][[1]]), position_in_playlist
-      )))
-    }
-    if (is.null(unlist(sapply(1:length(playlist_df[, 1]), in_playlist))))
-      return("It is not in any playlist")
-    unlist(sapply(1:length(playlist_df[, 1]), in_playlist))
-    
-    
-  }
-  mutate(str_his_comp, "In Playlist" = lapply(1:nrow(str_his_comp), in_which_playlists))
+  str_his_comp <- streaming_history_complete(folder_path)
+  
+  
+  setDT(str_his_comp)
+  setkey(str_his_comp, track_name, artist_name)
+  
+  
+  playlist_df[str_his_comp] %>%
+    replace_na(list(playlist_name = "It is not in any playlist")) %>%
+    unique()
+  
   
 }
 
