@@ -18,12 +18,17 @@
 
 
 number_of_tracks_by_weekday <- function(streaming_history, start_date, end_date, show_skipped = FALSE, as_percentage = TRUE){
-    if (show_skipped){
+  
+  
+  ..count..
+  start_time = end_time = weekday = skipped = ..count.. = NULL
+  
+  if (show_skipped){
       filtered <- streaming_history[start_date <= start_time & end_date >= end_time,]
     }
     else{
       filtered <- streaming_history[start_date <= start_time & end_date >= end_time & skipped == FALSE, ]
-    }
+  }
   vis <- ggplot(filtered, aes(x = weekday))
   
   if (as_percentage){

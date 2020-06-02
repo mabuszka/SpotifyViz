@@ -21,6 +21,9 @@
 
 number_of_tracks_by_hour <- function(streaming_history, start_date, end_date, 
                                      by_weekday = FALSE, show_skipped = FALSE){
+  
+  start_time = end_time  = skipped = NULL
+  
   if (show_skipped){
     filtered <- streaming_history[start_date <= start_time & end_date >= end_time,]
   }

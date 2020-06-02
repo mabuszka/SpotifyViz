@@ -19,6 +19,9 @@
 #' 
 
 prepare_streaming_history <- function(streaming_history){
+  
+  end_time = s_played = start_time = skipped = weekday = NULL
+  
   setnames(streaming_history,c("end_time", "artist_name", "track_name", "s_played"))
   streaming_history[,`:=`(end_time = ymd_hm(end_time), s_played = dmilliseconds((s_played)))
                     ][,`:=`(start_time = end_time - s_played,
