@@ -7,19 +7,16 @@
 prepare_streaming_history(streaming_history)
 }
 \arguments{
-\item{streaming_history}{data.table containing streaming history
-#'}
+\item{streaming_history}{A raw data table containing streaming history from spotify.}
+}
+\value{
+A data table containg streaming history from spotify suited for being used in rest of the functions from the package.
 }
 \description{
 Prepares the data table containig streaming history for futher oprations.
  Changes the names of the base columns to: end_time, artist_name, track_name, s_played. Changes the end_time 
  column from charcter to POSTIX date, s_played to a duration in seconds. Adds new columns: 
- start_time - estimated start time calculated from end_time and s_played, skipped - true if the track was 
+ start_time - estimated start time calculated from end_time and s_played, skipped - TRUE if the track was 
  played for less than 10s, weekday - weekdays derived from start_time date.  \cr
- ! It changes the orginal data table and not copies it and returns the changed copy ! 
- \itemize{
- \item cos
- \item cos2
- }
- costatamcoatsm
+ ! It changes the orginal data table and not copies it and returns the changed copy !
 }
