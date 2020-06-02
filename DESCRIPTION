@@ -1,0 +1,16 @@
+Package: spotifyviz
+Title: Vizualize Spotify Data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Magdalena",
+           family = "Buszka",
+           role = c("aut", "cre"),
+           email = "Magdalena.Buszka@math.uni.wroc.pl")
+Description: Vizualize and summarise data from Spotify.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports:
+    data.table,
+    lubridate
