@@ -9,14 +9,13 @@
 #'
 #' @import data.table
 #' @import jsonlite
-#' @import dplyr
 
 prepare_playlists <- function(folder_path) {
   song_names_function <- function(x) {
-    return(df[[2]][[x]][[1]][[1]])
+    return(df[[3]][[x]][[1]][[1]])
   }
   artist_names_function <- function(x) {
-    return(df[[2]][[x]][[1]][[2]])
+    return(df[[3]][[x]][[1]][[2]])
   }
   name = items = NULL
   
@@ -24,7 +23,7 @@ prepare_playlists <- function(folder_path) {
   if (folder_path != ".")
     files_path <- paste(folder_path, files_path, sep = "/")
   df <- jsonlite::fromJSON(files_path)
-  df <- select(df[[1]], name, items)
+  df <- as.data.table(df)
   
   
   playlists = lapply(1 : nrow(df), function(x) {
@@ -33,9 +32,11 @@ prepare_playlists <- function(folder_path) {
       track_name = song_names_function(x),
       artist_name = artist_names_function(x)
     )
-  }) %>%
-    bind_rows()
+  })
   
+  playlists_dt = rbindlist(playlists)
   
-  playlists
+  playlists_dt
 }
+
+

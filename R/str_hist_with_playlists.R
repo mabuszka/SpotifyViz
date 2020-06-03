@@ -8,7 +8,6 @@
 #' @export
 #'
 #' @import data.table
-#' @import dplyr
 #' @import tidyr
 
 
@@ -21,9 +20,10 @@ str_his_with_playlists <- function(playlists_dt, streaming_history) {
   setkey(str_his_comp, track_name, artist_name)
   setkey(playlists_dt, track_name, artist_name)
   
-  playlists_dt[str_his_comp] %>%
-    replace_na(list(playlist_name = "It is not in any playlist")) %>%
-    unique()
   
+  str_hist = playlists_dt[str_his_comp]
   
+  str_hist = replace_na(str_hist, list(playlist_name = "It is not in any playlist"))
+
+  unique(str_hist)
 }
