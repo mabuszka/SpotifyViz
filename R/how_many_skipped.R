@@ -17,6 +17,9 @@
 
 
 how_many_skipped <- function(streaming_history, start_date, end_date, as_percentage = FALSE){
+  
+  start_time = end_time = skipped = NULL
+  
   data <- streaming_history[start_date <= start_time & end_date >= end_time,]
   n <- data[skipped == TRUE,.N]
   if(as_percentage) {

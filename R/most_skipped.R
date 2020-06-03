@@ -17,6 +17,9 @@
 
 most_skipped <- function(streaming_history, start_date, end_date,track_or_artist,
                         how_many = 10){
+  
+  start_time = end_time = N = skipped = NULL
+  
     streaming_history[start_date <= start_time & end_date >= end_time & skipped == TRUE, .N,
                       by = eval(paste(track_or_artist,"_name", sep = ""))
                       ][order(-N)][order(-N)][1:how_many,]

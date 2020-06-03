@@ -2,10 +2,15 @@ Package: spotifyviz
 Title: Vizualize Spotify Data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Magdalena",
+    c(person(given = "Magdalena",
            family = "Buszka",
            role = c("aut", "cre"),
-           email = "Magdalena.Buszka@math.uni.wroc.pl")
+           email = "Magdalena.Buszka@math.uni.wroc.pl"),
+           person(given = "Artur",
+           family = "Simon",
+           role = "aut",
+           email = "artur.simon72@gmail.com")
+    )
 Description: Vizualize and summarise data from Spotify.
 License: GPL-3
 Encoding: UTF-8

@@ -14,8 +14,12 @@
 #' @export
 #'
 #' @import data.table
+#' @import lubridate
 
 how_long_listened <- function(streaming_history, start_date, end_date, as_percentage = FALSE){
+  
+  start_time = s_played = NULL
+  
   suma <- streaming_history[start_time >= start_date & start_time <= end_date, sum(s_played)]
   seconds_in_period <-as.numeric(difftime(end_date,start_date, units = "secs"))
   if (as_percentage)
@@ -23,4 +27,3 @@ how_long_listened <- function(streaming_history, start_date, end_date, as_percen
                        ), "%", sep = ""))
   as.duration(suma)
 }
-
