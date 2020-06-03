@@ -11,7 +11,7 @@ streaming_history_period_filter(streaming_history, start_date, end_date)
 
 \item{start_date}{A POSIXt,Date or string that can be coerced  into Date indicating start of the period of time.}
 
-\item{end_date}{A POSIXt, Date or string that can be coerced into Date indicating end of the period of time.#'}
+\item{end_date}{A POSIXt, Date or string that can be coerced into Date indicating end of the period of time.}
 }
 \description{
 Filer streaming history data table to only contain information about a given period of time.
