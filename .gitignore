@@ -2,4 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+<<<<<<< HEAD
 .SpotifyViz
+=======
+.travis.yml
+>>>>>>> magda
