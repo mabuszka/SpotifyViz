@@ -5,7 +5,7 @@
 \title{Visualize number of tracks played by hour}
 \usage{
 number_of_tracks_by_hour(
-  streaming_history,
+  filtered,
   start_date,
   end_date,
   by_weekday = FALSE,
@@ -13,7 +13,7 @@ number_of_tracks_by_hour(
 )
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{filtered}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
 
 \item{start_date}{A POSIXt indicating start of the period of time.}
 
