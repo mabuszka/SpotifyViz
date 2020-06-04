@@ -4,25 +4,15 @@
 \alias{most_skipped}
 \title{Most skipped tracks/artist}
 \usage{
-most_skipped(
-  streaming_history,
-  start_date,
-  end_date,
-  track_or_artist,
-  how_many = 10
-)
+most_skipped(streaming_history, track_or_artist, how_many = 10)
 }
 \arguments{
 \item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
 
-\item{start_date}{A POSIXt indicating start of the period of time.}
-
-\item{end_date}{A POSIXt indicating end of the period of time.}
-
-\item{track_or_artist}{A character string that specifies wheter to show most frequently skipped artists or tracks. 
+\item{track_or_artist}{A character string that specifies whether to show most frequently skipped artists or tracks. 
 Must be either "track" or "artist"}
 
-\item{how_many}{A positive integer indicating how many most skipped tracks/artist to show, defoults to 10.}
+\item{how_many}{A positive integer indicating how many most skipped tracks/artist to show, defaults to 10.}
 }
 \description{
 Shows most frequently skipped artist or track in given time period and counts how many times were they skipped

@@ -4,7 +4,7 @@
 #'
 #' @param playlists_dt A data table containing the names of playlists and songs on them from spotify. 
 #' @param streaming_history A raw data table containing streaming history from spotify.
-#' @return A data table containg streaming history from spotify with information on which playlists song is.
+#' @return A data table containing streaming history from spotify with information on which playlists song is.
 #' @export
 #'
 #' @import data.table

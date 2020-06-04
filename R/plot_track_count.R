@@ -15,7 +15,11 @@
 #' @importFrom  viridisLite viridis
 
 
-count_tracks <- function(streaming_history, only_skipped = FALSE, by = "year"){
+plot_track_count <- function(streaming_history, only_skipped = FALSE, by = "year"){
+  
+  skipped <- end_time <- ..count.. <- . <- NULL
+
+  
   if (only_skipped) {
     streaming_history <- streaming_history[(skipped),]
     y_lab = "Number of tracks skipped"
