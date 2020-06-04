@@ -18,5 +18,4 @@ Prepares the data table containig streaming history for futher oprations.
  column from charcter to POSTIX date, s_played to a duration in seconds. Adds new columns: 
  start_time - estimated start time calculated from end_time and s_played, skipped - TRUE if the track was 
  played for less than 10s, weekday - weekdays derived from start_time date.  \cr
- ! It changes the orginal data table and not copies it and returns the changed copy !
 }

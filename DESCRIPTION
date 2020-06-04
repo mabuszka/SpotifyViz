@@ -19,5 +19,6 @@ RoxygenNote: 7.1.0
 Imports:
     data.table,
     lubridate,
+    ggplot2,
     jsonlite,
-    ggplot2
+    viridisLite

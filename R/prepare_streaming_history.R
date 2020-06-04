@@ -5,7 +5,6 @@
 #'  column from charcter to POSTIX date, s_played to a duration in seconds. Adds new columns: 
 #'  start_time - estimated start time calculated from end_time and s_played, skipped - TRUE if the track was 
 #'  played for less than 10s, weekday - weekdays derived from start_time date.  \cr
-#'  ! It changes the orginal data table and not copies it and returns the changed copy ! 
 #' 
 #'
 #' @param streaming_history A raw data table containing streaming history from spotify.
@@ -19,9 +18,7 @@
 #' 
 
 prepare_streaming_history <- function(streaming_history){
-  
-  end_time = s_played = start_time = skipped = weekday = NULL
-  
+  streaming_history <- copy(streaming_history)
   setnames(streaming_history,c("end_time", "artist_name", "track_name", "s_played"))
   streaming_history[,`:=`(end_time = ymd_hm(end_time), s_played = dmilliseconds((s_played)))
                     ][,`:=`(start_time = end_time - s_played,
