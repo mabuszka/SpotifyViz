@@ -6,7 +6,7 @@
 #' 
 #' @param filtered A data.table containing streaming history, after 'prepare_streaming_history' was used on it.
 #' @param period A character vector indicating for which periods to split the time for counting tracks played. 
-#' Permitted values are: "weekdays" 
+#' Permitted values are: "weekday", "hour" 
 #' @param as_percentage A logical scalar. If TRUE (dafault) bars show percentage of of all tracks played for each weekday.
 #' @param include_skipped A logical scalar indicating whether to include tracks that were skipped
 #' @param by_weekday A logical scalar indicating whether to split the graph by weekdyas if period is "hour"
