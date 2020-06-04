@@ -9,7 +9,7 @@
 #' 
 #' @export
 
-streaming_history_period_filter <-function(streaming_history, start_date, end_date){
+filter_streaming_history <-function(streaming_history, start_date, end_date){
     streaming_history[as_date(start_date) <= start_time & as_date(end_date) >= end_time,]
   }
 

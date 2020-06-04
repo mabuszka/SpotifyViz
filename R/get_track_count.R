@@ -12,16 +12,18 @@
 #' @export
 #' 
 #' @import data.table
-#' @import viridisLite
+#' @importFrom  viridisLite viridis
 
 
-number_of_skipped_played_tracks <- function(streaming_history, only_skipped = FALSE, by = "year"){
-  if (only_skipped){
+count_tracks <- function(streaming_history, only_skipped = FALSE, by = "year"){
+  if (only_skipped) {
     streaming_history <- streaming_history[(skipped),]
     y_lab = "Number of tracks skipped"
   }
-  else{
-    streaming_history[, .(skipped = factor(skipped, levels = c(TRUE, FALSE)),
+  else {
+    streaming_history <- streaming_history[, .(skipped  = factor(skipped, 
+                                                                 levels= c("TRUE", "FALSE"), 
+                                                                 labels = c("Yes","No")),
                           end_time = end_time)]
     y_lab = "Number of tracks played"
   }
@@ -30,12 +32,12 @@ number_of_skipped_played_tracks <- function(streaming_history, only_skipped = FA
     theme(legend.position = "bottom")
   
   
-  if (only_skipped){
+  if (only_skipped) {
     vis <- vis + geom_bar(aes(y = ..count..))
     }
   else{
-    vis <- vis + geom_bar(aes(y = ..count..,fill = skipped))+
-      scale_fill_manual(name = "Was the track skipped", values = viridis(2, end = 0.8), labels = c("Yes", "No"))
+    vis <- vis + geom_bar(aes(y = ..count.., fill = skipped))+
+      scale_fill_manual(name = "Was the track skipped", values = viridis(2, end = 0.8))
     }
   
     vis <- switch(by,
@@ -46,6 +48,7 @@ number_of_skipped_played_tracks <- function(streaming_history, only_skipped = FA
       
   vis
 } 
+
 
 
 
