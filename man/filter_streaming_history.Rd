@@ -7,12 +7,18 @@
 filter_streaming_history(streaming_history, start_date, end_date)
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{streaming_history}{A data.table containing streaming history, made with \code{\link{complete_streaming_history}}.}
 
-\item{start_date}{A POSIXt,Date or string that can be coerced  into Date indicating start of the period of time.}
+\item{start_date}{start_date A POSIXt,Date or string that can be coerced into Date by \code{\link{ymd}} indicating start of the period of time.}
 
-\item{end_date}{A POSIXt, Date or string that can be coerced into Date indicating end of the period of time.}
+\item{end_date}{end_date A POSIXt, Date or string that can be coerced into Date by \code{\link{ymd}} indicating end of the period of time.}
+}
+\value{
+A streaming history data table containing only entries between \code{start_date} and \code{end_date}
 }
 \description{
 Filer streaming history data table to only contain information about a given period of time.
+}
+\seealso{
+\code{\link{filter_search_queries}}
 }

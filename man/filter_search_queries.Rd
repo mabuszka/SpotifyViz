@@ -7,11 +7,14 @@
 filter_search_queries(search_queries, start_date, end_date)
 }
 \arguments{
-\item{search_queries}{}
+\item{search_queries}{A data table with search queries, made with \code{\link{make_search_queries_dt}}}
 
-\item{start_date}{}
+\item{start_date}{A POSIXt,Date or string that can be coerced into Date by \code{\link{ymd}} indicating start of the period of time.}
 
-\item{end_date}{}
+\item{end_date}{A POSIXt, Date or string that can be coerced into Date by \code{\link{ymd}} indicating end of the period of time.}
+}
+\value{
+A search queries data table containing only entries between \code{start_date} and \code{end_date}
 }
 \description{
 Filter spotify search queries data table to contain only entries from specified time period
