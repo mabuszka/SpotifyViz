@@ -7,11 +7,11 @@
 filter_search_queries(search_queries, start_date, end_date)
 }
 \arguments{
-\item{search_queries}{}
+\item{search_queries}{bla}
 
-\item{start_date}{}
+\item{start_date}{bla}
 
-\item{end_date}{}
+\item{end_date}{bla}
 }
 \description{
 Filter spotify search queries data table to contain only entries from specified time period

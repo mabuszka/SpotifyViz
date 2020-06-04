@@ -22,3 +22,6 @@ Imports:
     ggplot2,
     jsonlite,
     viridisLite
+Suggests: 
+    spelling
+Language: en-US

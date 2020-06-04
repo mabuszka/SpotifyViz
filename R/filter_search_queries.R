@@ -2,9 +2,9 @@
 #' 
 #' Filter spotify search queries data table to contain only entries from specified time period
 #'
-#' @param search_queries 
-#' @param start_date 
-#' @param end_date 
+#' @param search_queries bla
+#' @param start_date bla
+#' @param end_date bla
 #'
 #' @export
 #'

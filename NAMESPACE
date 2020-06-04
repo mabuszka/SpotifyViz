@@ -2,6 +2,7 @@
 
 export(capitalize)
 export(complete_streaming_history)
+export(continuous_listening)
 export(count_of_tracks_by_period)
 export(count_tracks)
 export(filter_search_queries)
