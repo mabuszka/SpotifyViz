@@ -1,0 +1,61 @@
+#' Visualize number of tracks played by period
+#' 
+#' Vizualizes, using a bar chart, the number or percentage of songs that were played on different hours/weekdays. 
+#' If spilt by hours can be also faceted by weekday.
+#' 
+#' 
+#' @param filtered A data.table containing streaming history, after 'prepare_streaming_history' was used on it.
+#' @param period A character vector indicating for which periods to split the time for counting tracks played. 
+#' Permitted values are: "weekdays" 
+#' @param as_percentage A logical scalar. If TRUE (dafault) bars show percentage of of all tracks played for each weekday.
+#' @param include_skipped A logical scalar indicating whether to include tracks that were skipped
+#' @param by_weekday A logical scalar indicating whether to split the graph by weekdyas if period is "hour"
+
+#' @export
+#' 
+#' @import data.table
+#' @import ggplot2
+#' @import lubridate
+#' 
+
+
+count_of_tracks_by_period <- function(filtered, period = "weekday", as_percentage = TRUE, include_skipped = FALSE, by_weekday = FALSE){
+  if (!include_skipped){filtered <- filtered[skipped == FALSE,]}
+  functions <- list(weekday = function(x){lubridate::wday(x, label = TRUE, week_start = 1)}, hour = hour)
+  
+  vis <- ggplot(filtered, aes(x = functions[[period]](end_time)))
+  
+  if (as_percentage){
+    if(by_weekday){
+      vis <- vis +
+        geom_bar(aes(y = (..count..)/tapply(..count..,..PANEL..,sum)[..PANEL..])) +
+        facet_wrap(~weekday)+
+        labs(x = "Hour", y = "Percentage (within each weekday) of tracks played ")+
+        scale_y_continuous(labels = function(x) paste(x*100, "%"))
+    }
+    else{
+    vis <- vis+
+      geom_bar(aes(y = (..count..)/sum(..count..)))+
+      xlab(capitalize(period))+
+      ylab("Percentage of all tracks played")+
+      scale_y_continuous(labels = function(x) paste(x*100, "%"))
+    }
+  }
+  else{
+    
+    vis <- vis +
+      geom_bar()+
+      xlab(capitalize(period))+
+      ylab("Tracks played")
+    
+    if (by_weekday){
+      vis <- vis +
+        facet_wrap(~weekday)
+    }
+  }
+
+  
+  vis
+}
+
+

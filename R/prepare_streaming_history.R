@@ -23,6 +23,6 @@ prepare_streaming_history <- function(streaming_history){
   streaming_history[,`:=`(end_time = ymd_hm(end_time), s_played = dmilliseconds((s_played)))
                     ][,`:=`(start_time = end_time - s_played,
                             skipped = (s_played < duration(10, "seconds")))
-                      ][,weekday := lubridate::wday(start_time, label = TRUE)]
+                      ][,weekday := lubridate::wday(start_time, label = TRUE)][, weekday]
 }
 
