@@ -10,15 +10,6 @@
 #' @return A data table containg streaming history from spotify suited for being used in rest of the functions from the package.
 #'
 #' @export
-#
-
-
-
-
-
-
-
-
 
 
 

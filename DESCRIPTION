@@ -15,6 +15,5 @@ Imports:
     data.table,
     lubridate,
     ggplot2,
-    tidyr,
     jsonlite,
     viridisLite
