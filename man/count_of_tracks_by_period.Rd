@@ -16,7 +16,7 @@ count_of_tracks_by_period(
 \item{filtered}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
 
 \item{period}{A character vector indicating for which periods to split the time for counting tracks played. 
-Permitted values are: "weekdays"}
+Permitted values are: "weekday", "hour"}
 
 \item{as_percentage}{A logical scalar. If TRUE (dafault) bars show percentage of of all tracks played for each weekday.}
 
