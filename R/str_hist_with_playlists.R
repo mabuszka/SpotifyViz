@@ -4,11 +4,10 @@
 #'
 #' @param playlists_dt A data table containing the names of playlists and songs on them from spotify. 
 #' @param streaming_history A raw data table containing streaming history from spotify.
-#' @return A data table containg streaming history from spotify with information whether song is on user playlist. If it is not, the relevant information will appear.
+#' @return A data table containg streaming history from spotify with information on which playlists song is.
 #' @export
 #'
 #' @import data.table
-#' @import tidyr
 
 
 
@@ -22,8 +21,14 @@ str_his_with_playlists <- function(playlists_dt, streaming_history) {
   
   
   str_hist = playlists_dt[str_his_comp]
+  full = unique(str_hist)
   
-  str_hist = replace_na(str_hist, list(playlist_name = "It is not in any playlist"))
-
-  unique(str_hist)
+  wide = dcast(full, end_time + artist_name + track_name + s_played + start_time + skipped + weekday ~ playlist_name.playlists.name,
+               value.var = "playlist_name.playlists.name")
+  
+  wide[is.na(wide)] = 0
+  wide[, ("NA"):= NULL]
+  wide[, 8: ncol(wide) := lapply(.SD, function(x) {!(x == 0)}), .SDcols = 8 : ncol(wide)]
+  
+  wide
 }
