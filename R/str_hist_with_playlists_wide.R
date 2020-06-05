@@ -28,7 +28,9 @@ str_his_with_playlists_wide <- function(playlists_dt, streaming_history) {
   
   wide[is.na(wide)] = 0
   wide[, ("NA"):= NULL]
-  wide[, 8: ncol(wide) := lapply(.SD, function(x) {!(x == 0)}), .SDcols = 8 : ncol(wide)]
+  wide[, 8: ncol(wide) := lapply(.SD, function(x) {!(x == 0)}), .SDcols = 8 : ncol(wide)
+       ][,in_any := (do.call(pmax,.SD) > 0), .SDcols = 8:ncol(wide)]
+  
   
   wide
 }
