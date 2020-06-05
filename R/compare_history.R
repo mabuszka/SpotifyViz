@@ -19,6 +19,8 @@
 
 compare_history = function(streaming_history_1, streaming_history_2, by_track = F) {
   
+  skipped <- . <- track_name <- artist_name <- NULL
+  
   str_h_1 = copy(streaming_history_1)
   str_h_2 = copy(streaming_history_2)
   
