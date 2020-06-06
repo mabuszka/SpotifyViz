@@ -17,5 +17,5 @@ filter_streaming_history <- function(streaming_history, start_date, end_date) {
   
   start_time <- end_time <- NULL
   
-    streaming_history[as_date(start_date) <= start_time & as_date(end_date) >= end_time,]
+    streaming_history[as_date(start_date) <= start_time & as_date(end_date) + duration(86399, "second") >= end_time,]
   }
