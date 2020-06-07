@@ -1,6 +1,6 @@
-#' Make data table to use in \code{plot_daily_comparison}
+#' Make data table to use in \code{plot_day_comparison}
 #' 
-#' Make data table with data about play time of two users on given day, for further use in \code{\link{plot_daily_comparison}}
+#' Make data table with data about play time of two users on given day, for further use in \code{\link{plot_day_comparison}}
 #'
 #' @param user1_data A data.table containing streaming history from first user, made with \code{\link{complete_streaming_history}}.
 #' @param user2_data A data.table containing streaming history from second user, made with \code{\link{complete_streaming_history}}.

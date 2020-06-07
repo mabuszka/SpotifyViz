@@ -1,5 +1,5 @@
 
-#' Compare two users daily play time
+#' Compare two users day play time
 #' 
 #' Compare on which times two users were listening to spotify during a specified day.
 #'
@@ -10,7 +10,7 @@
 #' @export
 #'
 #'
-plot_daily_comparison <- function(two_users_dt, user1_name = "User 1", user2_name = "User 2") {
+plot_day_comparison <- function(two_users_dt, user1_name = "User 1", user2_name = "User 2") {
   
   end_time <- start_time <- user <- NULL
   
