@@ -1,7 +1,7 @@
-#' Vizualize search queries
+#' Visualize search queries
 #'
 #' @param search_queries A data table containing spotify search queries, made with \code{\link{make_search_queries_dt}}   
-#' @param additional A character vector, additional information to be vizualized, can be either "country" or "platform". 
+#' @param additional A character vector, additional information to be visualized, can be either "country" or "platform". 
 #'
 #' @export
 #'

@@ -1,6 +1,6 @@
-#' Vizalize popularity of different playlist
+#' Visualize popularity of different playlist
 #' 
-#' Vizualize, using a bar chart, how popular were different playlists. Either by number of tracks played or play time.
+#' Visualize, using a bar chart, how popular were different playlists. Either by number of tracks played or play time.
 #'
 #' @param str_his_with_playlists_long A data table containing streaming history with information about playlists, 
 #' in long form, made with \code{\link{str_his_with_playlists_long}}.

@@ -1,6 +1,6 @@
-#' Vizualize how much of music listened to was from playlists
+#' Visualize how much of music listened to was from playlists
 #' 
-#' Vizualize, using a bar chart, how much music listened to was from playlists. 
+#' Visualize, using a bar chart, how much music listened to was from playlists. 
 #' Either counting the number of tracks played or play time.
 
 #' @param str_his_with_playlist_wide A data table containing streaming history with information about playlists, 

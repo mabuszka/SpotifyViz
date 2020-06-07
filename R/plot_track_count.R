@@ -1,6 +1,6 @@
-#' vizualize number of tracks that were played or skipped 
+#' visualize number of tracks that were played or skipped 
 #' 
-#' vizualizes, using a bar chart, how many tracks were played or how many were skipped, each period (day, week, month, year).
+#' visualizes, using a bar chart, how many tracks were played or how many were skipped, each period (day, week, month, year).
 #' 
 #' 
 #' 

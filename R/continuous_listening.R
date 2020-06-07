@@ -1,13 +1,13 @@
-#' Measure the number of continuous listening.
+#' Measure the number of continuous listening sessions.
 #' 
 #' Listening number informs about number of songs listened in a row.
-#' If distance between beginning of a song and end of a previous one is less than mins then listening number stays.
+#' If distance between beginning of a song and end of a previous one is less than \code{mins} then listening number stays.
 #' Otherwise increases. Counting begins from the newest song in streaming history.
 #'
 #'
-#' @param streaming_history A data table containg streaming history from spotify.
-#' @param mins Number of minutes which determine distance between listenings.
-#' @return A data table containg streaming history with additional column about listening number.
+#' @param streaming_history A data table containing streaming history from spotify.
+#' @param mins Number of minutes which determine distance between listening sessions.
+#' @return A data table containing streaming history with additional column about listening number.
 #' @export
 #'
 #' @import data.table

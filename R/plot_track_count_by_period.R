@@ -1,6 +1,6 @@
 #' Visualize number of tracks played by period
 #' 
-#' Vizualizes, using a bar chart, the number or percentage of songs that were played on different hours/weekdays. 
+#' Visualizes, using a bar chart, the number or percentage of songs that were played on different hours/weekdays. 
 #' If split by hours, can be also faceted by weekday.
 #' 
 #' 
