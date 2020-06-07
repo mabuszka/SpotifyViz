@@ -11,7 +11,7 @@ make_search_queries_dt(folder_path)
 search queries in json format. File must contain 'SearchQueries" in the name.}
 }
 \value{
-A data table with 3 columns(date, platform, contry) 
+A data table with 3 columns(date, platform, country) 
 containing details of Search Queries from spotify.
 }
 \description{

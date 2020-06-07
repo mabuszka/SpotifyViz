@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_playlists.R
 \name{prepare_playlists}
 \alias{prepare_playlists}
-\title{Preapare playlists data table}
+\title{Prepare playlists data table}
 \usage{
 prepare_playlists(folder_path)
 }
@@ -13,5 +13,5 @@ prepare_playlists(folder_path)
 A data table containing the names of playlists and songs on them from spotify.
 }
 \description{
-Preapare playlists data table
+Prepare playlists data table
 }

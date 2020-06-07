@@ -10,5 +10,5 @@ capitalize(string)
 \item{string}{A string that you want to capitalize.}
 }
 \description{
-Capitelize first letter in the string
+Capitalize first letter in the string.
 }

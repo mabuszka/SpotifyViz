@@ -11,7 +11,7 @@ complete_streaming_history(folder_path)
 Streaming History in json format. File(s) must contain "StreamingHistory" in the name.}
 }
 \value{
-A data table containg streaming history from spotify suited for being used in rest of the functions from the package.
+A data table containing streaming history from spotify suited for being used in rest of the functions from the package.
 }
 \description{
 Make data table with make_streaming_history_dt and do prepare_streaming_history with, that

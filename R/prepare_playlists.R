@@ -1,4 +1,4 @@
-#' Preapare playlists data table
+#' Prepare playlists data table
 #'
 #'
 #'

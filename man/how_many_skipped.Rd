@@ -14,9 +14,9 @@ how_many_skipped(
 \arguments{
 \item{streaming_history}{data.table containing streaming history, after 'prepare_streaming_history' was used on it}
 
-\item{start_date}{POSIXt indicating start of the period of time to count skipped songs}
+\item{start_date}{A POSIXt,Date or string that can be coerced into Date by \code{\link{as_date}} indicating start of the period of time to count skipped songs}
 
-\item{end_date}{POSIXt indicating end of the period of time to count skipped songs}
+\item{end_date}{A POSIXt,Date or string that can be coerced into Date by \code{\link{as_date}} indicating end of the period of time to count skipped songs}
 
 \item{as_percentage}{logical. if FALSE (default) a number of skipped songs is returned,
 otherwise a character vector indicating percentage of skipped songs in given period}
