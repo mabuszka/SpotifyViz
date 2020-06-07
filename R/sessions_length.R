@@ -17,9 +17,11 @@
 
 sessions_length = function(streaming_history, mins) {
   
-  str_his = copy(streaming_history)
+  listening_number = NULL
   
-  con_list_dt = continuous_listening(str_his[skipped == FALSE, ], mins)
+  session_time = skipped = . = s_played = listening_number
+  
+  con_list_dt = continuous_listening(streaming_history[skipped == FALSE, ], mins)
   
   sessions = con_list_dt[, .(session_time = sum(s_played)), by = listening_number]
   

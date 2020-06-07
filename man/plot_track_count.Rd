@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_track_count.R
 \name{plot_track_count}
 \alias{plot_track_count}
-\title{vizualize number of tracks that were played or skipped}
+\title{visualize number of tracks that were played or skipped}
 \usage{
 plot_track_count(streaming_history, only_skipped = FALSE, by = "year")
 }
@@ -15,5 +15,5 @@ plot_track_count(streaming_history, only_skipped = FALSE, by = "year")
 Permitted values are: "year", "month", "week", "day".}
 }
 \description{
-vizualizes, using a bar chart, how many tracks were played or how many were skipped, each period (day, week, month, year).
+visualizes, using a bar chart, how many tracks were played or how many were skipped, each period (day, week, month, year).
 }

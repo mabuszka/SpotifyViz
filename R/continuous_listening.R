@@ -2,7 +2,7 @@
 #' 
 #' Listening number informs about number of songs listened in a row.
 #' If distance between beginning of a song and end of a previous one is less than \code{mins} then listening number stays.
-#' Otherwise increases. Counting begins from the newest song in streaming history.
+#' Otherwise increases. Counting begins from the oldest song in streaming history.
 #'
 #'
 #' @param streaming_history A data table containing streaming history from spotify.
@@ -16,31 +16,20 @@
 
 continuous_listening = function(streaming_history, mins) {
   
-  end_time <- start_time <- NULL
-  
-  dt = copy(streaming_history)
-  dt = dt[order(-start_time, -end_time)]
+  skipped = end_time = artist_name = track_name = s_played = start_time = weekday = end_of_prev = diff = listening_number = . = NULL
   
   
-  distances = difftime(dt[["start_time"]][1:(nrow(dt) - 1)], dt[["end_time"]][2:nrow(dt)], units = "mins") <  mins
-  distances = c(distances, T)
-  
-  #dt[, is_continuous := distances]
+  streaming_history = streaming_history[order(start_time, end_time)]
   
   
-  listening_number = rep(0, nrow(dt))
-  k = 1
+  streaming_history = streaming_history[, .(end_time, artist_name, track_name, s_played, start_time, skipped, weekday,
+              end_of_prev = data.table::shift(end_time, fill = min(end_time)))]
   
-  for( i in 1:nrow(dt)) {
-    if (distances[i]) {
-      listening_number[i] = k
-    } else {
-      listening_number[i] = k
-      k = k + 1
-    }
-  }
+  streaming_history = streaming_history[, .(end_time, artist_name, track_name, s_played, start_time, skipped, weekday,
+              diff = as.numeric(start_time - end_of_prev))]
   
-  dt[, listening_number := listening_number]
+  streaming_history = streaming_history[, .(end_time, artist_name, track_name, s_played, start_time, skipped, weekday,
+              listening_number = (cumsum(diff > 5 * 60)) + 1)]
   
-  dt
+  streaming_history
 }

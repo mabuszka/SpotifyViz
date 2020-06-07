@@ -17,6 +17,8 @@
 
 longest_session = function(streaming_history, mins) {
   
+  end_time = . = listening_number = s_played = session_time = skipped  = NULL
+  
   str_his = copy(streaming_history)
   
   con_list_dt = continuous_listening(str_his[skipped == FALSE, ], mins)

@@ -2,15 +2,15 @@
 % Please edit documentation in R/plot_searches.R
 \name{plot_searches}
 \alias{plot_searches}
-\title{Vizualize search queries}
+\title{Visualize search queries}
 \usage{
 plot_searches(search_queries, additional = "country")
 }
 \arguments{
 \item{search_queries}{A data table containing spotify search queries, made with \code{\link{make_search_queries_dt}}}
 
-\item{additional}{A character vector, additional information to be vizualized, can be either "country" or "platform".}
+\item{additional}{A character vector, additional information to be visualized, can be either "country" or "platform".}
 }
 \description{
-Vizualize search queries
+Visualize search queries
 }

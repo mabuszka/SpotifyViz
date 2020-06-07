@@ -1,6 +1,6 @@
 #' Visualize sessions length
 #'
-#' Infromation about length of every session. Excludes skipped tracks.
+#' Visualize sessions length divided on intervals using bar plot.
 #'
 #'
 #' @param streaming_history A data.table containing streaming history, after 'prepare_streaming_history' was used on it.
@@ -15,23 +15,9 @@
 
 sessions_visualize = function(streaming_history, mins, as_percentage = TRUE) {
   
-  sessions = sessions_length(streaming_history, mins)
+  frac = NULL
   
-  sessions$interval = ifelse(
-    sessions$session_time < 10 * 60, "<10min", ifelse(
-      sessions$session_time < 30 * 60, "10-30 min", ifelse(
-        sessions$session_time < 60 * 60, "0.5-1h", ifelse(
-          sessions$session_time < 2 * 60 * 60, "1-2h", ifelse(
-            sessions$session_time < 4 * 60 * 60, "2-4h", ifelse(
-              sessions$session_time < 6 * 60 * 60, "4-6h", "6h+"
-            )
-          )
-        )
-      )
-    )
-  )
-  
-  sessions_groupped = sessions[, .(sum = .N), by = interval][, frac := 100 * round(sum / sum(sum), 3)]
+  sessions_groupped = sessions_intervals(streaming_history, mins)
   
   
   if(as_percentage) {

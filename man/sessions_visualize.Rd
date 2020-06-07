@@ -14,5 +14,5 @@ sessions_visualize(streaming_history, mins, as_percentage = TRUE)
 \item{as_percentage}{A logical value. If TRUE (default) bars show percentage of of all sessions.}
 }
 \description{
-Infromation about length of every session. Excludes skipped tracks.
+Visualize sessions length divided on intervals using bar plot.
 }
