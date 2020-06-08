@@ -18,12 +18,12 @@ how_long_listened(
 
 \item{end_date}{A POSIXt,Date or string that can be coerced into Date by \code{\link{as_date}} indicating end of the period of time to count tracks}
 
-\item{as_percentage}{A logical scalar. If FALSE (default) length of time (in seconds and an approximate in biggest reasonable unit)
+\item{as_percentage}{A logical scalar. If \code{FALSE} (default) length of time (in seconds and an approximate in biggest reasonable unit)
 that songs were listened to in given time period is returned,
 otherwise a character vector indicating percentage of given time period will be returned.}
 }
 \value{
-An ineteger if `as_percetage` is FALSE and a character vector if `as_percentage` is TRUE
+An integer if \code{as_percentage} is \code{FALSE} and a character vector if \code{as_percentage} is \code{TRUE}
 }
 \description{
 Measures time spent listening to spotify during given time period. 

@@ -25,6 +25,6 @@ Permitted values are: "weekday", "hour"}
 \item{by_weekday}{A logical scalar indicating whether to split the graph by weekdays if period is "hour"}
 }
 \description{
-Vizualizes, using a bar chart, the number or percentage of songs that were played on different hours/weekdays. 
+Visualizes, using a bar chart, the number or percentage of songs that were played on different hours/weekdays. 
 If split by hours, can be also faceted by weekday.
 }
