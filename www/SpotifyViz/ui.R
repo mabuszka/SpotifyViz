@@ -37,16 +37,19 @@ body = dashboardBody(
                         
                         # Input: Select a file ----
                         box(
+                            width = NULL,
                             fileInput("StreamingHistory", "Choose JSON file(s) with Streaming History",
                                       multiple = TRUE,
                                       accept = c(".JSON"))
                         ),
                         box(
+                            width = NULL,
                             fileInput("SearchQueries", "Choose JSON file with SearchQueries",
                                       multiple = FALSE,
                                       accept = c(".JSON"))
                         ),
                          box(
+                             width = NULL,
                              fileInput("Playlist", "Choose JSON file with Playlist",
                                        multiple = FALSE,
                                        accept = c(".JSON")) 
@@ -62,20 +65,23 @@ body = dashboardBody(
                         # Output: Data file ----
 
                         tabBox(
+                            width = NULL,
                             title = "See the data you've uploaded",
                             # The id lets us use input$tabset1 on the server to find the current tab
-                            id = "tabset1", height = "450px", width = "640px",
+                            id = "tabset1", height = "450px",
+                            side = "right",
                             tabPanel(
                                     title = "Streaming history",
                                     dataTableOutput("StreamingHistoryDT")
                             ),
                             tabPanel(
                                         title = "Search queries",
-                                        dataTableOutput("SearchQueries")
-                                    ),
+                                        dataTableOutput("SearchQueriesDT")
+                                    )
+                            ,
                             tabPanel(
                                     title = "Playlists",
-                                    dataTableOutput("Playlist")
+                                    dataTableOutput("PlaylistDT")
                             )
                         )
                     )
