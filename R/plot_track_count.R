@@ -26,22 +26,24 @@ plot_track_count <- function(streaming_history, only_skipped = FALSE, by = "year
   }
   else {
     streaming_history <- streaming_history[, .(skipped  = factor(skipped, 
-                                                                 levels= c("TRUE", "FALSE"), 
+                                                                 levels = c("TRUE", "FALSE"), 
                                                                  labels = c("Yes","No")),
                           end_time = end_time)]
     y_lab = "Number of tracks played"
   }
-  vis <- ggplot(streaming_history, aes(x = as.Date(floor_date(end_time, by))))+
-    labs(y = y_lab, x = "Date")+
-    theme(legend.position = "bottom")
+  
+  vis <- ggplot(streaming_history, aes(x = as.Date(floor_date(end_time, by)))) +
+    labs(y = y_lab, x = "Date") +
+    theme(legend.position = "bottom") +
+    theme_spotifyvis()
   
   
   if (only_skipped) {
-    vis <- vis + geom_bar(aes(y = ..count..))
+    vis <- vis + geom_bar(aes(y = ..count..), fill = "#440154FF", colour = "white")
     }
   else{
     vis <- vis + geom_bar(aes(y = ..count.., fill = skipped))+
-      scale_fill_manual(name = "Was the track skipped", values = viridis(2, end = 0.8))
+      scale_fill_manual(name = "Was the track skipped", values = c("#440154FF" ,"#7AD151FF"))
     }
   
     vis <- switch(by,

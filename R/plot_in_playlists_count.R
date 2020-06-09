@@ -30,25 +30,27 @@ plot_in_playlists_count <- function(str_his_with_playlist_wide, as_percentage = 
     time_dt  <- str_his_with_playlist_wide[, .(played = sum(s_played) / time_units[[time_unit]]) , by = in_any]
     y_label  <- paste("Play time (in ", time_unit,")", sep = "")
     y_label_percent <- "% of all play time"
-    vis <- ggplot(time_dt)
+    vis <- ggplot(time_dt) +
+      theme_spotifyvis()
   }
   
   else{
     count_dt <- str_his_with_playlist_wide[, .(played = .N), by = in_any]
-    vis <- ggplot(count_dt)
+    vis <- ggplot(count_dt) +
+      theme_spotifyvis()
     y_label <- "Tracks played"
     y_label_percent <- "% of all tracks played"
   }
   
   
   if (!as_percentage) {
-    vis <- vis + geom_bar(aes(x = in_any, y = played ), stat = "identity") +
+    vis <- vis + geom_bar(aes(x = in_any, y = played ), stat = "identity", fill = "#440154FF", colour = "white") +
             labs(y = y_label)
   }
   
   else {
     vis <- vis + 
-            geom_bar(aes(x = in_any, y = played * 100 / sum(played) ), stat = "identity") +
+            geom_bar(aes(x = in_any, y = played * 100 / sum(played) ), stat = "identity", fill = "#440154FF", colour = "white") +
             labs(y = y_label_percent)
   }
   
