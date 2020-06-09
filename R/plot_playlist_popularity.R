@@ -24,20 +24,24 @@ plot_playlist_popularity <- function(str_his_with_playlists_long, time_or_count 
                                              ][, playlist_name := factor(playlist_name,
                                                                          levels = as.character(playlist_name))]
   vis <- ggplot(summary) +
+    theme_spotifyvis() +
     theme(axis.title.y = element_blank())
 
   if (time_or_count == "time") {
     time_units <- c("seconds" = 1, "minutes" = 60, "hours" = 3600)
+    abbr <- c("seconds" = "s", "minutes" = "min", "hours" = "h")
+    
     vis <- vis +
-      geom_bar(aes(y = playlist_name, x = time / time_units[time_unit]), stat = "identity") +
-      labs( x = paste("Play time (in ", time_unit,")", sep = ""))
+      geom_bar(aes(y = playlist_name, x = time / time_units[time_unit]), stat = "identity", fill = "#440154FF", colour = "white") +
+      labs( x = "Play time") +
+      scale_x_continuous(labels = function(x){paste(x, abbr[time_unit])})
     
     
   }
   
   else{
     vis <- vis +
-    geom_bar(aes(y = playlist_name, x = count), stat = "identity") +
+    geom_bar(aes(y = playlist_name, x = count), stat = "identity", fill = "#440154FF", colour = "white") +
       labs(x = "Tracks played")
     
   }

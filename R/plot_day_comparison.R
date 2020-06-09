@@ -24,6 +24,7 @@ plot_day_comparison <- function(two_users_dt, user1_name = "User 1", user2_name 
     scale_y_continuous(limits = c(-0.1,3), breaks = c(1,2), minor_breaks = NULL, labels = c(user1_name, user2_name)) +
     labs(x = "Hour") +
     scale_fill_manual(values = c("#440154FF" ,"#7AD151FF")) +
+    theme_spotifyvis() +
     theme(legend.position = "None")
   
   vis

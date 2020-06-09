@@ -27,34 +27,36 @@ plot_track_count_by_period <- function(filtered, period = "weekday",
   
   if (!include_skipped) { filtered <- filtered[skipped == FALSE,] }
   
-  functions <- list(weekday = function(x){lubridate::wday(x, label = TRUE, week_start = 1)}, hour = hour)
+  functions <- list(weekday = function(x){lubridate::wday(x, label = TRUE, abbr = FALSE, week_start = 1)}, hour = lubridate::hour)
   
-  vis <- ggplot(filtered, aes(x = functions[[period]](end_time)))
+  vis <- ggplot(filtered, aes(x = functions[[period]](end_time))) +
+    theme_spotifyvis()
   
-  if (as_percentage){
-    if(by_weekday){
+  
+  if (as_percentage) {
+    if (by_weekday) {
       vis <- vis +
-        geom_bar(aes(y = (..count..)/tapply(..count..,..PANEL..,sum)[..PANEL..])) +
-        facet_wrap(~weekday)+
-        labs(x = "Hour", y = "Percentage (within each weekday) of tracks played ")+
+        geom_bar(aes(y = (..count..)/tapply(..count..,..PANEL..,sum)[..PANEL..]), fill = "#440154FF", colour = "white") +
+        facet_wrap(~weekday) +
+        labs(x = "Hour", y = "Percentage (within each weekday) of tracks played ") +
         scale_y_continuous(labels = function(x) paste(x*100, "%"))
     }
-    else{
-    vis <- vis+
-      geom_bar(aes(y = (..count..)/sum(..count..)))+
-      xlab(capitalize(period))+
-      ylab("Percentage of all tracks played")+
+    else {
+    vis <- vis +
+      geom_bar(aes(y = (..count..)/sum(..count..)) , fill = "#440154FF", colour = "white") +
+      xlab(capitalize(period)) +
+      ylab("Percentage of all tracks played") +
       scale_y_continuous(labels = function(x) paste(x*100, "%"))
     }
   }
   else{
     
     vis <- vis +
-      geom_bar()+
-      xlab(capitalize(period))+
+      geom_bar(fill = "#440154FF", colour = "white") +
+      xlab(capitalize(period)) +
       ylab("Tracks played")
     
-    if (by_weekday){
+    if (by_weekday) {
       vis <- vis +
         facet_wrap(~weekday)
     }
