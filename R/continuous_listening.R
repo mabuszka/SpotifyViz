@@ -29,7 +29,7 @@ continuous_listening = function(streaming_history, mins) {
               diff = as.numeric(start_time - end_of_prev))]
   
   streaming_history = streaming_history[, .(end_time, artist_name, track_name, s_played, start_time, skipped, weekday,
-              listening_number = (cumsum(diff > 5 * 60)) + 1)]
+              listening_number = (cumsum(diff > mins * 60)) + 1)]
   
   streaming_history
 }
