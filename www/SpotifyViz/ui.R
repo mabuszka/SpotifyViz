@@ -1,0 +1,54 @@
+
+
+sidebar = dashboardSidebar(
+    sidebarMenu(
+        menuItem("Input user data", tabName = "input_us_data", icon = icon("fas fa-upload")),
+        menuItem("Tables", tabName = "tables", icon = icon("fas fa-table")),
+        menuItem("Plots", tabName = "tables", icon = icon("fas fa-chart-bar"),
+                 menuSubItem(
+                     "Search queries", "search_que", icon = icon("fas fa-search")
+                 ),
+                 menuSubItem(
+                     "Streaming history", "str_hist", icon = icon('history')
+                 )
+        ),
+        menuItem("Compare with another user", tabName = "compare", icon = icon("fas fa-user-friends"),
+                 menuSubItem(
+                     "Other user data input", "oth_us_data_in", icon = icon("fas fa-upload")
+                 ),
+                 menuSubItem("Plots", "plot_compare", icon = icon("fas fa-chart-bar")
+                     
+                 ),
+                 menuSubItem("Tables", "tables_compare", icon = icon("fas fa-table"))
+                 
+            
+        ),
+        menuItem("About", tabName = "about", icon = icon("fas fa-info"))
+    )
+)
+
+body = dashboardBody(
+    tabItems(
+        tabItem(tabName = "dashboard",
+                
+        ),
+        
+        tabItem(tabName = "tables",
+                h2("Blabla")
+            
+        ),
+        
+        tabItem(tabName = "about",
+                h2("About this app"),
+                fluidRow(infoBox(title = "Visits this site to see more",
+                                 value = "Github", href = "https://github.com/StatsIMUWr/SpotifyViz"))
+        )
+    )
+)
+
+# Put them together into a dashboardPage
+dashboardPage(
+    dashboardHeader(title = "SpotifyViz"),
+    sidebar,
+    body
+)
