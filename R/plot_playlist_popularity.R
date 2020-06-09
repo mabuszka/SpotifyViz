@@ -29,9 +29,12 @@ plot_playlist_popularity <- function(str_his_with_playlists_long, time_or_count 
 
   if (time_or_count == "time") {
     time_units <- c("seconds" = 1, "minutes" = 60, "hours" = 3600)
+    abbr <- c("seconds" = "s", "minutes" = "min", "hours" = "h")
+    
     vis <- vis +
       geom_bar(aes(y = playlist_name, x = time / time_units[time_unit]), stat = "identity", fill = "#440154FF", colour = "white") +
-      labs( x = paste("Play time (in ", time_unit,")", sep = ""))
+      labs( x = "Play time") +
+      scale_x_continuous(labels = function(x){paste(x, abbr[time_unit])})
     
     
   }
