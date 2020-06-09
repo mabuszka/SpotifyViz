@@ -1,6 +1,7 @@
 
 
 sidebar = dashboardSidebar(
+    width = 320,
     sidebarMenu(
         menuItem("Input user data", tabName = "input_user_data", icon = icon("fas fa-upload")),
         menuItem("Tables", tabName = "tables", icon = icon("fas fa-table")),
@@ -28,36 +29,36 @@ sidebar = dashboardSidebar(
 )
 
 body = dashboardBody(
+    tags$head( 
+        tags$style(HTML(".main-sidebar { font-size: 18px; }")) #change the font size to 20
+    ),
     tabItems(
         tabItem(tabName = "input_user_data",
                 sidebarLayout(
                     
-                    # Sidebar panel for inputs ----
                     column(3,
-                        
-                        # Input: Select a file ----
-                        box(
-                            width = NULL,
-                            fileInput("StreamingHistory", "Choose JSON file(s) with Streaming History",
-                                      multiple = TRUE,
-                                      accept = c(".JSON"))
-                        ),
-                        box(
-                            width = NULL,
-                            fileInput("SearchQueries", "Choose JSON file with SearchQueries",
-                                      multiple = FALSE,
-                                      accept = c(".JSON"))
-                        ),
-                         box(
-                             width = NULL,
-                             fileInput("Playlist", "Choose JSON file with Playlist",
-                                       multiple = FALSE,
-                                       accept = c(".JSON")) 
-                         )   
-   
+                           box(
+                               width = NULL,
+                               fileInput("StreamingHistory", "Choose JSON file(s) with Streaming History",
+                                         multiple = TRUE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("SearchQueries", "Choose JSON file with SearchQueries",
+                                         multiple = FALSE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("Playlist", "Choose JSON file with Playlist",
+                                         multiple = FALSE,
+                                         accept = c(".JSON")) 
+                           )   
+                           
+                    ),
                         
 
-                    ),
                     
                     # Main panel for displaying outputs ----
                     column(9,
@@ -67,9 +68,7 @@ body = dashboardBody(
                         tabBox(
                             width = NULL,
                             title = "See the data you've uploaded",
-                            # The id lets us use input$tabset1 on the server to find the current tab
-                            id = "tabset1", height = "450px",
-                            side = "right",
+                            id = "tabset1",
                             tabPanel(
                                     title = "Streaming history",
                                     dataTableOutput("StreamingHistoryDT")
@@ -77,8 +76,7 @@ body = dashboardBody(
                             tabPanel(
                                         title = "Search queries",
                                         dataTableOutput("SearchQueriesDT")
-                                    )
-                            ,
+                                    ),
                             tabPanel(
                                     title = "Playlists",
                                     dataTableOutput("PlaylistDT")
