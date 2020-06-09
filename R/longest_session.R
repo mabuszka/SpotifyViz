@@ -32,6 +32,7 @@ longest_session = function(streaming_history, mins, for_view = TRUE) {
   longest_session_number = sessions[session_time == max(session_time), ][[1, 1]]
   
   longest_session_dt = con_list_dt[listening_number == longest_session_number, ]
+  
   if (for_view) {
     longest_session_dt <- longest_session_dt[, .(`Start` = lubridate::floor_date(start_time, "minutes" ),
                         `Artist name` = artist_name,`Track name` = track_name,
