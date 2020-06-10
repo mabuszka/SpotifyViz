@@ -22,6 +22,6 @@ make_search_queries_dt <- function(folder_path){
   if (folder_path != ".") {
     file_path <- paste(folder_path, files_path, sep = "/")
   }
-  read_files <- data.table(jsonlite::fromJSON(file_path))
+  read_files <- data.table(jsonlite::fromJSON(files_path))
   read_files[,list(date=ymd(date),platform,country)]
 }
