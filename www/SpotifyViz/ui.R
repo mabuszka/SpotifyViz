@@ -1,10 +1,11 @@
 
 
 sidebar = dashboardSidebar(
+    width = 320,
     sidebarMenu(
         menuItem("Input user data", tabName = "input_user_data", icon = icon("fas fa-upload")),
         menuItem("Tables", tabName = "tables", icon = icon("fas fa-table")),
-        menuItem("Plots", tabName = "tables", icon = icon("fas fa-chart-bar"),
+        menuItem("Plots", tabName = "plots", icon = icon("fas fa-chart-bar"),
                  menuSubItem(
                      "Search queries", "search_que", icon = icon("fas fa-search")
                  ),
@@ -48,45 +49,38 @@ tabs_color <- '.nav-tabs-custom .nav-tabs li.active {
 ## MAGDA
 
 body = dashboardBody(
+    tags$head( 
+        tags$style(HTML(".main-sidebar { font-size: 18px; }")) #change the font size to 20
+    ),
     tabItems(
         tabItem(tabName = "input_user_data",
                 sidebarLayout(
                     
-                    # Sidebar panel for inputs ----
                     column(3,
-                        
-                        # Input: Select a file ----
-                        box(
-                            width = NULL,
-                            status = "success",
-                            fileInput("StreamingHistory", "Choose JSON file(s) with Streaming History",
-                                      multiple = TRUE,
-                                      accept = c(".JSON"))
-                        ),
-                        box(
-                            width = NULL,
-                            status = "success",
-                            fileInput("SearchQueries", "Choose JSON file with SearchQueries",
-                                      multiple = FALSE,
-                                      accept = c(".JSON"))
-                        ),
-                         box(
-                             width = NULL,
-                             status = "success",
-                             fileInput("Playlist", "Choose JSON file with Playlist",
-                                       multiple = FALSE,
-                                       accept = c(".JSON")) 
-                         )   
-   
-                        
-
+                           box(
+                               width = NULL,
+                               fileInput("streaming_history", "Choose JSON file(s) with Streaming History",
+                                         multiple = TRUE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("search_queries", "Choose JSON file with SearchQueries",
+                                         multiple = FALSE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("playlist", "Choose JSON file with Playlist",
+                                         multiple = FALSE,
+                                         accept = c(".JSON")) 
+                           )
+                           
                     ),
+
                     
-                    # Main panel for displaying outputs ----
                     column(9,
                         
-                        # Output: Data file ----
-
                         tabBox(
                             width = NULL,
                             title = "See the data you've uploaded",
@@ -96,25 +90,55 @@ body = dashboardBody(
                             side = "right",
                             tabPanel(
                                     title = "Streaming history",
-                                    dataTableOutput("StreamingHistoryDT")
+                                    dataTableOutput("streaming_historyDT")
                             ),
                             tabPanel(
                                         title = "Search queries",
-                                        dataTableOutput("SearchQueriesDT")
-                                    )
-                            ,
+                                        dataTableOutput("search_queriesDT")
+                                    ),
                             tabPanel(
                                     title = "Playlists",
-                                    dataTableOutput("PlaylistDT")
-                            ),
+                                    dataTableOutput("playlistDT")
+                                    ),
                             
-                            tags$head(tags$style(HTML(tabs_color
-                                                      )))
+                            tags$head(tags$style(HTML(tabs_color)))
                         )
                     )
                     
                 )
                 
+        ),
+        tabItem(tabName = "search_que",
+                column(
+                    3,
+                    box(title = "Date range", status = "primary", solidHeader = TRUE, width = NULL,
+                        
+                        dateInput('start_date_plots_search_que',
+                                  label = ('Start date: yyyy-mm-dd'),
+                                  value = ymd("2019-10-01")
+                        ),
+                        dateInput('end_date_plots_search_que',
+                                  label = ('End date: yyyy-mm-dd'),
+                                  value = ymd("2019-10-30")
+                        
+                        )
+                    ),
+                    box(title = "Controls", status = "primary", solidHeader = TRUE, width = NULL,
+                        radioButtons(
+                            "radio_btn_plot_search_que", "Additional info",
+                            choices = c("Platform" = "platform", "Country" = "country")
+                        )
+                        
+                        
+                    )
+                ),
+                column(9,
+                       box(width = NULL,
+                           plotOutput("plot_searches")
+                       )
+                )
+                
+            
         ),
         ## MAGDA
         
@@ -167,6 +191,57 @@ body = dashboardBody(
                     
                 )
             
+        ),
+        tabItem(tabName = "oth_us_data_in",
+                sidebarLayout(
+                    
+                    column(3,
+                           box(
+                               width = NULL,
+                               fileInput("streaming_history_u2", "Choose JSON file(s) with Streaming History",
+                                         multiple = TRUE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("search_queries_u2", "Choose JSON file with SearchQueries",
+                                         multiple = FALSE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("playlist_u2", "Choose JSON file with Playlist",
+                                         multiple = FALSE,
+                                         accept = c(".JSON")) 
+                           )
+
+                           
+                    ),
+                    
+                    
+                    column(9,
+                           
+                           tabBox(
+                               width = NULL,
+                               title = "See the data you've uploaded four second user",
+                               id = "tabset1",
+                               tabPanel(
+                                   title = "Streaming history",
+                                   dataTableOutput("streaming_historyDT_u2")
+                               ),
+                               tabPanel(
+                                   title = "Search queries",
+                                   dataTableOutput("search_queriesDT_u2")
+                               ),
+                               tabPanel(
+                                   title = "Playlists",
+                                   dataTableOutput("playlistDT_u2")
+                               )
+                           )
+                    )
+                    
+                )
+                
         ),
         
         ## MAGDA

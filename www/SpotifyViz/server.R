@@ -7,14 +7,13 @@ library(shiny)
 
 shinyServer(function(input, output) {
   
-  
-    # req(input$StreamingHistory)
-  streaming_history_dt <- eventReactive(input$StreamingHistory,{
+  # req(input$StreamingHistory)
+  streaming_history_dt <- eventReactive(input$streaming_history,{
     
     tryCatch(
       {
         
-        read_files <- rbindlist(lapply(input$StreamingHistory$datapath, jsonlite::fromJSON))
+        read_files <- rbindlist(lapply(input$streaming_history$datapath, jsonlite::fromJSON))
       },
       error = function(e) {
         stop(safeError(e))
@@ -23,19 +22,20 @@ shinyServer(function(input, output) {
     
     
     streaming_history_dt <- prepare_streaming_history(read_files)
+    streaming_history_dt
     
   })
   
-    output$StreamingHistoryDT <- renderDataTable(streaming_history_dt())
-
+  output$streaming_historyDT <- renderDataTable(streaming_history_dt())
   
-  search_queries_dt <- eventReactive(input$SearchQueries,{
+  
+  search_queries_dt <- eventReactive(input$search_queries,{
     
     # req(input$SearchQueries)
     tryCatch(
       {
         
-        read_files <- data.table(jsonlite::fromJSON(input$SearchQueries$datapath))
+        read_files <- data.table(jsonlite::fromJSON(input$search_queries$datapath))
         read_files <- read_files[,list(date=ymd(date), platform, country)]
       }, 
       error = function(e) {
@@ -46,15 +46,15 @@ shinyServer(function(input, output) {
     search_queries <- read_files
     search_queries
   })
-  output$SearchQueriesDT <- renderDataTable(search_queries_dt())
+  output$search_queriesDT <- renderDataTable(search_queries_dt())
   
   
-  playlist_dt <- eventReactive(input$Playlist,{
+  playlist_dt <- eventReactive(input$playlist,{
     # req(input$Playlist)
     tryCatch(
       {
         
-        playlists = playlist_shiny(input$Playlist$datapath)
+        playlists = playlist_shiny(input$playlist$datapath)
         
       },
       error = function(e) {
@@ -67,7 +67,25 @@ shinyServer(function(input, output) {
     
   }) 
   
-  output$PlaylistDT <- renderDataTable(playlist_dt())
+  output$playlistDT <- renderDataTable(playlist_dt())
+  
+  ### plots search queries
+  
+  str_his_fil_plot_search_que <- eventReactive({input$start_date_plots_search_que
+    input$end_date_plots_search_que
+    input$search_queries},
+    {
+      str_his_filtered <-  filter_search_queries(search_queries_dt(),
+                                                    start_date = input$start_date_plots_search_que,
+                                                    end_date = input$end_date_plots_search_que)
+      str_his_filtered
+    })
+  
+  output$plot_searches = renderPlot(
+    plot_searches(str_his_fil_plot_search_que(), additional = input$radio_btn_plot_search_que)
+    
+  )
+  
   
   
   
