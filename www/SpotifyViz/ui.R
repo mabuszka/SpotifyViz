@@ -142,7 +142,7 @@ body = dashboardBody(
         ),
         tabItem(tabName = "str_hist",
                 fluidRow(
-                    column(5,
+                    column(4,
                            box(title = "Date range", solidHeader = TRUE, width = NULL, collapsible = TRUE,
                                status = "success",
                                dateInput('start_date_plots_str_his',

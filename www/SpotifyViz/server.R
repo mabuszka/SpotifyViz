@@ -174,7 +174,7 @@ shinyServer(function(input, output) {
   ### sessions plot
   
   output$str_his_plot_session = renderPlot({
-    sessions_visualize(str_hist_plot_str_his_wo_playlists(), as_percentage = as.logical(input$session_plot))
+    sessions_visualize(str_hist_plot_str_his_wo_playlists(), mins = 5, as_percentage = as.logical(input$session_plot))
   })
   
   ## MAGDA
