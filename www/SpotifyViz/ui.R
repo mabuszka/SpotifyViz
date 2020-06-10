@@ -111,7 +111,9 @@ body = dashboardBody(
         tabItem(tabName = "search_que",
                 column(
                     3,
-                    box(title = "Date range", solidHeader = TRUE, width = NULL,
+                    box(title = "Date range", 
+                        solidHeader = TRUE,
+                        width = NULL,
                         status = "success",
                         dateInput('start_date_plots_search_que',
                                   label = ('Start date: yyyy-mm-dd'),
@@ -123,7 +125,10 @@ body = dashboardBody(
                                   
                         )
                     ),
-                    box(title = "Controls", status = "success", solidHeader = TRUE, width = NULL,
+                    box(title = "Controls",
+                        status = "success", 
+                        solidHeader = TRUE, 
+                        width = NULL,
                         radioButtons(
                             "radio_btn_plot_search_que", "Additional info",
                             choices = c("Platform" = "platform", "Country" = "country")
@@ -133,7 +138,10 @@ body = dashboardBody(
                     )
                 ),
                 column(9,
-                       box(width = NULL, status = "success",
+                       box(width = NULL,
+                           status = "success",
+                           title = "Plot search queries",
+                           solidHeader = TRUE,
                            plotOutput("plot_searches")
                        )
                 )
@@ -143,8 +151,8 @@ body = dashboardBody(
         tabItem(tabName = "str_hist",
                 fluidRow(
                     column(4,
-                           box(title = "Date range", solidHeader = TRUE, width = NULL, collapsible = TRUE,
-                               status = "success",
+                           box(title = "Date range", solidHeader = TRUE, width = NULL, 
+                               collapsible = TRUE, status = "success",
                                dateInput('start_date_plots_str_his',
                                          label = ('Start date: yyyy-mm-dd'),
                                          value = ymd("2019-10-01")
@@ -161,22 +169,22 @@ body = dashboardBody(
                 fluidRow(
                     column(3,
                            box(title = "Controls", solidHeader = TRUE, width = NULL,
-                               status = "success", collapsible = TRUE, collapsed = TRUE,
+                               status = "success", collapsible = TRUE, collapsed = FALSE,
                                radioButtons("as_per_str_his_play_time", "As percentage",
                                             choices = list("Yes" = TRUE, "No" = FALSE),
                                             selected = FALSE
                                ),
                                radioButtons("t_or_c_play_time", "Number of tracks or playtime",
-                                        choices = c("Number of tracks" = "count", "Playtime" = "time")
+                                            choices = c("Number of tracks" = "count", "Playtime" = "time")
                                ),
                                uiOutput("ui_play_time"
-                                   
+                                        
                                )
                                
                            )
                     ),
                     column(9,
-                           box(title = "Playtime", solidHeader = TRUE, width = NULL,  collapsible = TRUE,
+                           box(title = "Playtime", solidHeader = TRUE, width = NULL,  collapsible = FALSE,
                                status = "success", collapsed = TRUE,
                                plotOutput("str_his_plot_play_time")
                            )
@@ -184,75 +192,75 @@ body = dashboardBody(
                 ),
                 fluidRow(
                     column(3,
-                         box(title = "Controls", solidHeader = TRUE, width = NULL,
-                             status = "success", collapsible = TRUE, collapsed = TRUE,
-                             radioButtons("t_or_c_pop_playlists", "Number of tracks or playtime",
-                                          choices = c("Number of tracks" = "count", "Playtime" = "time")
-                             ),
-                             uiOutput("ui_pop_playlists"
-                                      
-                             )
-                             
-                         )  
+                           box(title = "Controls", solidHeader = TRUE, width = NULL,
+                               status = "success", collapsible = TRUE, collapsed = FALSE,
+                               radioButtons("t_or_c_pop_playlists", "Number of tracks or playtime",
+                                            choices = c("Number of tracks" = "count", "Playtime" = "time")
+                               ),
+                               uiOutput("ui_pop_playlists"
+                                        
+                               )
+                               
+                           )  
                     ),
                     column(9,
-                         box(title = "Popular playlists", solidHeader = TRUE, width = NULL,  collapsible = TRUE,
-                             status = "success", collapsed = TRUE,
-                             plotOutput("str_his_plot_pop_playlists")
-                         )
-                        
+                           box(title = "Popular playlists", solidHeader = TRUE, width = NULL,  collapsible = TRUE,
+                               status = "success", collapsed = FALSE,
+                               plotOutput("str_his_plot_pop_playlists")
+                           )
+                           
                     )
                 ),
                 h2("Tracks plots"),
                 fluidRow(
                     column(3,
                            box(title = "Controls", solidHeader = TRUE, width = NULL,
-                               status = "success", collapsible = TRUE, collapsed = TRUE,
+                               status = "success", collapsible = TRUE, collapsed = FALSE,
                                radioButtons("skipped_track_count", "Only skipped",
                                             choices = c("Yes" = TRUE, "No" = FALSE)
-                                   
+                                            
                                ),
                                radioButtons("time_track_count", "Time division",
                                             choices = c("Year" = "year", "Month" = "month", "Week" = "week", "Day" = "day" )
-                                   
+                                            
                                )
                                
                            )
                     ),
                     column(9,
-                        box(title = "Track counts", solidHeader = TRUE, width = NULL,
-                            status = "success", collapsible = TRUE, collapsed = TRUE,
-                            plotOutput("str_his_plot_track_count")
-                            
-                        )
-                        
+                           box(title = "Track count", solidHeader = TRUE, width = NULL,
+                               status = "success", collapsible = TRUE, collapsed = FALSE,
+                               plotOutput("str_his_plot_track_count")
+                               
+                           )
+                           
                     )
                 ),
                 fluidRow(
                     column(3,
-                        box(title = "Controls", solidHeader = TRUE, width = NULL,
-                            status = "success", collapsible = TRUE,
-                            radioButtons("skipped_track_period", "Include skipped",
-                                         choices = c("Yes" = TRUE, "No" = FALSE)
-                                         
-                            ),
-                            radioButtons("percentage_track_period", "As percentage",
-                                         choices = c("Yes" = TRUE, "No" = FALSE)
-                                         
-                            ),
-                            radioButtons("by_track_period", "Distribution",
-                                         choices = c("Daily" = "weekday", "Hourly" = "hour"),
-                                selected = c("Hourly" = "hour")
-                            ),
-                            uiOutput("ui_track_period")
-                        )
+                           box(title = "Controls", solidHeader = TRUE, width = NULL,
+                               status = "success", collapsible = TRUE,
+                               radioButtons("skipped_track_period", "Include skipped",
+                                            choices = c("Yes" = TRUE, "No" = FALSE)
+                                            
+                               ),
+                               radioButtons("percentage_track_period", "As percentage",
+                                            choices = c("Yes" = TRUE, "No" = FALSE)
+                                            
+                               ),
+                               radioButtons("by_track_period", "Distribution",
+                                            choices = c("Daily" = "weekday", "Hourly" = "hour"),
+                                            selected = c("Hourly" = "hour")
+                               ),
+                               uiOutput("ui_track_period")
+                           )
                     ),
                     column(9,
-                           box(title = "Track counts by period", solidHeader = TRUE, width = NULL,
-                               status = "success", collapsible = TRUE, collapsed = TRUE,
+                           box(title = "Track count by period", solidHeader = TRUE, width = NULL,
+                               status = "success", collapsible = TRUE, collapsed = FALSE,
                                plotOutput("str_his_plot_track_period")
                            )
-                        
+                           
                     )
                 ),
                 h2("Sessions Plot"),
@@ -279,7 +287,7 @@ body = dashboardBody(
                     box(
                         width = NULL,
                         solidHeader = TRUE,
-                        title = "Date range",
+                        title = "Date range - for all tables",
                         status = "success",
                         uiOutput("start_date_tables_ui"),
                         uiOutput("end_date_tables_ui")
@@ -288,7 +296,7 @@ body = dashboardBody(
                 column(
                     width = 2,
                     box(title = "Summary control", solidHeader = TRUE, width = NULL,
-                        status = "success",
+                        collapsible = TRUE, status = "success",
                         radioButtons("as_percentage_summary", "As percentage",
                                      choices = list("Yes" = TRUE, "No" = FALSE),
                                      selected = FALSE
@@ -297,22 +305,20 @@ body = dashboardBody(
                 ),
                 column(
                     width = 7,
-                    box(title = "Summary table",
-                        width = NULL,
-                        solidHeader = TRUE,
-                        status = "success",
+                    box(title = "Summary table", width = NULL, solidHeader = TRUE,
+                        status = "success", collapsible = TRUE,
                         tableOutput("summary_dt")
                     )
                 )
                 ),
+                h2("Most frequent"),
                 fluidRow(
+                    
                     column(
                         width = 3,
                         box(
-                            width = NULL,
-                            solidHeader = TRUE,
-                            title = "Controls",
-                            status = "success",
+                            width = NULL, solidHeader = TRUE, title = "Controls",
+                            status = "success", collapsible = TRUE,
                             radioButtons("track_or_artist_tables", label = ("Track or Artist"),
                                          choices = list("Artist" = "artist", "Track" = "track"),
                                          selected = "artist"),
@@ -323,9 +329,7 @@ body = dashboardBody(
                     ),
                     column(width = 4,
                            box(
-                               width = 0,
-                               solidHeader = TRUE,
-                               collapsible = TRUE,
+                               width = NULL, solidHeader = TRUE, collapsible = TRUE,
                                status = "success",
                                title = "Most frequently skipped",
                                DTOutput("most_skipped"),
@@ -334,13 +338,26 @@ body = dashboardBody(
                     column(
                         width = 4,
                         box(
-                            width = 0,
-                            solidHeader = TRUE,
-                            collapsible = TRUE,
+                            width = NULL, solidHeader = TRUE, collapsible = TRUE,
                             status = "success",
                             title = "Most frequently played",
                             DTOutput("most_played"),
                         )
+                    )
+                    
+                ),
+                h2("Longest session of playing with less than 5 minutes breaks between tracks"),
+                fluidRow(
+                    box(width = 5, title = "Longest session summary",
+                        solidHeader = TRUE, collapsible = TRUE,
+                        status = "success",
+                        tableOutput("longest_session_summ")
+                        
+                    ),
+                    box(width = 7, title = "Longest session",
+                        solidHeader = TRUE, collapsible = TRUE,
+                        status = "success",
+                        DTOutput("longest_session")
                     )
                     
                 )
@@ -379,9 +396,7 @@ body = dashboardBody(
                     column(9,
                            
                            tabBox(
-                               width = NULL,
-                               side = "right",
-                               title = "See the data you've uploaded for second user",
+                               width = NULL, side = "right", title = "See the data you've uploaded for second user",
                                id = "tabset1",
                                tabPanel(
                                    title = "Streaming history",

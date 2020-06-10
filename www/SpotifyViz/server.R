@@ -1,7 +1,3 @@
-
-
-
-
 library(shiny)
 
 
@@ -13,7 +9,8 @@ shinyServer(function(input, output) {
     tryCatch(
       {
         
-        read_files <- rbindlist(lapply(input$streaming_history$datapath, jsonlite::fromJSON))
+        read_files <- rbindlist(lapply(input$streaming_history$datapath,
+                                       jsonlite::fromJSON))
       },
       error = function(e) {
         stop(safeError(e))
@@ -31,7 +28,6 @@ shinyServer(function(input, output) {
   
   search_queries_dt <- eventReactive(input$search_queries,{
     
-    # req(input$SearchQueries)
     tryCatch(
       {
         
@@ -50,7 +46,6 @@ shinyServer(function(input, output) {
   
   
   playlist_dt <- eventReactive(input$playlist,{
-    # req(input$Playlist)
     tryCatch(
       {
         
@@ -221,6 +216,19 @@ shinyServer(function(input, output) {
                                                 input$end_date_tables,
                                                 as_percentage = as.logical(input$as_percentage_summary)
                                                 ))
+  longest_session_dt <- eventReactive({input$start_date_tables
+                                   input$end_date_tables
+                                   input$streaming_history},
+                                   {
+                                     longest_session_dt <- longest_session(streaming_history_filtered_tables(),5)
+                                     longest_session_dt
+                                   }
+    
+  )
+  
+  output$longest_session <- renderDT(session_for_view(longest_session_dt()))
+  
+  output$longest_session_summ <- renderTable(make_session_stats(longest_session_dt()))
   
   
   ## MAGDA
