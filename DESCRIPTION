@@ -1,12 +1,17 @@
 Package: spotifyviz
-Title: Vizualize Spotify Data
+Title: Visualize Spotify Data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Magdalena",
+    c(person(given = "Magdalena",
            family = "Buszka",
            role = c("aut", "cre"),
-           email = "Magdalena.Buszka@math.uni.wroc.pl")
-Description: Vizualize and summarise data from Spotify.
+           email = "Magdalena.Buszka@math.uni.wroc.pl"),
+           person(given = "Artur",
+           family = "Simon",
+           role = "aut",
+           email = "artur.simon72@gmail.com")
+    )
+Description: Visualize and summarize data from Spotify.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -17,3 +22,6 @@ Imports:
     ggplot2,
     jsonlite,
     viridisLite
+Suggests: 
+Language: en-US
+    spelling

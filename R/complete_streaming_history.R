@@ -7,10 +7,9 @@
 #' @param folder_path Path to a folder which contains file or files with 
 #' Streaming History in json format. File(s) must contain "StreamingHistory" in the name.
 #' 
-#' @return A data table containg streaming history from spotify suited for being used in rest of the functions from the package.
+#' @return A data table containing streaming history from spotify suited for being used in rest of the functions from the package.
 #'
 #' @export
-
 
 
 complete_streaming_history <- function(folder_path)

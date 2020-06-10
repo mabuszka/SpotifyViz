@@ -1,5 +1,9 @@
 # SpotifyViz
 
+  <!-- badges: start -->
+  [![Travis build status](https://travis-ci.org/StatsIMUWr/SpotifyViz.svg?branch=master)](https://travis-ci.org/StatsIMUWr/SpotifyViz)
+  <!-- badges: end -->
+
 An R tool and Shiny application to explore music tastes based on Spotify data.
 The application is available 03.02.2020.
 
