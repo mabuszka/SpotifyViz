@@ -23,3 +23,26 @@ playlist_shiny = function(playlist_raw) {
   playlists_dt = rbindlist(playlists)
   playlists_dt
 }
+
+##Functions for min and max date calculation for defoult value in date input 
+## for serach queries use end_and_start = FALSE
+
+min_date <- function(data, end_and_start = TRUE){
+  if (end_and_start) {
+  min_date <- as_date(data[, min(start_time)])
+  }
+  else {
+    min_date <- as_date(data[, min(date)])
+  }
+  min_date
+}
+
+max_date <- function(data, end_and_start = TRUE){
+  if (end_and_start) {
+    max_date <- as_date(data[, max(end_time)])
+  }
+  else {
+    max_date <- as_date(data[, max(date)])
+  }
+}
+
