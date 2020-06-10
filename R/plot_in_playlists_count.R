@@ -47,9 +47,10 @@ plot_in_playlists_count <- function(str_his_with_playlist_wide, as_percentage = 
   
   if (!as_percentage) {
     vis <- vis + geom_bar(aes(x = in_any, y = played ), stat = "identity", fill = "#440154FF", colour = "white") +
-            labs(y = y_label) +
-            scale_y_continuous(labels = function(x) paste(x, abbr[time_unit])) 
-      
+            labs(y = y_label)
+    if (time_or_count == "time") {
+       vis <- vis + scale_y_continuous(labels = function(x) paste(x, abbr[time_unit])) 
+    }
   }
   
   else {
