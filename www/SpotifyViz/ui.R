@@ -27,7 +27,7 @@ sidebar = dashboardSidebar(
         menuItem("About", tabName = "about", icon = icon("fas fa-info"))
     )
 )
-## MAGDA
+## color options 
 tabs_color <- '.nav-tabs-custom .nav-tabs li.active {
     border-top-color: #00a65a;
 }
@@ -35,7 +35,7 @@ tabs_color <- '.nav-tabs-custom .nav-tabs li.active {
                             background-color: #00a65a;
                             }
 .nav-tabs-custom > .nav-tabs > li.header {
-                            color: #f4f4f4f4;
+                            color: #FFFFFF;
 }
 .nav-tabs-custom>.nav-tabs>li>a {
     color: #FFFFFF;
@@ -46,7 +46,6 @@ tabs_color <- '.nav-tabs-custom .nav-tabs li.active {
     color: #333;
 }'
 
-## MAGDA
 
 body = dashboardBody(
     tags$head( 
@@ -100,7 +99,8 @@ body = dashboardBody(
                                     ),
                             tabPanel(
                                     title = "Playlists",
-                                    dataTableOutput("playlistDT")
+                                    dataTableOutput("playlistDT"),
+                                    tags$head(tags$style(HTML(tabs_color)))
                             )
                         )
                     )
@@ -140,7 +140,6 @@ body = dashboardBody(
                 
             
         ),
-        #### ARTUR
         tabItem(tabName = "str_hist",
                 fluidRow(
                     column(5,
@@ -164,7 +163,8 @@ body = dashboardBody(
                            box(title = "Controls", solidHeader = T, width = NULL,
                                status = "success", collapsible = T, collapsed = T,
                                radioButtons("as_per_str_his_play_time", "As percentage",
-                                            choices = c("Yes" = TRUE, "No" = FALSE)
+                                            choices = list("Yes" = TRUE, "No" = FALSE),
+                                            selected = FALSE
                                ),
                                radioButtons("t_or_c_play_time", "Additional info",
                                         choices = c("Time" = "time", "Count" = "count")
@@ -184,7 +184,6 @@ body = dashboardBody(
                 )
             
         ),
-        ### koniec ARTUR
         tabItem(tabName = "tables",
                 fluidRow(column(
                     width = 3,
@@ -269,7 +268,8 @@ body = dashboardBody(
                            
                            tabBox(
                                width = NULL,
-                               title = "See the data you've uploaded four second user",
+                               side = "right",
+                               title = "See the data you've uploaded for second user",
                                id = "tabset1",
                                tabPanel(
                                    title = "Streaming history",
@@ -290,8 +290,7 @@ body = dashboardBody(
                 
         ),
         
-        ## MAGDA
-        
+
         tabItem(tabName = "about",
                 h2("About this app"),
                 fluidRow(infoBox(title = "Visits this site to see more",

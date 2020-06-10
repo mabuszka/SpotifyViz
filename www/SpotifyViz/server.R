@@ -89,6 +89,9 @@ shinyServer(function(input, output) {
   
   #### plots streaming history
   ### ARTUR
+  
+  output$text <- renderText(input$as_per_str_his_play_time)
+  
   output$ui_play_time = renderUI({if (input$t_or_c_play_time == "time") {
     radioButtons("t_units_play_time", "Time units",
                  choices = c("Hours" = "hours", "Minutes" = "minutes", "Seconds" = "seconds")
@@ -111,7 +114,8 @@ shinyServer(function(input, output) {
   
   output$str_his_plot_play_time = renderPlot({
     plot_in_playlists_count(str_his_with_playlist_wide = str_his_with_playlists_wide(playlist_dt(), str_hist_plot_str_his()),
-                            time_or_count = input$t_or_c_play_time, time_unit = input$t_units_play_time
+                            time_or_count = input$t_or_c_play_time, time_unit = input$t_units_play_time,
+                            as_percentage = as.logical(input$as_per_str_his_play_time)
                             )
   })
   
