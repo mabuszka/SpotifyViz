@@ -74,6 +74,23 @@ shinyServer(function(input, output) {
   
   ## MAGDA
   
+  # generate defoult value of date inputs
+  output$end_date_tables_ui <- renderUI(
+    {
+      dateInput('end_date_tables',
+                     label = ('End date: yyyy-mm-dd'),
+                     value = max_date(streaming_history_dt()))
+    }
+           )
+  
+  output$start_date_tables_ui <- renderUI(
+    {
+      dateInput('start_date_tables',
+                label = ('Start date: yyyy-mm-dd'),
+                value = min_date(streaming_history_dt()))
+    }
+  )
+
   
   streaming_history_filtered_tables <- eventReactive({input$start_date_tables 
                                                       input$end_date_tables
@@ -87,7 +104,8 @@ shinyServer(function(input, output) {
   output$most_skipped <- renderDT(most_skipped(streaming_history_filtered_tables(),
                                                track_or_artist = input$track_or_artist_tables))
   
-  output$most_played <- renderDT(most_played(streaming_history_filtered_tables(), track_or_artist = input$track_or_artist_tables))
+  output$most_played <- renderDT(most_played(streaming_history_filtered_tables(), 
+                                             track_or_artist = input$track_or_artist_tables))
   
   
   ## MAGDA

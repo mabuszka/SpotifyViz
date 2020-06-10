@@ -126,12 +126,8 @@ body = dashboardBody(
                         solidHeader = TRUE,
                         title = "Date range",
                         status = "success",
-                        dateInput('start_date_tables',
-                                               label = ('Start date: yyyy-mm-dd'),
-                                               value = Sys.Date()),
-                        dateInput('end_date_tables',
-                                  label = ('End date: yyyy-mm-dd'),
-                                  value = Sys.Date()),
+                        uiOutput("start_date_tables_ui"),
+                        uiOutput("end_date_tables_ui")
                         ),
                     box(
                         width = NULL,
@@ -141,6 +137,8 @@ body = dashboardBody(
                         radioButtons("track_or_artist_tables", label = ("Track or Artist"),
                                      choices = list("Artist" = "artist", "Track" = "track"),
                                      selected = "artist"),
+                        sliderInput("how_many_tables", label = ("Show how many entries"),
+                                    min = 0, max = 30, value = 10)
                         
                     )),
                     column(
