@@ -5,7 +5,9 @@
 #'
 #' @param streaming_history A data.table containing streaming history, after 'prepare_streaming_history' was used on it.
 #' @param mins Number of minutes which determine distance between listenings.
-#' @return A data table containg infromation about longest session.
+
+#' 
+#' @return A data table containg information about longest session.
 #'
 #' @export
 #'
@@ -17,7 +19,7 @@
 
 longest_session = function(streaming_history, mins) {
   
-  end_time = . = listening_number = s_played = session_time = skipped  = NULL
+  end_time = . = listening_number = s_played = session_time = skipped  = track_name  = artist_name = start_time =  NULL
   
   str_his = copy(streaming_history)
   
@@ -27,8 +29,9 @@ longest_session = function(streaming_history, mins) {
   
   longest_session_number = sessions[session_time == max(session_time), ][[1, 1]]
   
-  longest_session_dt = con_list_dt[listening_number == longest_session_number]
+  longest_session_dt = con_list_dt[listening_number == longest_session_number, ]
   
-  longest_session_dt
+
+      longest_session_dt
   
 }

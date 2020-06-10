@@ -20,14 +20,18 @@ most_played <- function(streaming_history, track_or_artist,
   
   N <- skipped <- NULL
   
-  if (show_skipped){
-    streaming_history[, .N,
+  if (show_skipped) {
+    most_played_dt <- streaming_history[, .N,
                       by = eval(paste(track_or_artist,"_name", sep = ""))
                       ][order(-N)][1:how_many,]
   }
   else {
-    streaming_history[skipped == FALSE, .N,
+    most_played_dt <- streaming_history[skipped == FALSE, .N,
                       by = eval(paste(track_or_artist,"_name", sep = ""))
                       ][order(-N)][order(-N)][1:how_many,]
   }
+  
+  setnames(most_played_dt, c(paste(capitalize(track_or_artist),"name"), "Times played"))
+  
+  most_played_dt
 }
