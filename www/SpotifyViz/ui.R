@@ -373,7 +373,9 @@ body = dashboardBody(
                                fileInput("streaming_history_u2", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
                                          accept = c(".JSON"))
-                           ),
+                           )
+                           ##other data input for later 
+                           ,
                            box(
                                width = NULL,
                                status = "success",
@@ -386,7 +388,7 @@ body = dashboardBody(
                                status = "success",
                                fileInput("playlist_u2", "Choose JSON file with Playlist",
                                          multiple = FALSE,
-                                         accept = c(".JSON")) 
+                                         accept = c(".JSON"))
                            )
                            
                            
@@ -415,6 +417,59 @@ body = dashboardBody(
                     
                 )
                 
+        ),
+        tabItem(tabName = "plot_compare",
+                fluidRow(
+                    column(width = 4,
+                           box(
+                               width = NULL,
+                               solidHeader = TRUE,
+                               title = "Select day",
+                               status = "success",
+                               dateInput("date_day_compare",
+                                         label = ('Select day: yyyy-mm-dd'),
+                                         value = ymd("2019-10-01")
+                               )
+                           ),
+                           box(
+                               solidHeader = TRUE, width = NULL, title = "Names",
+                               status = "success", 
+                               textInput("u1_name", label = "Input name for first user", 
+                                         placeholder = "user 1"),
+                               textInput("u2_name", label = "Input name for second user", 
+                                         placeholder = "user 2"),
+                               actionButton("take_names", label = "Set names" )
+                               ,
+                               
+                               
+                           )
+                    ),
+                    column(width = 8,
+                           box(
+                               width = NULL, status = "success",
+                               solidHeader = TRUE, title = "Playtime comparison on selected day",
+                               plotOutput("day_compare")
+                           )
+                           
+                    )
+                )
+        ),
+        tabItem(
+            tabName = "tables_compare",
+            fluidRow(
+                     box(title = "Controls", solidHeader = TRUE,
+                         status = "success", width = 4,
+                         radioButtons("tracks_common", "Show common",
+                                      choices = list("Tracks" = TRUE, "Artists" = FALSE),
+                                      selected = FALSE
+                         )
+
+                     ),
+                box(title = "Show common", solidHeader = TRUE, status = "success",
+                    width = 8,
+                    DTOutput("common_dt")
+                )
+            )
         ),
         
         
