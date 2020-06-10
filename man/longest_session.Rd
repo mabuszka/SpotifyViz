@@ -12,7 +12,7 @@ longest_session(streaming_history, mins)
 \item{mins}{Number of minutes which determine distance between listenings.}
 }
 \value{
-A data table containg infromation about longest session.
+A data table containg information about longest session.
 }
 \description{
 Shows all information about longest session i.e. tracks, artists etc. Excludes skipped tracks.

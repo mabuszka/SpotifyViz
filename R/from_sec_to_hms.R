@@ -9,8 +9,8 @@
 #' @export
 #'
 #' @examples
-#' from_sec_to_min_sec(60)
-#' from_sec_to_min_sec(134)
+#' from_sec_to_hms(60)
+#' from_sec_to_hms(134)
 
 
 
