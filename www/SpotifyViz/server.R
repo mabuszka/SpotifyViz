@@ -87,8 +87,10 @@ shinyServer(function(input, output) {
     
   )
   
-  #### plots streaming history
+  #### plots streaming history ####
   ### ARTUR
+  
+  ### playtime
   output$ui_play_time = renderUI({if (input$t_or_c_play_time == "time") {
     radioButtons("t_units_play_time", "Time units",
                  choices = c("Hours" = "hours", "Minutes" = "minutes", "Seconds" = "seconds")
@@ -96,10 +98,11 @@ shinyServer(function(input, output) {
   }
   })
   
+  ### for plots with playlists
   str_hist_plot_str_his = eventReactive({input$start_date_plots_str_his
     input$end_date_plots_str_his
     input$streaming_history
-    #input$playlist
+    input$playlist
     },
     {str_his_filtered = filter_streaming_history(streaming_history_dt(),
                                                  start_date = input$start_date_plots_str_his,
@@ -109,10 +112,69 @@ shinyServer(function(input, output) {
     })
   
   
+  str_hist_plot_str_his_wo_playlists = eventReactive({input$start_date_plots_str_his
+    input$end_date_plots_str_his
+    input$streaming_history
+  },
+  {str_his_filtered = filter_streaming_history(streaming_history_dt(),
+                                               start_date = input$start_date_plots_str_his,
+                                               end_date = input$end_date_plots_str_his)
+  str_his_filtered
+  
+  })
+  
   output$str_his_plot_play_time = renderPlot({
     plot_in_playlists_count(str_his_with_playlist_wide = str_his_with_playlists_wide(playlist_dt(), str_hist_plot_str_his()),
-                            time_or_count = input$t_or_c_play_time, time_unit = input$t_units_play_time
+                            time_or_count = input$t_or_c_play_time, time_unit = input$t_units_play_time,
+                            as_percentage = as.logical(input$as_per_str_his_play_time)
                             )
+  })
+  
+
+  
+  ### popular playlists
+  
+  output$ui_pop_playlists = renderUI({if (input$t_or_c_pop_playlists == "time") {
+    radioButtons("t_units_pop_playlists", "Time units",
+                 choices = c("Hours" = "hours", "Minutes" = "minutes", "Seconds" = "seconds")
+    )
+  }
+  })
+  
+  output$str_his_plot_pop_playlists = renderPlot({
+    plot_playlist_popularity(str_his_with_playlists_long = str_his_with_playlists_long(playlist_dt(), str_hist_plot_str_his()),
+                            time_or_count = input$t_or_c_pop_playlists, time_unit = input$t_units_pop_playlists)
+  })
+  
+  
+  ### track counts 
+  
+  output$str_his_plot_track_count = renderPlot({
+    plot_track_count(str_hist_plot_str_his_wo_playlists(),
+                     only_skipped = as.logical(input$skipped_track_count),
+                     by = input$time_track_count)
+  })
+  
+  #### track counts by period
+  
+  output$ui_track_period = renderUI({if (input$by_track_period == "hour") {
+    radioButtons("by_weekday_track_period", "By weekday",
+                 choices = c("Yes" = TRUE, "No" = FALSE), selected = c("No" = FALSE)) 
+  }
+  })
+  
+  
+  output$str_his_plot_track_period = renderPlot({
+    plot_track_count_by_period(str_hist_plot_str_his_wo_playlists(),
+                              period = input$by_track_period, include_skipped = as.logical(input$skipped_track_period),
+                              as_percentage = as.logical(input$percentage_track_period),
+                              by_weekday = as.logical(input$by_weekday_track_period))
+  })
+  
+  ### sessions plot
+  
+  output$str_his_plot_session = renderPlot({
+    sessions_visualize(str_hist_plot_str_his_wo_playlists(), as_percentage = as.logical(input$session_plot))
   })
   
   ## MAGDA
