@@ -59,18 +59,21 @@ body = dashboardBody(
                     column(3,
                            box(
                                width = NULL,
+                               status = "success",
                                fileInput("streaming_history", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
                                          accept = c(".JSON"))
                            ),
                            box(
                                width = NULL,
+                               status = "success",
                                fileInput("search_queries", "Choose JSON file with SearchQueries",
                                          multiple = FALSE,
                                          accept = c(".JSON"))
                            ),
                            box(
                                width = NULL,
+                               status = "success",
                                fileInput("playlist", "Choose JSON file with Playlist",
                                          multiple = FALSE,
                                          accept = c(".JSON")) 
@@ -84,7 +87,6 @@ body = dashboardBody(
                         tabBox(
                             width = NULL,
                             title = "See the data you've uploaded",
-                            # The id lets us use input$tabset1 on the server to find the current tab
                             id = "tabset1",
                             height = "450px",
                             side = "right",
@@ -99,9 +101,7 @@ body = dashboardBody(
                             tabPanel(
                                     title = "Playlists",
                                     dataTableOutput("playlistDT")
-                                    ),
-                            
-                            tags$head(tags$style(HTML(tabs_color)))
+                            )
                         )
                     )
                     
@@ -111,8 +111,8 @@ body = dashboardBody(
         tabItem(tabName = "search_que",
                 column(
                     3,
-                    box(title = "Date range", status = "primary", solidHeader = TRUE, width = NULL,
-                        
+                    box(title = "Date range", solidHeader = TRUE, width = NULL,
+                        status = "success",
                         dateInput('start_date_plots_search_que',
                                   label = ('Start date: yyyy-mm-dd'),
                                   value = ymd("2019-10-01")
@@ -123,7 +123,7 @@ body = dashboardBody(
                         
                         )
                     ),
-                    box(title = "Controls", status = "primary", solidHeader = TRUE, width = NULL,
+                    box(title = "Controls", status = "success", solidHeader = TRUE, width = NULL,
                         radioButtons(
                             "radio_btn_plot_search_que", "Additional info",
                             choices = c("Platform" = "platform", "Country" = "country")
@@ -133,15 +133,58 @@ body = dashboardBody(
                     )
                 ),
                 column(9,
-                       box(width = NULL,
+                       box(width = NULL, status = "success",
                            plotOutput("plot_searches")
                        )
                 )
                 
             
         ),
-        ## MAGDA
-        
+        #### ARTUR
+        tabItem(tabName = "str_hist",
+                fluidRow(
+                    column(5,
+                           box(title = "Date range", solidHeader = TRUE, width = NULL,
+                               status = "success",
+                               dateInput('start_date_plots_str_his',
+                                         label = ('Start date: yyyy-mm-dd'),
+                                         value = ymd("2019-10-01")
+                               ),
+                               dateInput('end_date_plots_str_his',
+                                         label = ('End date: yyyy-mm-dd'),
+                                         value = ymd("2019-10-30")
+                               )
+                           )
+                    )
+                    
+                ),
+                fluidRow(
+                    column(3,
+
+                           box(title = "Controls", solidHeader = T, width = NULL,
+                               status = "success", collapsible = T, collapsed = T,
+                               radioButtons("as_per_str_his_play_time", "As percentage",
+                                            choices = c("Yes" = TRUE, "No" = FALSE)
+                               ),
+                               radioButtons("t_or_c_play_time", "Additional info",
+                                        choices = c("Time" = "time", "Count" = "count")
+                               ),
+                               uiOutput("ui_play_time",
+                                   
+                               )
+                               
+                           )
+                    ),
+                    column(9,
+                           box(title = "Playtime", solidHeader = T, width = NULL,  collapsible = T,
+                               status = "success", collapsed = T,
+                               plotOutput("str_his_plot_play_time")
+                           )
+                    )
+                )
+            
+        ),
+        ### koniec ARTUR
         tabItem(tabName = "tables",
                 fluidRow(column(
                     width = 3,
@@ -198,18 +241,21 @@ body = dashboardBody(
                     column(3,
                            box(
                                width = NULL,
+                               status = "success",
                                fileInput("streaming_history_u2", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
                                          accept = c(".JSON"))
                            ),
                            box(
                                width = NULL,
+                               status = "success",
                                fileInput("search_queries_u2", "Choose JSON file with SearchQueries",
                                          multiple = FALSE,
                                          accept = c(".JSON"))
                            ),
                            box(
                                width = NULL,
+                               status = "success",
                                fileInput("playlist_u2", "Choose JSON file with Playlist",
                                          multiple = FALSE,
                                          accept = c(".JSON")) 
