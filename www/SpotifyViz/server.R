@@ -7,8 +7,9 @@ library(shiny)
 
 shinyServer(function(input, output) {
   
-  output$StreamingHistoryDT <-renderDataTable({
-    req(input$StreamingHistory)
+  
+    # req(input$StreamingHistory)
+  streaming_history_dt <- eventReactive(input$StreamingHistory,{
     
     tryCatch(
       {
@@ -21,32 +22,39 @@ shinyServer(function(input, output) {
     )
     
     
-    return(prepare_streaming_history(read_files))
+    streaming_history_dt <- prepare_streaming_history(read_files)
+    
   })
+  
+    output$StreamingHistoryDT <- renderDataTable(streaming_history_dt())
 
   
-  output$SearchQueriesDT <- renderDataTable({
-    req(input$SearchQueries)
+  search_queries_dt <- eventReactive(input$SearchQueries,{
+    
+    # req(input$SearchQueries)
     tryCatch(
       {
         
         read_files <- data.table(jsonlite::fromJSON(input$SearchQueries$datapath))
-        read_files <- read_files[,list(date=ymd(date),platform,country)]
-      },
+        read_files <- read_files[,list(date=ymd(date), platform, country)]
+      }, 
       error = function(e) {
         stop(safeError(e))
       }
     )
     
-    return(read_files)
+    search_queries <- read_files
+    search_queries
   })
+  output$SearchQueriesDT <- renderDataTable(search_queries_dt())
   
-  output$PlaylistDT <- renderDataTable({
-    req(input$Playlist)
+  
+  playlist_dt <- eventReactive(input$Playlist,{
+    # req(input$Playlist)
     tryCatch(
       {
         
-       playlists = playlist_shiny(input$Playlist$datapath)
+        playlists = playlist_shiny(input$Playlist$datapath)
         
       },
       error = function(e) {
@@ -54,8 +62,11 @@ shinyServer(function(input, output) {
       }
     )
     
-    return(playlists)
+    playlist_dt <- playlists
     
     
-  })
+  }) 
+  
+  output$PlaylistDT <- renderDataTable(playlist_dt())
+  
 })
