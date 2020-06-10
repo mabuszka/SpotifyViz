@@ -54,10 +54,6 @@ body = dashboardBody(
                                fileInput("playlist", "Choose JSON file with Playlist",
                                          multiple = FALSE,
                                          accept = c(".JSON")) 
-                           ),
-                           box("Plot my habits",
-                               width = NULL,
-                               actionButton("do_plots", "Plot")
                            )
                            
                     ),
@@ -88,9 +84,35 @@ body = dashboardBody(
                 
         ),
         tabItem(tabName = "search_que",
-                box(width = NULL,
-                    plotOutput("plot_searches")
+                column(
+                    3,
+                    box(title = "Date range", status = "primary", solidHeader = TRUE, width = NULL,
+                        
+                        dateInput('start_date_plots_search_que',
+                                  label = ('Start date: yyyy-mm-dd'),
+                                  value = ymd("2019-10-01")
+                        ),
+                        dateInput('end_date_plots_search_que',
+                                  label = ('End date: yyyy-mm-dd'),
+                                  value = ymd("2019-10-30")
+                        
+                        )
+                    ),
+                    box(title = "Controls", status = "primary", solidHeader = TRUE, width = NULL,
+                        radioButtons(
+                            "radio_btn_plot_search_que", "Additional info",
+                            choices = c("Platform" = "platform", "Country" = "country")
+                        )
+                        
+                        
+                    )
+                ),
+                column(9,
+                       box(width = NULL,
+                           plotOutput("plot_searches")
+                       )
                 )
+                
             
         ),
         
