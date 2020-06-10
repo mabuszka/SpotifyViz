@@ -69,4 +69,27 @@ shinyServer(function(input, output) {
   
   output$PlaylistDT <- renderDataTable(playlist_dt())
   
+  
+  
+  
+  ## MAGDA
+  
+  
+  streaming_history_filtered_tables <- eventReactive({input$start_date_tables 
+                                                      input$end_date_tables
+                                                      input$StreamingHistory},
+                                                     {
+                                                       str_his_filtered <-  filter_streaming_history(streaming_history_dt(),
+                                                                                                     start_date = input$start_date_tables,
+                                                                                                     end_date = input$end_date_tables)
+                                                       str_his_filtered
+                                                     })
+  output$most_skipped <- renderDT(most_skipped(streaming_history_filtered_tables(),
+                                               track_or_artist = input$track_or_artist_tables))
+  
+  output$most_played <- renderDT(most_played(streaming_history_filtered_tables(), track_or_artist = input$track_or_artist_tables))
+  
+  
+  ## MAGDA
+  
 })
