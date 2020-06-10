@@ -138,7 +138,7 @@ shinyServer(function(input, output) {
     }
   )
 
-  
+  ## filter streaming_history for tables
   streaming_history_filtered_tables <- eventReactive({input$start_date_tables 
                                                       input$end_date_tables
                                                       input$streaming_history},
@@ -148,11 +148,21 @@ shinyServer(function(input, output) {
                                                                                                      end_date = input$end_date_tables)
                                                        str_his_filtered
                                                      })
+  
+  # tables
   output$most_skipped <- renderDT(most_skipped(streaming_history_filtered_tables(),
-                                               track_or_artist = input$track_or_artist_tables))
+                                               track_or_artist = input$track_or_artist_tables,
+                                               how_many = input$how_many_tables))
   
   output$most_played <- renderDT(most_played(streaming_history_filtered_tables(), 
-                                             track_or_artist = input$track_or_artist_tables))
+                                             track_or_artist = input$track_or_artist_tables,
+                                             how_many = input$how_many_tables))
+  
+  output$summary_dt <- renderTable(make_summary_dt(streaming_history_dt(), 
+                                                input$start_date_tables, 
+                                                input$end_date_tables,
+                                                as_percentage = as.logical(input$as_percentage_summary)
+                                                ))
   
   
   ## MAGDA

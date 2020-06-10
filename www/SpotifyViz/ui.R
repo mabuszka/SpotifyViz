@@ -18,11 +18,11 @@ sidebar = dashboardSidebar(
                      "Other user data input", "oth_us_data_in", icon = icon("fas fa-upload")
                  ),
                  menuSubItem("Plots", "plot_compare", icon = icon("fas fa-chart-bar")
-                     
+                             
                  ),
                  menuSubItem("Tables", "tables_compare", icon = icon("fas fa-table"))
                  
-            
+                 
         ),
         menuItem("About", tabName = "about", icon = icon("fas fa-info"))
     )
@@ -79,30 +79,30 @@ body = dashboardBody(
                            )
                            
                     ),
-
+                    
                     
                     column(9,
-                        
-                        tabBox(
-                            width = NULL,
-                            title = "See the data you've uploaded",
-                            id = "tabset1",
-                            height = "450px",
-                            side = "right",
-                            tabPanel(
-                                    title = "Streaming history",
-                                    dataTableOutput("streaming_historyDT")
-                            ),
-                            tabPanel(
-                                        title = "Search queries",
-                                        dataTableOutput("search_queriesDT")
-                                    ),
-                            tabPanel(
-                                    title = "Playlists",
-                                    dataTableOutput("playlistDT"),
-                                    tags$head(tags$style(HTML(tabs_color)))
-                            )
-                        )
+                           
+                           tabBox(
+                               width = NULL,
+                               title = "See the data you've uploaded",
+                               id = "tabset1",
+                               height = "450px",
+                               side = "right",
+                               tabPanel(
+                                   title = "Streaming history",
+                                   dataTableOutput("streaming_historyDT")
+                               ),
+                               tabPanel(
+                                   title = "Search queries",
+                                   dataTableOutput("search_queriesDT")
+                               ),
+                               tabPanel(
+                                   title = "Playlists",
+                                   dataTableOutput("playlistDT"),
+                                   tags$head(tags$style(HTML(tabs_color)))
+                               )
+                           )
                     )
                     
                 )
@@ -120,7 +120,7 @@ body = dashboardBody(
                         dateInput('end_date_plots_search_que',
                                   label = ('End date: yyyy-mm-dd'),
                                   value = ymd("2019-10-30")
-                        
+                                  
                         )
                     ),
                     box(title = "Controls", status = "success", solidHeader = TRUE, width = NULL,
@@ -138,7 +138,7 @@ body = dashboardBody(
                        )
                 )
                 
-            
+                
         ),
         tabItem(tabName = "str_hist",
                 fluidRow(
@@ -159,30 +159,30 @@ body = dashboardBody(
                 ),
                 fluidRow(
                     column(3,
-
+                           
                            box(title = "Controls", solidHeader = T, width = NULL,
-                               status = "success", collapsible = T, collapsed = T,
+                               status = "success", collapsible = T, collapsed = FALSE,
                                radioButtons("as_per_str_his_play_time", "As percentage",
                                             choices = list("Yes" = TRUE, "No" = FALSE),
                                             selected = FALSE
                                ),
                                radioButtons("t_or_c_play_time", "Additional info",
-                                        choices = c("Time" = "time", "Count" = "count")
+                                            choices = c("Time" = "time", "Count" = "count")
                                ),
                                uiOutput("ui_play_time",
-                                   
+                                        
                                )
                                
                            )
                     ),
                     column(9,
                            box(title = "Playtime", solidHeader = T, width = NULL,  collapsible = T,
-                               status = "success", collapsed = T,
+                               status = "success", collapsed = FALSE,
                                plotOutput("str_his_plot_play_time")
                            )
                     )
                 )
-            
+                
         ),
         tabItem(tabName = "tables",
                 fluidRow(column(
@@ -194,45 +194,68 @@ body = dashboardBody(
                         status = "success",
                         uiOutput("start_date_tables_ui"),
                         uiOutput("end_date_tables_ui")
-                        ),
-                    box(
+                    ),
+                ),
+                column(
+                    width = 2,
+                    box(title = "Summary control", solidHeader = TRUE, width = NULL,
+                        status = "success",
+                        radioButtons("as_percentage_summary", "As percentage",
+                                     choices = list("Yes" = TRUE, "No" = FALSE),
+                                     selected = FALSE
+                        )
+                    )
+                ),
+                column(
+                    width = 7,
+                    box(title = "Summary table",
                         width = NULL,
                         solidHeader = TRUE,
-                        title = "Controls",
                         status = "success",
-                        radioButtons("track_or_artist_tables", label = ("Track or Artist"),
-                                     choices = list("Artist" = "artist", "Track" = "track"),
-                                     selected = "artist"),
-                        sliderInput("how_many_tables", label = ("Show how many entries"),
-                                    min = 0, max = 30, value = 10)
-                        
-                    )),
-                    column(
-                        width = 4,
-                    
-                    box(
-                        width = 0,
-                        solidHeader = TRUE,
-                        collapsible = TRUE,
-                        status = "success",
-                        title = "Most frequently skipped",
-                        DTOutput("most_skipped"),
+                        tableOutput("summary_dt")
                     )
+                )
+                ),
+                fluidRow(
+                    column(
+                        width = 3,
+                        box(
+                            width = NULL,
+                            solidHeader = TRUE,
+                            title = "Controls",
+                            status = "success",
+                            radioButtons("track_or_artist_tables", label = ("Track or Artist"),
+                                         choices = list("Artist" = "artist", "Track" = "track"),
+                                         selected = "artist"),
+                            sliderInput("how_many_tables", label = ("Show how many entries"),
+                                        min = 1, max = 30, value = 10)
+                            
+                        )
+                    ),
+                    column(width = 4,
+                           box(
+                               width = 0,
+                               solidHeader = TRUE,
+                               collapsible = TRUE,
+                               status = "success",
+                               title = "Most frequently skipped",
+                               DTOutput("most_skipped"),
+                           )
                     ),
                     column(
                         width = 4,
-                    box(
-                        width = 0,
-                        solidHeader = TRUE,
-                        collapsible = TRUE,
-                        status = "success",
-                        title = "Most frequently played",
-                        DTOutput("most_played"),
+                        box(
+                            width = 0,
+                            solidHeader = TRUE,
+                            collapsible = TRUE,
+                            status = "success",
+                            title = "Most frequently played",
+                            DTOutput("most_played"),
+                        )
                     )
-                )
                     
                 )
-            
+                
         ),
         tabItem(tabName = "oth_us_data_in",
                 sidebarLayout(
@@ -259,7 +282,7 @@ body = dashboardBody(
                                          multiple = FALSE,
                                          accept = c(".JSON")) 
                            )
-
+                           
                            
                     ),
                     
@@ -290,7 +313,7 @@ body = dashboardBody(
                 
         ),
         
-
+        
         tabItem(tabName = "about",
                 h2("About this app"),
                 fluidRow(infoBox(title = "Visits this site to see more",
