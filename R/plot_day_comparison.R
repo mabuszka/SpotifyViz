@@ -15,7 +15,7 @@ plot_day_comparison <- function(two_users_dt, user1_name = "User 1", user2_name 
   end_time <- start_time <- user <- NULL
   
   
-  breaks <- pretty_dates(two_users_dt$end_time, 10)
+  breaks <- lubridate::pretty_dates(two_users_dt$end_time, 10)
 
   vis <-  ggplot(two_users_dt) +
     geom_rect(aes(xmin = start_time, xmax = end_time,

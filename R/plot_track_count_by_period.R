@@ -56,7 +56,7 @@ plot_track_count_by_period <- function(filtered, period = "weekday",
       xlab(capitalize(period)) +
       ylab("Tracks played")
     
-    if (by_weekday) {
+    if (by_weekday & period == "hour") {
       vis <- vis +
         facet_wrap(~weekday)
     }
