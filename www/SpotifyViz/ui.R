@@ -5,7 +5,7 @@ sidebar = dashboardSidebar(
     sidebarMenu(
         menuItem("Input user data", tabName = "input_user_data", icon = icon("fas fa-upload")),
         menuItem("Tables", tabName = "tables", icon = icon("fas fa-table")),
-        menuItem("Plots", tabName = "tables", icon = icon("fas fa-chart-bar"),
+        menuItem("Plots", tabName = "plots", icon = icon("fas fa-chart-bar"),
                  menuSubItem(
                      "Search queries", "search_que", icon = icon("fas fa-search")
                  ),
@@ -39,47 +39,47 @@ body = dashboardBody(
                     column(3,
                            box(
                                width = NULL,
-                               fileInput("StreamingHistory", "Choose JSON file(s) with Streaming History",
+                               fileInput("streaming_history", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
                                          accept = c(".JSON"))
                            ),
                            box(
                                width = NULL,
-                               fileInput("SearchQueries", "Choose JSON file with SearchQueries",
+                               fileInput("search_queries", "Choose JSON file with SearchQueries",
                                          multiple = FALSE,
                                          accept = c(".JSON"))
                            ),
                            box(
                                width = NULL,
-                               fileInput("Playlist", "Choose JSON file with Playlist",
+                               fileInput("playlist", "Choose JSON file with Playlist",
                                          multiple = FALSE,
                                          accept = c(".JSON")) 
-                           )   
+                           ),
+                           box("Plot my habits",
+                               width = NULL,
+                               actionButton("do_plots", "Plot")
+                           )
                            
                     ),
-                        
 
                     
-                    # Main panel for displaying outputs ----
                     column(9,
                         
-                        # Output: Data file ----
-
                         tabBox(
                             width = NULL,
                             title = "See the data you've uploaded",
                             id = "tabset1",
                             tabPanel(
                                     title = "Streaming history",
-                                    dataTableOutput("StreamingHistoryDT")
+                                    dataTableOutput("streaming_historyDT")
                             ),
                             tabPanel(
                                         title = "Search queries",
-                                        dataTableOutput("SearchQueriesDT")
+                                        dataTableOutput("search_queriesDT")
                                     ),
                             tabPanel(
                                     title = "Playlists",
-                                    dataTableOutput("PlaylistDT")
+                                    dataTableOutput("playlistDT")
                             )
                         )
                     )
@@ -87,10 +87,67 @@ body = dashboardBody(
                 )
                 
         ),
+        tabItem(tabName = "search_que",
+                box(width = NULL,
+                    plotOutput("plot_searches")
+                )
+            
+        ),
         
         tabItem(tabName = "tables",
                 h2("Blabla")
             
+        ),
+        tabItem(tabName = "oth_us_data_in",
+                sidebarLayout(
+                    
+                    column(3,
+                           box(
+                               width = NULL,
+                               fileInput("streaming_history_u2", "Choose JSON file(s) with Streaming History",
+                                         multiple = TRUE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("search_queries_u2", "Choose JSON file with SearchQueries",
+                                         multiple = FALSE,
+                                         accept = c(".JSON"))
+                           ),
+                           box(
+                               width = NULL,
+                               fileInput("playlist_u2", "Choose JSON file with Playlist",
+                                         multiple = FALSE,
+                                         accept = c(".JSON")) 
+                           )
+
+                           
+                    ),
+                    
+                    
+                    column(9,
+                           
+                           tabBox(
+                               width = NULL,
+                               title = "See the data you've uploaded four second user",
+                               id = "tabset1",
+                               tabPanel(
+                                   title = "Streaming history",
+                                   dataTableOutput("streaming_historyDT_u2")
+                               ),
+                               tabPanel(
+                                   title = "Search queries",
+                                   dataTableOutput("search_queriesDT_u2")
+                               ),
+                               tabPanel(
+                                   title = "Playlists",
+                                   dataTableOutput("playlistDT_u2")
+                               )
+                           )
+                    )
+                    
+                )
+                
         ),
         
         tabItem(tabName = "about",
