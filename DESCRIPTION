@@ -23,5 +23,6 @@ Imports:
     jsonlite,
     viridisLite
 Suggests: 
+    testthat
 Language: en-US
     spelling
