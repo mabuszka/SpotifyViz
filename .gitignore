@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 .SpotifyViz
+doc
+Meta
+inst/doc

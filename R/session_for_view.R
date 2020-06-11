@@ -12,6 +12,8 @@
 #' 
 session_for_view <- function(session_dt){
   
+  . = NULL
+  
   track_name <- artist_name <- s_played <- start_time <- NULL
   
   session_dt <- session_dt[, .(`Start` = lubridate::floor_date(start_time, "minutes" ),
