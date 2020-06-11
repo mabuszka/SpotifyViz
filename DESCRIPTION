@@ -23,5 +23,7 @@ Imports:
     jsonlite,
     viridisLite
 Suggests: 
-    spelling
+    spelling,
+    knitr, rmarkdown
 Language: en-US
+VignetteBuilder: knitr
