@@ -7,10 +7,8 @@
 #' @param base_line_size Base size for line elements
 #' @param base_rect_size Base size for rect elements
 #'
-#' @return
 #' @export
 #'
-#' @examples
 theme_spotifyvis <- function(base_size = 11, base_family = "",
                           base_line_size = base_size / 22,
                           base_rect_size = base_size / 22) {

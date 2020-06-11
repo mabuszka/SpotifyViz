@@ -44,5 +44,11 @@ max_date <- function(data, end_and_start = TRUE){
   else {
     max_date <- as_date(data[, max(date)])
   }
+  max_date
 }
+
+
+  
+
+
 

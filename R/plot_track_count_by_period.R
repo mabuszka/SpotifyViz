@@ -34,7 +34,7 @@ plot_track_count_by_period <- function(filtered, period = "weekday",
   
   
   if (as_percentage) {
-    if (by_weekday) {
+    if (by_weekday && period == "hour") {
       vis <- vis +
         geom_bar(aes(y = (..count..)/tapply(..count..,..PANEL..,sum)[..PANEL..]), fill = "#440154FF", colour = "white") +
         facet_wrap(~weekday) +
@@ -56,7 +56,7 @@ plot_track_count_by_period <- function(filtered, period = "weekday",
       xlab(capitalize(period)) +
       ylab("Tracks played")
     
-    if (by_weekday) {
+    if (by_weekday && period == "hour") {
       vis <- vis +
         facet_wrap(~weekday)
     }
