@@ -18,7 +18,7 @@ make_search_queries_dt <- function(folder_path){
   
   platform <- country <- NULL
   
-  file_path <- list.files(folder_path,"SearchQueries.*.\\.json$")
+  file_path <- list.files(folder_path,"SearchQueries.*\\.json$")
   if (folder_path != ".") {
     file_path <- paste(folder_path, file_path, sep = "/")
   }

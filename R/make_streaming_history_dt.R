@@ -16,7 +16,7 @@
 
 
 make_streaming_history_dt <- function(folder_path){
-  files_path <- list.files(folder_path,"StreamingHistory.*.\\.json$")
+  files_path <- list.files(folder_path,"StreamingHistory.*\\.json$")
   if (folder_path != ".") 
     files_path <- paste(folder_path, files_path, sep = "/")
   rbindlist(lapply(files_path, jsonlite::fromJSON))
