@@ -18,10 +18,10 @@ make_search_queries_dt <- function(folder_path){
   
   platform <- country <- NULL
   
-  files_path <- list.files(folder_path,"SearchQueries")
+  file_path <- list.files(folder_path,"SearchQueries.*.\\.json$")
   if (folder_path != ".") {
-    file_path <- paste(folder_path, files_path, sep = "/")
+    file_path <- paste(folder_path, file_path, sep = "/")
   }
-  read_files <- data.table(jsonlite::fromJSON(files_path))
-  read_files[,list(date=ymd(date),platform,country)]
+  read_file <- data.table(jsonlite::fromJSON(file_path))
+  read_file[,list(date=ymd(date),platform,country)]
 }

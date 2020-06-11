@@ -19,7 +19,7 @@ prepare_playlists <- function(folder_path) {
   }
   name = items = NULL
   
-  files_path <- list.files(folder_path, "Playlist")
+  files_path <- list.files(folder_path, "Playlist.*.\\.json$")
   if (folder_path != ".")
     files_path <- paste(folder_path, files_path, sep = "/")
   df <- jsonlite::fromJSON(files_path)
