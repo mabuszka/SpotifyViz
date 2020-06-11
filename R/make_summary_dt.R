@@ -15,6 +15,8 @@
 
 
 make_summary_dt <- function(streaming_history, start_date, end_date, as_percentage = TRUE) {
+  . = track_name = artist_name = NULL
+  
   filtered <- filter_streaming_history(streaming_history, start_date, end_date)
   hm_tracks <- filtered[,.N]
   hm_different_tracks <- uniqueN(filtered[,.(track_name)])

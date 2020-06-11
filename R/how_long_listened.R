@@ -10,7 +10,7 @@
 #' @param as_percentage A logical scalar. If \code{FALSE} (default) length of time (in seconds and an approximate in biggest reasonable unit)
 #' that songs were listened to in given time period is returned,
 #' otherwise a character vector indicating percentage of given time period will be returned.
-#' @param for_viewing A logical sclara
+#' @param for_viewing A logical scalar
 #' 
 #' @return An integer if \code{as_percentage} is \code{FALSE} and a character vector if \code{as_percentage} is \code{TRUE}
 #'

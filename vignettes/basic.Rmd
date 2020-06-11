@@ -1,0 +1,139 @@
+---
+title: "Basic of SpotifyViz"
+author: "."
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic of SpotifyViz}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+This vignette introduces to basic analyze data from spotify using spoitfyviz package.
+
+To begin, we'll load spotifyviz.
+
+```{r, warning=F}
+library(spotifyviz)
+```
+
+## Loading data
+
+
+To analyze data from spotify first we have to load the data. We're gonna use `make_streaming_history_dt()` to load streaming history, `prepare_playlists()` to load playlists and `make_search_queries_dt()` for search queries. In addition, if we want to have table with streaming history suited for rest of the functions, we need to call `prepare_streming_history()`.
+
+```{r, warning=F}
+
+str_his = make_streaming_history_dt("C:/data")
+str_his_dt = prepare_streaming_history(str_his)
+
+search_queries = make_search_queries_dt("C:/data")
+
+playlists = prepare_playlists("C:/data")
+```
+
+Now we can see how do they look like.
+
+```{r}
+head(str_his_dt)
+
+head(search_queries)
+
+head(playlists)
+```
+
+## Operations on data
+
+Now, since we have our data in appropriate, we can start analyzing.
+
+```{r}
+make_summary_dt(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T)
+```
+
+
+```{r}
+most_played(str_his_dt, track_or_artist = "artist", show_skipped = F, how_many = 10)
+```
+
+```{r}
+most_skipped(str_his_dt, track_or_artist = "track", for_view = T, how_many = 10)
+```
+
+
+```{r}
+how_long_listened(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T, for_viewing = T)
+```
+
+```{r}
+how_many_skipped(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T)
+```
+
+
+```{r}
+plot_searches(search_queries, additional = "platform")
+```
+
+
+```{r}
+playlists_wide = str_his_with_playlists_wide(playlists, str_his_dt)
+
+plot_in_playlists_count(playlists_wide, as_percentage = T, time_or_count = "time", time_unit = "hours")
+```
+
+
+```{r}
+playlist_long = str_his_with_playlists_long(playlists, str_his_dt)
+
+plot_playlist_popularity(playlist_long, time_or_count = "time", time_unit = "hours")
+```
+
+
+```{r}
+plot_track_count(str_his_dt, only_skipped = F, by = "week")
+```
+
+```{r}
+plot_track_count_by_period(str_his_dt, period = "hour", as_percentage = T, include_skipped = T, by_weekday = T)
+```
+
+
+```{r}
+sessions = continuous_listening(str_his_dt, mins = 5)
+head(sessions)
+
+
+```
+
+```{r}
+long_session = longest_session(str_his_dt, mins = 5)
+
+head(long_session)
+```
+
+```{r}
+make_session_stats(long_session)
+```
+
+
+```{r}
+
+head(sessions_length(str_his_dt, mins = 5))
+
+head(sessions_intervals(str_his_dt, mins = 5))
+```
+
+
+```{r}
+sessions_visualize(str_his_dt, mins = 5, as_percentage = T)
+
+```
+
