@@ -6,12 +6,6 @@ testthat::test_that("continuous_listening test",{
   expect_equal(continuous_listening(p[30],10)[[8]],1)
 })
 
-testthat::test_that("capitalize function test",{
-  expect_equal(capitalize("abc"),"Abc")
-  expect_equal(capitalize("Abc"),"Abc")
-  expect_equal(capitalize(" abc")," abc")
-})
-
 testthat::test_that("filter_search_queries function test",{
   p<-readRDS("DataRDS/CleanSearchQueries.rds")
   expect_true(all.equal(p,filter_search_queries(p,"19.09.10","19.10.10")))
