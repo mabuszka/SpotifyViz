@@ -33,22 +33,22 @@ To analyze data from spotify first we have to load the data. We're gonna use `ma
 
 ```{r, warning=F}
 
-# str_his = make_streaming_history_dt("path")
-# str_his_dt = prepare_streaming_history(str_his)
-# 
-# search_queries = make_search_queries_dt("path")
-# 
-# playlists = prepare_playlists("path")
+str_his = make_streaming_history_dt(".")
+str_his_dt = prepare_streaming_history(str_his)
+ 
+search_queries = make_search_queries_dt(".")
+ 
+playlists = prepare_playlists(".")
 ```
 
 Now we can see how do they look like.
 
 ```{r}
-# head(str_his_dt)
-# 
-# head(search_queries)
-# 
-# head(playlists)
+head(str_his_dt)
+ 
+head(search_queries)
+
+head(playlists)
 ```
 
 ## Operations on data
@@ -56,84 +56,85 @@ Now we can see how do they look like.
 Now, since we have our data in appropriate, we can start analyzing.
 
 ```{r}
-#make_summary_dt(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T)
+make_summary_dt(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T)
 ```
 
 
 ```{r}
-#most_played(str_his_dt, track_or_artist = "artist", show_skipped = F, how_many = 10)
+most_played(str_his_dt, track_or_artist = "artist", show_skipped = F, how_many = 10)
 ```
 
 ```{r}
-# most_skipped(str_his_dt, track_or_artist = "track", for_view = T, how_many = 10)
-```
-
-
-```{r}
-#how_long_listened(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T, for_viewing = T)
-```
-
-```{r}
-#how_many_skipped(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T)
+most_skipped(str_his_dt, track_or_artist = "track", for_view = T, how_many = 10)
 ```
 
 
 ```{r}
-#plot_searches(search_queries, additional = "platform")
+how_long_listened(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T, for_viewing = T)
+```
+
+```{r}
+how_many_skipped(str_his_dt, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = T)
 ```
 
 
 ```{r}
-# playlists_wide = str_his_with_playlists_wide(playlists, str_his_dt)
-# 
-# plot_in_playlists_count(playlists_wide, as_percentage = T, time_or_count = "time", time_unit = "hours")
+plot_searches(search_queries, additional = "platform")
 ```
 
 
 ```{r}
-# playlist_long = str_his_with_playlists_long(playlists, str_his_dt)
-# 
-# plot_playlist_popularity(playlist_long, time_or_count = "time", time_unit = "hours")
+playlists_wide = str_his_with_playlists_wide(playlists, str_his_dt)
+
+
+plot_in_playlists_count(playlists_wide, as_percentage = T, time_or_count = "time", time_unit = "hours")
 ```
 
 
 ```{r}
-# plot_track_count(str_his_dt, only_skipped = F, by = "week")
-```
+playlist_long = str_his_with_playlists_long(playlists, str_his_dt)
 
-```{r}
-# plot_track_count_by_period(str_his_dt, period = "hour", as_percentage = T, include_skipped = T, by_weekday = T)
-```
-
-
-```{r}
-# sessions = continuous_listening(str_his_dt, mins = 5)
-# head(sessions)
-
-
-```
-
-```{r}
-# long_session = longest_session(str_his_dt, mins = 5)
-
-# head(long_session)
-```
-
-```{r}
-# make_session_stats(long_session)
+plot_playlist_popularity(playlist_long, time_or_count = "time", time_unit = "hours")
 ```
 
 
 ```{r}
+plot_track_count(str_his_dt, only_skipped = F, by = "week")
+```
 
-# head(sessions_length(str_his_dt, mins = 5))
-
-# head(sessions_intervals(str_his_dt, mins = 5))
+```{r}
+plot_track_count_by_period(str_his_dt, period = "hour", as_percentage = T, include_skipped = T, by_weekday = T)
 ```
 
 
 ```{r}
-# sessions_visualize(str_his_dt, mins = 5, as_percentage = T)
+sessions = continuous_listening(str_his_dt, mins = 5)
+head(sessions)
+
+
+```
+
+```{r}
+long_session = longest_session(str_his_dt, mins = 5)
+
+head(long_session)
+```
+
+```{r}
+make_session_stats(long_session)
+```
+
+
+```{r}
+
+head(sessions_length(str_his_dt, mins = 5))
+
+head(sessions_intervals(str_his_dt, mins = 5))
+```
+
+
+```{r}
+sessions_visualize(str_his_dt, mins = 5, as_percentage = T)
 
 ```
 
