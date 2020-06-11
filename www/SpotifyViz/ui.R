@@ -61,21 +61,24 @@ body = dashboardBody(
                                status = "success",
                                fileInput("streaming_history", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
-                                         accept = c(".JSON"))
+                                         accept = c(".JSON")),
+                               actionButton("submit_streaming_history", label = "Submit" )
                            ),
                            box(
                                width = NULL,
                                status = "success",
                                fileInput("search_queries", "Choose JSON file with SearchQueries",
                                          multiple = FALSE,
-                                         accept = c(".JSON"))
+                                         accept = c(".JSON")),
+                               actionButton("submit_search_queries", label = "Submit" )
                            ),
                            box(
                                width = NULL,
                                status = "success",
                                fileInput("playlist", "Choose JSON file with Playlist",
                                          multiple = FALSE,
-                                         accept = c(".JSON")) 
+                                         accept = c(".JSON")),
+                               actionButton("submit_playlist", label = "Submit" )
                            )
                            
                     ),
@@ -103,6 +106,7 @@ body = dashboardBody(
                                    tags$head(tags$style(HTML(tabs_color)))
                                )
                            )
+                           
                     )
                     
                 )
@@ -184,8 +188,8 @@ body = dashboardBody(
                            )
                     ),
                     column(9,
-                           box(title = "Playtime", solidHeader = TRUE, width = NULL,  collapsible = FALSE,
-                               status = "success", collapsed = TRUE,
+                           box(title = "Playtime", solidHeader = TRUE, width = NULL,  collapsible = TRUE,
+                               status = "success", collapsed = FALSE,
                                plotOutput("str_his_plot_play_time")
                            )
                     )
@@ -289,8 +293,10 @@ body = dashboardBody(
                         solidHeader = TRUE,
                         title = "Date range - for all tables",
                         status = "success",
-                        uiOutput("start_date_tables_ui"),
-                        uiOutput("end_date_tables_ui")
+                        dateInput('start_date_tables',
+                                  label = ("Start date: yyyy-mm-dd")),
+                        dateInput('end_date_tables',
+                                  label = ("End date: yyyy-mm-dd"))
                     ),
                 ),
                 column(
@@ -372,7 +378,8 @@ body = dashboardBody(
                                status = "success",
                                fileInput("streaming_history_u2", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
-                                         accept = c(".JSON"))
+                                         accept = c(".JSON")),
+                               actionButton("submit_streaming_history_u2", label = "Submit" )
                            )
                            ##other data input for later 
                            ,
@@ -381,14 +388,16 @@ body = dashboardBody(
                                status = "success",
                                fileInput("search_queries_u2", "Choose JSON file with SearchQueries",
                                          multiple = FALSE,
-                                         accept = c(".JSON"))
+                                         accept = c(".JSON")),
+                               actionButton("submit_search_queries_u2", label = "Submit" )
                            ),
                            box(
                                width = NULL,
                                status = "success",
                                fileInput("playlist_u2", "Choose JSON file with Playlist",
                                          multiple = FALSE,
-                                         accept = c(".JSON"))
+                                         accept = c(".JSON")),
+                               actionButton("submit_playlist_u2", label = "Submit" )
                            )
                            
                            

@@ -1,13 +1,13 @@
 library(shiny)
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
-  streaming_history_dt <- eventReactive(input$streaming_history,{
+  streaming_history_dt <- eventReactive(input$submit_streaming_history,{
     
     tryCatch(
       {
-
+        
         read_files <- rbindlist(lapply(input$streaming_history$datapath,
                                        jsonlite::fromJSON))
       },
@@ -25,7 +25,7 @@ shinyServer(function(input, output) {
   output$streaming_historyDT <- renderDataTable(streaming_history_dt())
   
   
-  search_queries_dt <- eventReactive(input$search_queries,{
+  search_queries_dt <- eventReactive(input$submit_search_queries,{
     
     tryCatch(
       {
@@ -44,7 +44,7 @@ shinyServer(function(input, output) {
   output$search_queriesDT <- renderDataTable(search_queries_dt())
   
   
-  playlist_dt <- eventReactive(input$playlist,{
+  playlist_dt <- eventReactive(input$submit_playlist,{
     tryCatch(
       {
         
@@ -72,7 +72,7 @@ shinyServer(function(input, output) {
   ## ARTUR
   str_his_fil_plot_search_que <- eventReactive({input$start_date_plots_search_que
     input$end_date_plots_search_que
-    input$search_queries},
+    input$submit_search_queries},
     {
       str_his_filtered <-  filter_search_queries(search_queries_dt(),
                                                  start_date = input$start_date_plots_search_que,
@@ -99,8 +99,8 @@ shinyServer(function(input, output) {
   ### for plots with playlists
   str_hist_plot_str_his = eventReactive({input$start_date_plots_str_his
     input$end_date_plots_str_his
-    input$streaming_history
-    input$playlist
+    input$submit_streaming_history
+    input$submit_playlist
   },
   {str_his_filtered = filter_streaming_history(streaming_history_dt(),
                                                start_date = input$start_date_plots_str_his,
@@ -112,7 +112,7 @@ shinyServer(function(input, output) {
   
   str_hist_plot_str_his_wo_playlists = eventReactive({input$start_date_plots_str_his
     input$end_date_plots_str_his
-    input$streaming_history
+    input$submit_streaming_history
   },
   {str_his_filtered = filter_streaming_history(streaming_history_dt(),
                                                start_date = input$start_date_plots_str_his,
@@ -177,27 +177,11 @@ shinyServer(function(input, output) {
   
   ## MAGDA
   
-  # generate defoult value of date inputs
-  output$end_date_tables_ui <- renderUI(
-    {
-      dateInput('end_date_tables',
-                label = ('End date: yyyy-mm-dd'),
-                value = max_date(streaming_history_dt()))
-    }
-  )
-  
-  output$start_date_tables_ui <- renderUI(
-    {
-      dateInput('start_date_tables',
-                label = ('Start date: yyyy-mm-dd'),
-                value = min_date(streaming_history_dt()))
-    }
-  )
   
   ## filter streaming_history for tables
   streaming_history_filtered_tables <- eventReactive({input$start_date_tables 
     input$end_date_tables
-    input$streaming_history},
+    input$submit_streaming_history},
     {
       str_his_filtered <-  filter_streaming_history(streaming_history_dt(),
                                                     start_date = input$start_date_tables,
@@ -221,7 +205,7 @@ shinyServer(function(input, output) {
   ))
   longest_session_dt <- eventReactive({input$start_date_tables
     input$end_date_tables
-    input$streaming_history},
+    input$submit_streaming_history},
     {
       longest_session_dt <- longest_session(streaming_history_filtered_tables(),5)
       longest_session_dt
@@ -236,7 +220,7 @@ shinyServer(function(input, output) {
   
   ### user comparison
   ## input from other user 
-  streaming_history_dt_u2 <- eventReactive(input$streaming_history_u2,{
+  streaming_history_dt_u2 <- eventReactive(input$submit_streaming_history_u2,{
     
     tryCatch(
       {
@@ -258,12 +242,12 @@ shinyServer(function(input, output) {
   output$streaming_historyDT_u2 <- renderDataTable(streaming_history_dt_u2())
   
   
-  search_queries_dt_u2 <- eventReactive(input$search_queries_u2,{
+  search_queries_dt_u2 <- eventReactive(input$submit_search_queries_u2,{
     
     tryCatch(
       {
         
-        read_files <- data.table(jsonlite::fromJSON(input$search_queries_u2$datapath))
+        read_files <- data.table(jsonlite::fromJSON(input$submit_search_queries_u2$datapath))
         read_files <- read_files[,list(date = lubridate::ymd(date), platform, country)]
       }, 
       error = function(e) {
@@ -277,7 +261,7 @@ shinyServer(function(input, output) {
   output$search_queriesDT_u2 <- renderDataTable(search_queries_dt_u2())
   
   
-  playlist_dt_u2 <- eventReactive(input$playlist_u2,{
+  playlist_dt_u2 <- eventReactive(input$submit_playlist_u2,{
     tryCatch(
       {
         
@@ -300,8 +284,8 @@ shinyServer(function(input, output) {
   ## for plots
   
   two_users_day <- eventReactive({input$date_day_compare
-    input$streaming_history_u2
-    input$streaming_history},
+    input$submit_streaming_history_u2
+    input$submit_streaming_history},
     {
       two_users_day <- make_two_users_dt(streaming_history_dt(), streaming_history_dt_u2(), input$date_day_compare)
       two_users_day
@@ -322,6 +306,58 @@ shinyServer(function(input, output) {
     common <- compare_history(streaming_history_dt(),streaming_history_dt_u2(), by_track = as.logical(input$tracks_common))
     setnames(common, old = c("artist_name", "track_name"), new = c("Artist name", "Track name"), skip_absent = TRUE)
     common
+  }
+  )
+  
+  
+
+  observe({
+    
+    
+    updateDateInput(session, "start_date_plots_str_his",
+                    min   = min_date(streaming_history_dt()),
+                    max   = max_date(streaming_history_dt()),
+                    value = min_date(streaming_history_dt()))
+    
+    updateDateInput(session, "end_date_plots_str_his",
+                    min   = min_date(streaming_history_dt()),
+                    max   = max_date(streaming_history_dt()),
+                    value = max_date(streaming_history_dt()))
+    
+    updateDateInput(session, "start_date_tables",
+                    min   = min_date(streaming_history_dt()),
+                    max   = max_date(streaming_history_dt()),
+                    value = min_date(streaming_history_dt()))
+    
+    updateDateInput(session, "end_date_tables",
+                    min   = min_date(streaming_history_dt()),
+                    max   = max_date(streaming_history_dt()),
+                    value = max_date(streaming_history_dt()))
+    
+    
+  }
+  )
+  
+  observe({
+    updateDateInput(session, "start_date_plots_search_que",
+                    min   = min_date(search_queries_dt(), FALSE),
+                    max   = max_date(search_queries_dt(), FALSE),
+                    value = min_date(search_queries_dt(), FALSE))
+    
+    updateDateInput(session, "end_date_plots_search_que",
+                    min   = min_date(search_queries_dt(), FALSE),
+                    max   = max_date(search_queries_dt(), FALSE),
+                    value = max_date(search_queries_dt(), FALSE))
+    
+  }
+  )
+  
+  observe({
+    updateDateInput(session, "compare_day",
+                    min   = max(min_date(streaming_history_dt_u2()), min_date(streaming_history_dt())),
+                    max   = min(max_date(streaming_history_dt_u2()), max_date(streaming_history_dt())))
+
+    
   }
   )
   
