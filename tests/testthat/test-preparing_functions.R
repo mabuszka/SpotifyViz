@@ -31,3 +31,5 @@ testthat::test_that("CompleteStreamHis reading and preparing test",{
   expect_is(p,"data.table")
 })
 
+
+
