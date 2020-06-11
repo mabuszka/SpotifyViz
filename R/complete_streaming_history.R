@@ -10,7 +10,6 @@
 #' @return A data table containing streaming history from spotify suited for being used in rest of the functions from the package.
 #'
 #' @export
-#
 
 
 complete_streaming_history <- function(folder_path)
