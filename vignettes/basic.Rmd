@@ -1,4 +1,3 @@
-
 ---
 title: "Basic of SpotifyViz"
 author: "."
