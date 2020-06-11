@@ -10,6 +10,7 @@
 #' @param as_percentage A logical scalar. If \code{FALSE} (default) length of time (in seconds and an approximate in biggest reasonable unit)
 #' that songs were listened to in given time period is returned,
 #' otherwise a character vector indicating percentage of given time period will be returned.
+#' @param for_viewing A logical sclara
 #' 
 #' @return An integer if \code{as_percentage} is \code{FALSE} and a character vector if \code{as_percentage} is \code{TRUE}
 #'
@@ -18,17 +19,18 @@
 #' @import data.table
 #' @import lubridate
 
-how_long_listened <- function(streaming_history, start_date, end_date, as_percentage = FALSE){
+how_long_listened <- function(streaming_history, start_date, end_date, as_percentage = FALSE, for_viewing = TRUE){
   
   start_time <- s_played <- NULL
   
   end_date <- as_date(end_date)
   start_date <- as_date(start_date)
   
-  suma <- streaming_history[start_time >= start_date & start_time <= end_date, sum(s_played)]
-  seconds_in_period <-as.numeric(difftime(end_date,start_date, units = "secs"))
-  if (as_percentage)
-    return(paste(round(suma/seconds_in_period * 100, digits = 2
-                       ), "%", sep = ""))
-  as.duration(suma)
+  suma <- round(streaming_history[start_time >= start_date & start_time <= end_date, sum(s_played)],0)
+  seconds_in_period <- as.numeric(difftime(end_date,start_date, units = "secs"))
+  percent <- round(suma/seconds_in_period * 100, digits = 2)
+  if (as_percentage & for_viewing) {return(paste(percent, "%", sep = ""))}
+  if (as_percentage ) {return (percent)}
+  if (for_viewing)  return(from_sec_to_hms(suma))
+  suma
 }

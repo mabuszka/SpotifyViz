@@ -20,9 +20,6 @@ theme_spotifyvis(
 
 \item{base_rect_size}{Base size for rect elements}
 }
-\value{
-
-}
 \description{
 Theme used in plots.
 }

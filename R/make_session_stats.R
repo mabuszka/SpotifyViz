@@ -10,15 +10,11 @@
 
 make_session_stats <- function(session_dt) {
   
-  stats <- c("Session start", "Session end", "Tracks played", "Play time")
-  values <- c(substr(as.character(session_dt[,lubridate::floor_date(min(start_time), "minutes")]), start = 1, stop = 16),
-              substr(as.character(session_dt[,lubridate::floor_date(max(end_time), "minutes")]), start = 1, stop = 16),
-              as.character(session_dt[,.N]),
-              as.character(session_dt[, .(from_sec_to_hms(as.integer(sum(s_played))))]))
-  
-  table <- data.table(Stat = stats, Value = values )
+  table <- data.table(`Session start` = c(substr(as.character(session_dt[,lubridate::floor_date(min(start_time), "minutes")]), start = 1, stop = 16)),
+            `Session end`  = c(substr(as.character(session_dt[,lubridate::floor_date(max(end_time), "minutes")]), start = 1, stop = 16)),
+              `Tracks played` = c(session_dt[,.N]),
+            `Play time`  = c(session_dt[, .(from_sec_to_hms(as.integer(sum(s_played))))]))
    table
  }
-
 
 

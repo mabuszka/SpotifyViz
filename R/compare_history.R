@@ -21,10 +21,10 @@ compare_history = function(streaming_history_1, streaming_history_2, by_track = 
   
   skipped <- . <- track_name <- artist_name <- NULL
   
-  str_h_1 = copy(streaming_history_1)
-  str_h_2 = copy(streaming_history_2)
+  str_h_1 = streaming_history_1[,.(artist_name, track_name, skipped)]
+  str_h_2 = streaming_history_2[,.(artist_name, track_name, skipped)]
   
-  if(by_track) {
+  if (by_track) {
     str_h_1 = unique(str_h_1[skipped == F, .(track_name, artist_name)])
     str_h_2 = unique(str_h_2[skipped == F, .(track_name, artist_name)])
     

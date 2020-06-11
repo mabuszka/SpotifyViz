@@ -12,12 +12,15 @@
 #' @export
 #' 
 #' @import data.table
-#' @importFrom  viridisLite viridis
+#' @import lubridate
 
 
 plot_track_count <- function(streaming_history, only_skipped = FALSE, by = "year"){
   
   skipped <- end_time <- ..count.. <- . <- NULL
+  
+  
+  pretty_breaks <- as.Date(lubridate::pretty_dates((streaming_history$end_time), 5))
 
   
   if (only_skipped) {
@@ -49,13 +52,12 @@ plot_track_count <- function(streaming_history, only_skipped = FALSE, by = "year
   
     vis <- switch(by,
       "year"  = vis + scale_x_date(date_labels = "%Y", date_breaks = ("1 year")),
-      "month" = vis + scale_x_date(date_labels = "%b %Y", date_breaks = "2 months"),
-      "week"  = vis + scale_x_date(date_labels = "%b %Y", date_minor_breaks = "1 month", date_breaks = "2 months"),
-      "day"   = vis + scale_x_date(date_labels = "%d.%m.%y",date_minor_breaks = "1 month", date_breaks = "2 months"))
+      "month" = vis + scale_x_date(date_labels = "%m.%y", date_breaks = "2 months" ),
+      "week"  = vis + scale_x_date(date_labels = "%m.%y", breaks = pretty_breaks),
+      "day"   = vis + scale_x_date(date_labels = "%d.%m.%y", breaks = pretty_breaks))
       
   vis
 } 
-
 
 
 

@@ -18,4 +18,5 @@ Change format form number of seconds to number of hours, minutes and seconds
 \examples{
 from_sec_to_hms(60)
 from_sec_to_hms(134)
+from_sec_to_hms(1257)
 }
