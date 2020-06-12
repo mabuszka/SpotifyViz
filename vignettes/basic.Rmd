@@ -1,6 +1,6 @@
 
 ---
-title: "Basic SpotifyViz"
+title: "Basic of SpotifyViz"
 author: " "
 date: "`r Sys.Date()`"
 output: 
@@ -75,7 +75,7 @@ head(playlists)
 
 Now, since we have our data in appropriate form, we can start analyzing them.
 
-###Example
+### Example
 
 ```{r}
 # the wide form
