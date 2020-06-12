@@ -247,7 +247,7 @@ shinyServer(function(input, output, session) {
     tryCatch(
       {
         
-        read_files <- data.table(jsonlite::fromJSON(input$submit_search_queries_u2$datapath))
+        read_files <- data.table(jsonlite::fromJSON(input$search_queries_u2$datapath))
         read_files <- read_files[,list(date = lubridate::ymd(date), platform, country)]
       }, 
       error = function(e) {

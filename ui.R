@@ -220,7 +220,7 @@ body = dashboardBody(
                     column(3,
                            box(title = "Controls", solidHeader = TRUE, width = NULL,
                                status = "success", collapsible = TRUE, collapsed = FALSE,
-                               radioButtons("skipped_track_count", "Only skipped",
+                               radioButtons("skipped_track_count", "Include skipped",
                                             choices = c("Yes" = TRUE, "No" = FALSE)
                                             
                                ),
