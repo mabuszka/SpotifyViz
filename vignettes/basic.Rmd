@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 library(spotifyviz)
 ```
 
-This vignette introduces to basic functionalites of spoitfyviz package. 
+This vignette introduces to basic functionalities of spotifyviz package. 
 
 # Loading data
 
@@ -47,14 +47,14 @@ playlists <- prepare_playlists("path")
 ```
 
 
-In futher examples data provided by the package will be used.
+In further examples data provided by the package will be used.
 
 ```{r}
-streaming_history <- spotifyviz::CleanStreamHis
+streaming_history <- spotifyviz::clean_stream_his
   
-search_queries <- spotifyviz::CleanSearchQueries
+search_queries <- spotifyviz::clean_search_queries
   
-playlists <- spotifyviz::CleanPlaylist
+playlists <- spotifyviz::clean_playlist
 
 
 ```
@@ -73,8 +73,8 @@ head(playlists)
 
 # Preparing the additional data
 
-## str_his_with_playlists_wide, srt_his_with_playlist_long
-This functions make the data table containing information about user streaming history with addiotional information on whether the track was part of one of the playlist provided by the playist data table. The wide version gives the output in the wide form, and the long version in the long form.
+## str_his_with_playlists_wide, str_his_with_playlist_long
+This functions make the data table containing information about user streaming history with additional information on whether the track was part of one of the playlist provided by the playlist data table. The wide version gives the output in the wide form, and the long version in the long form.
 
 ###Example
 
@@ -105,7 +105,7 @@ head(playlist_long)
 
 ## continuous_listening 
 
-This function adds the "listening number" to the streaming history data table - the number which determines to which listening session (the session - the tracks were played with less than `mins` minutes of breaks beetween them) the track belongs.
+This function adds the "listening number" to the streaming history data table - the number which determines to which listening session (the session - the tracks were played with less than `mins` minutes of breaks between them) the track belongs.
 
 ###Example
 
@@ -137,7 +137,7 @@ make_summary_dt(streaming_history, start_date = "2018-01-01", end_date = "2019-0
 
 ## most_played
 
-This function finds the most played tracks or artist and returs a data table with either track or artist name and the times it was played.
+This function finds the most played tracks or artist and returns a data table with either track or artist name and the times it was played.
 
 ### Example
 
@@ -177,7 +177,7 @@ This function calculates how long the user listened to spotify in given time per
 # start_date = "2018-01-01" : filter the data table to only include results later than "2018-01-01"
 # end_date = "2019-01-01" : filter the data table to only include results earlier than "2019-01-01"
 # as_percentage = TRUE : show the result as a percentage of the input time period from strat_date to end_date
-# for_view = TRUE : show results in format good for reading but not the best for futher computations 
+# for_view = TRUE : show results in format good for reading but not the best for further computations 
 # 
 how_long_listened(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE, for_viewing = TRUE)
 ```
@@ -185,7 +185,7 @@ how_long_listened(streaming_history, start_date = "2018-01-01", end_date = "2019
 
 ## how_many_skipped
 
-This function counts how many tracks were skipped (their play time was less than 10s) in given time period. Either as a number or as a perentage of all tracks played in given time period.
+This function counts how many tracks were skipped (their play time was less than 10s) in given time period. Either as a number or as a percentage of all tracks played in given time period.
 
 ### Example
 
@@ -318,7 +318,7 @@ plot_track_count(streaming_history, only_skipped = FALSE, by = "day")
 
 ## plot_track_count_by_period
 
-This function plots either daily or hourly habbits of listening of the user.
+This function plots either daily or hourly habits of listening of the user.
 
 # Example
 
@@ -331,7 +331,7 @@ This function plots either daily or hourly habbits of listening of the user.
 plot_track_count_by_period(streaming_history, period = "hour", as_percentage = FALSE, include_skipped = FALSE, by_weekday = TRUE)
 ```
 
-##sessions_visalize
+##sessions_visualize
 This function plots the number of sessions for different session lengths.Sessions length are divided into categories: 
 
 * <10min  
