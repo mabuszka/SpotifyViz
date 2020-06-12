@@ -4,7 +4,8 @@ library(lubridate)
 library(shinydashboard)
 library(DT)
 library(ggplot2)
-if(!require(spotifyviz)) devtools::install_github("StatsIMUWr/SpotifyViz/tree/magda")
+library(spotifyviz)
+
 
 
 
