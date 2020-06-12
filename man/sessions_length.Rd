@@ -7,13 +7,14 @@
 sessions_length(streaming_history, mins)
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{streaming_history}{A data.table containing streaming history, after 
+'prepare_streaming_history' was used on it.}
 
 \item{mins}{Number of minutes which determine distance between listenings.}
 }
 \value{
-A data table containg infromation about length of every session.
+A data table containing information about length of every session.
 }
 \description{
-Infromation about length of every session. Excludes skipped tracks.
+Information about length of every session. Excludes skipped tracks.
 }

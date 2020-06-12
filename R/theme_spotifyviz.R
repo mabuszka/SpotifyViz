@@ -1,4 +1,4 @@
-#' Spotifyvis theme for ggplot2
+#' Spotifyviz theme for ggplot2
 #' 
 #' Theme used in plots.
 #'
@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-theme_spotifyvis <- function(base_size = 11, base_family = "",
+theme_spotifyviz <- function(base_size = 11, base_family = "",
                           base_line_size = base_size / 22,
                           base_rect_size = base_size / 22) {
   # Starts with theme_bw and then modify some parts

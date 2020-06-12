@@ -7,12 +7,16 @@
 make_two_users_dt(user1_data, user2_data, day)
 }
 \arguments{
-\item{user1_data}{A data.table containing streaming history from first user, made with \code{\link{complete_streaming_history}}.}
+\item{user1_data}{A data.table containing streaming history from first user, 
+made with \code{\link{complete_streaming_history}}.}
 
-\item{user2_data}{A data.table containing streaming history from second user, made with \code{\link{complete_streaming_history}}.}
+\item{user2_data}{A data.table containing streaming history from second user, 
+made with \code{\link{complete_streaming_history}}.}
 
-\item{day}{end_date A POSIXt, Date or string that can be coerced into Date by \code{\link{as_date}} indicating the day for witch to create the data table.}
+\item{day}{end_date A POSIXt, Date or string that can be coerced into 
+Date by \code{\link{as_date}} indicating the day for witch to create the data table.}
 }
 \description{
-Make data table with data about play time of two users on given day, for further use in \code{\link{plot_day_comparison}}
+Make data table with data about play time of two users on given day, 
+for further use in \code{\link{plot_day_comparison}}
 }

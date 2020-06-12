@@ -12,15 +12,16 @@ plot_in_playlists_count(
 )
 }
 \arguments{
-\item{str_his_with_playlist_wide}{A data table containing streaming history with information about playlists, 
-in wide form, made with \code{\link{str_his_with_playlists_wide}}.}
+\item{str_his_with_playlist_wide}{A data table containing streaming history 
+with information about playlists, in wide form, made with \code{\link{str_his_with_playlists_wide}}.}
 
 \item{as_percentage}{A logical scalar indicating whether to show a percentage or an absolute value.}
 
-\item{time_or_count}{A character vector indicating whether to count number of tracks played or the time they were played.}
+\item{time_or_count}{A character vector indicating whether to count
+number of tracks played or the time they were played.}
 
-\item{time_unit}{A character vector indicating the time unit to use if showing an absolute value of time played.
-Permitted vales are "seconds", "minutes", "hours".}
+\item{time_unit}{A character vector indicating the time unit to use 
+if showing an absolute value of time played. Permitted vales are "seconds", "minutes", "hours".}
 }
 \description{
 Visualize, using a bar chart, how much music listened to was from playlists. 

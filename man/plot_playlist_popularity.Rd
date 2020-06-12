@@ -11,10 +11,10 @@ plot_playlist_popularity(
 )
 }
 \arguments{
-\item{str_his_with_playlists_long}{A data table containing streaming history with information about playlists, 
+\item{str_his_with_playlists_long}{A data table containing streaming history with information about playlists,
 in long form, made with \code{\link{str_his_with_playlists_long}}.}
 
-\item{time_or_count}{A character vector indicating whether to count number of tracks played 
+\item{time_or_count}{A character vector indicating whether to count number of tracks played
 or the time they were played.}
 
 \item{time_unit}{A character vector indicating the time unit to use if showing an absolute value of time played.

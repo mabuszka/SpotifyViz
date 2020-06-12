@@ -12,7 +12,8 @@ str_his_with_playlists_wide(playlists_dt, streaming_history)
 \item{streaming_history}{A data table containing streaming history from spotify.}
 }
 \value{
-A data table containing streaming history from spotify with information on which playlists song is. Data table is in wide format.
+A data table containing streaming history from spotify with information on which 
+playlists song is. Data table is in wide format.
 }
 \description{
 Prepares the streaming history with playlists data table

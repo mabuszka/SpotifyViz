@@ -15,23 +15,22 @@
 #' @import data.table
 
 
-most_played <- function(streaming_history, track_or_artist,
-                        how_many = 10, show_skipped = TRUE){
-  
+most_played <- function(streaming_history,
+                        track_or_artist,
+                        how_many = 10,
+                        show_skipped = TRUE) {
   N <- skipped <- NULL
   
   if (show_skipped) {
     most_played_dt <- streaming_history[, .N,
-                      by = eval(paste(track_or_artist,"_name", sep = ""))
-                      ][order(-N)][1:how_many,]
+                                        by = eval(paste(track_or_artist, "_name", sep = ""))][order(-N)][1:how_many, ]
   }
   else {
     most_played_dt <- streaming_history[skipped == FALSE, .N,
-                      by = eval(paste(track_or_artist,"_name", sep = ""))
-                      ][order(-N)][order(-N)][1:how_many,]
+                                        by = eval(paste(track_or_artist, "_name", sep = ""))][order(-N)][order(-N)][1:how_many, ]
   }
   
-  setnames(most_played_dt, c(paste(capitalize(track_or_artist),"name"), "Times played"))
+  setnames(most_played_dt, c(paste(capitalize(track_or_artist), "name"), "Times played"))
   
   most_played_dt
 }

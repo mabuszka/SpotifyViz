@@ -13,16 +13,20 @@ plot_track_count_by_period(
 )
 }
 \arguments{
-\item{filtered}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{filtered}{A data.table containing streaming history, after 'prepare_streaming_history' 
+was used on it.}
 
-\item{period}{A character vector indicating for which periods to split the time for counting tracks played. 
+\item{period}{A character vector indicating for which periods to split the time for 
+counting tracks played. 
 Permitted values are: "weekday", "hour"}
 
-\item{as_percentage}{A logical scalar. If TRUE (default) bars show percentage of of all tracks played for each weekday.}
+\item{as_percentage}{A logical scalar. If TRUE (default) bars show percentage 
+of all tracks played for each weekday.}
 
 \item{include_skipped}{A logical scalar indicating whether to include tracks that were skipped}
 
-\item{by_weekday}{A logical scalar indicating whether to split the graph by weekdays if period is "hour"}
+\item{by_weekday}{A logical scalar indicating whether to split the graph by weekdays 
+if period is "hour"}
 }
 \description{
 Visualizes, using a bar chart, the number or percentage of songs that were played on different hours/weekdays. 

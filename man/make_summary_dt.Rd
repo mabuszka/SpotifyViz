@@ -7,13 +7,17 @@
 make_summary_dt(streaming_history, start_date, end_date, as_percentage = TRUE)
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{streaming_history}{A data.table containing streaming history, after 
+'prepare_streaming_history' was used on it.}
 
-\item{start_date}{A POSIXt,Date or string that can be coerced into Date by \code{\link{as_date}} indicating start of the period of time.}
+\item{start_date}{A POSIXt,Date or string that can be coerced into 
+Date by \code{\link{as_date}} indicating start of the period of time.}
 
-\item{end_date}{A POSIXt,Date or string that can be coerced into Date by \code{\link{as_date}} indicating end of the period of time.}
+\item{end_date}{A POSIXt,Date or string that can be coerced into 
+Date by \code{\link{as_date}} indicating end of the period of time.}
 
-\item{as_percentage}{A logical scalar. If \code{TRUE} (default) tracks skipped and time listened to will be a percentegae of all tracks and whole time period.}
+\item{as_percentage}{A logical scalar. If \code{TRUE} (default) 
+tracks skipped and time listened to will be a percentage of all tracks and whole time period.}
 }
 \value{
 A data table with summarized streaming history

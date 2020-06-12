@@ -12,15 +12,19 @@ most_skipped(
 )
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{streaming_history}{A data.table containing streaming history, 
 
-\item{track_or_artist}{A character string that specifies whether to show most frequently skipped artists or tracks. 
+after 'prepare_streaming_history' was used on it.}
+
+\item{track_or_artist}{A character string that specifies whether
+ to show most frequently skipped artists or tracks. 
 Must be either "track" or "artist"}
 
-\item{how_many}{A positive integer indicating how many most skipped tracks/artist to show, defaults to 10.}
+\item{how_many}{A positive integer indicating how many most skipped 
+tracks/artist to show, defaults to 10.}
 
-\item{for_view}{A logical scalar. If \code{TRUE} (defoult) returns a data.table that is easy to read for humans,
-with spaces in column names and capitalized first letters}
+\item{for_view}{A logical scalar. If \code{TRUE} (default) returns a 
+data.table that is easy to read for humans,with spaces in column names and capitalized first letters}
 }
 \description{
 Shows most frequently skipped artist or track in given time period and counts how many times were they skipped

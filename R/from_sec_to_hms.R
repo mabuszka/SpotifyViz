@@ -14,23 +14,21 @@
 #' from_sec_to_hms(1257)
 
 
-
 from_sec_to_hms <- function(x) {
   
   single <- function(x) {
-  hours <- floor(x / 3600)
-  mins <- floor((x - 3600 * hours)/60)
-  secs <- x - mins * 60 - hours * 3600
-
-  time <- ""
-
-  if ( hours > 0) time <- paste(time, hours, "h")
-  if (mins > 0) time <- paste(time, mins, "min" )
-  if (secs > 0) time <- paste(time, secs, "s")
-  if (time == "") time <- "0s"
-  time
+    hours <- floor(x / 3600)
+    mins <- floor((x - 3600 * hours) / 60)
+    secs <- x - mins * 60 - hours * 3600
+    time <- ""
+    if (hours > 0) time <- paste(time, hours, "h")
+    if (mins > 0) time <- paste(time, mins, "min")
+    if (secs > 0) time <- paste(time, secs, "s")
+    if (time == "") time <- "0s"
+    time
   }
   
   times <- sapply(x, single)
+  
   times
 }
