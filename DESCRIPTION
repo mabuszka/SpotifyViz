@@ -24,6 +24,8 @@ Imports:
     viridisLite
 Suggests: 
     spelling,
-    knitr, rmarkdown
+    knitr,
+    rmarkdown,
+    testthat
 Language: en-US
 VignetteBuilder: knitr
