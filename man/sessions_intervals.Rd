@@ -7,7 +7,8 @@
 sessions_intervals(streaming_history, mins)
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{streaming_history}{A data.table containing streaming history, after 
+'prepare_streaming_history' was used on it.}
 
 \item{mins}{Number of minutes which determine distance between listenings.}
 }

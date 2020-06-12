@@ -7,11 +7,14 @@
 plot_track_count(streaming_history, only_skipped = FALSE, by = "year")
 }
 \arguments{
-\item{streaming_history}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it.}
+\item{streaming_history}{A data.table containing streaming history, 
+after 'prepare_streaming_history' was used on it.}
 
-\item{only_skipped}{A logical scalar indicating whether to show all played tracks or only those that were skipped.}
+\item{only_skipped}{A logical scalar indicating whether to show 
+all played tracks or only those that were skipped.}
 
-\item{by}{A character vector indicating for which periods to split the time for counting tracks played/skipped. 
+\item{by}{A character vector indicating for which periods 
+to split the time for counting tracks played/skipped.
 Permitted values are: "year", "month", "week", "day".}
 }
 \description{

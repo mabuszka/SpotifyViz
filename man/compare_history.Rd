@@ -7,9 +7,11 @@
 compare_history(streaming_history_1, streaming_history_2, by_track = F)
 }
 \arguments{
-\item{streaming_history_1}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it from user 1.}
+\item{streaming_history_1}{A data.table containing streaming history, 
+after 'prepare_streaming_history' was used on it from user 1.}
 
-\item{streaming_history_2}{A data.table containing streaming history, after 'prepare_streaming_history' was used on it from user 2.}
+\item{streaming_history_2}{A data.table containing streaming history, 
+after 'prepare_streaming_history' was used on it from user 2.}
 
 \item{by_track}{Logical value, whether comparison should include tracks. Default is FALSE.}
 }

@@ -7,7 +7,8 @@
 prepare_playlists(folder_path)
 }
 \arguments{
-\item{folder_path}{Path to a folder which contains file with Playlists in json format. File must contain "Playlist" in the name.}
+\item{folder_path}{Path to a folder which contains file with Playlists in json format. 
+File must contain "Playlist" in the name.}
 }
 \value{
 A data table containing the names of playlists and songs on them from spotify.

@@ -1,11 +1,12 @@
 #' Sessions length
 #'
-#' Infromation about length of every session. Excludes skipped tracks.
+#' Information about length of every session. Excludes skipped tracks.
 #'
 #'
-#' @param streaming_history A data.table containing streaming history, after 'prepare_streaming_history' was used on it.
+#' @param streaming_history A data.table containing streaming history, after 
+#' 'prepare_streaming_history' was used on it.
 #' @param mins Number of minutes which determine distance between listenings.
-#' @return A data table containg infromation about length of every session.
+#' @return A data table containing information about length of every session.
 #'
 #' @export
 #'
@@ -16,14 +17,12 @@
 
 
 sessions_length = function(streaming_history, mins) {
+
+  skipped <- . <- s_played <- listening_number <- NULL
   
-  listening_number = NULL
+  con_list_dt <- continuous_listening(streaming_history[skipped == FALSE, ], mins)
   
-  session_time = skipped = . = s_played = listening_number
-  
-  con_list_dt = continuous_listening(streaming_history[skipped == FALSE, ], mins)
-  
-  sessions = con_list_dt[, .(session_time = sum(s_played)), by = listening_number]
+  sessions <- con_list_dt[, .(session_time = sum(s_played)), by = listening_number]
   
   sessions
   

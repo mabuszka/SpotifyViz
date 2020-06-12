@@ -7,7 +7,7 @@
 #' @param mins Number of minutes which determine distance between listenings.
 
 #' 
-#' @return A data table containg information about longest session.
+#' @return A data table containing information about longest session.
 #'
 #' @export
 #'
@@ -17,21 +17,12 @@
 
 
 
-longest_session = function(streaming_history, mins) {
-  
-  end_time = . = listening_number = s_played = session_time = skipped  = track_name  = artist_name = start_time =  NULL
-  
-  str_his = copy(streaming_history)
-  
-  con_list_dt = continuous_listening(str_his[skipped == FALSE, ], mins)
-  
-  sessions = con_list_dt[, .(session_time = sum(s_played)), by = listening_number]
-  
-  longest_session_number = sessions[session_time == max(session_time), ][[1, 1]]
-  
-  longest_session_dt = con_list_dt[listening_number == longest_session_number, ]
-  
-
-      longest_session_dt
-  
+longest_session <- function(streaming_history, mins) {
+  . <- listening_number <- s_played <- session_time <- skipped  <- NULL
+  str_his <- copy(streaming_history)
+  con_list_dt <- continuous_listening(str_his[skipped == FALSE, ], mins)
+  sessions <- con_list_dt[, .(session_time = sum(s_played)), by = listening_number]
+  longest_session_number <- sessions[session_time == max(session_time), ][[1, 1]]
+  longest_session_dt <- con_list_dt[listening_number == longest_session_number, ]
+  longest_session_dt
 }

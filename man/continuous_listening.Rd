@@ -16,6 +16,7 @@ A data table containing streaming history with additional column about listening
 }
 \description{
 Listening number informs about number of songs listened in a row.
-If distance between beginning of a song and end of a previous one is less than \code{mins} then listening number stays.
+If distance between beginning of a song and end of a previous one is less than 
+\code{mins} then listening number stays.
 Otherwise increases. Counting begins from the oldest song in streaming history.
 }

@@ -9,7 +9,11 @@ Authors@R:
            person(given = "Artur",
            family = "Simon",
            role = "aut",
-           email = "artur.simon72@gmail.com")
+           email = "artur.simon72@gmail.com"),
+           person(given = "Wiktor",
+           family = "Jacaszek",
+           role = "aut",
+           email = "Wiktor.Jacaszek@math.uni.wroc.pl")
     )
 Description: Visualize and summarize data from Spotify.
 License: GPL-3

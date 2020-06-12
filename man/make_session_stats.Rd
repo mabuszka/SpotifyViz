@@ -7,7 +7,8 @@
 make_session_stats(session_dt)
 }
 \arguments{
-\item{session_dt}{A data table conatining information about listenng session. Must have columns "artist_name", "track_name", "s_played", "start_time".}
+\item{session_dt}{A data table containing information about listening session. 
+Must have columns "artist_name", "track_name", "s_played", "start_time".}
 }
 \description{
 Make a table containing stats about session - play time , number of tracks played, start and end.
