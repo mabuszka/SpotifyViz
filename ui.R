@@ -1,6 +1,7 @@
 
 
 sidebar = dashboardSidebar(
+    shinyjs::useShinyjs(),
     width = 320,
     sidebarMenu(
         menuItem("Input user data", tabName = "input_user_data", icon = icon("fas fa-upload")),
@@ -21,8 +22,6 @@ sidebar = dashboardSidebar(
                              
                  ),
                  menuSubItem("Tables", "tables_compare", icon = icon("fas fa-table"))
-                 
-                 
         ),
         menuItem("About", tabName = "about", icon = icon("fas fa-info"))
     )
@@ -48,42 +47,53 @@ tabs_color <- '.nav-tabs-custom .nav-tabs li.active {
 
 
 body = dashboardBody(
+    shinyjs::useShinyjs(),
     tags$head( 
         tags$style(HTML(".main-sidebar { font-size: 18px; }")) #change the font size to 20
     ),
     tabItems(
         tabItem(tabName = "input_user_data",
                 sidebarLayout(
-                    
                     column(3,
                            box(
                                width = NULL,
                                status = "success",
+
+                               selectInput("select_streaming_history", "Select Streaming History",
+                                           c("Example" = "example", "Own data" = "own"),
+                                             selected = c("Example" = "example")
+                               ),
                                fileInput("streaming_history", "Choose JSON file(s) with Streaming History",
                                          multiple = TRUE,
                                          accept = c(".JSON")),
-                               actionButton("submit_streaming_history", label = "Submit" )
+                               actionButton("submit_streaming_history", label = "Import")
                            ),
                            box(
                                width = NULL,
                                status = "success",
+                               selectInput("select_search_queries", "Select Search Queries",
+                                           c("Example" = "example", "Own data" = "own"),
+                                           selected = c("Example" = "example")
+                               ),
                                fileInput("search_queries", "Choose JSON file with SearchQueries",
                                          multiple = FALSE,
                                          accept = c(".JSON")),
-                               actionButton("submit_search_queries", label = "Submit" )
+                                actionButton("submit_search_queries", label = "Import" ),
                            ),
                            box(
                                width = NULL,
                                status = "success",
+                               selectInput("select_playlist", "Select Playlists",
+                                           c("Example" = "example", "Own data" = "own"),
+                                           selected = c("Example" = "example")
+                                           
+                               ),
                                fileInput("playlist", "Choose JSON file with Playlist",
                                          multiple = FALSE,
                                          accept = c(".JSON")),
-                               actionButton("submit_playlist", label = "Submit" )
+                                   actionButton("submit_playlist", label = "Import" ),
                            )
-                           
                     ),
-                    
-                    
                     column(9,
                            
                            tabBox(
@@ -106,11 +116,8 @@ body = dashboardBody(
                                    tags$head(tags$style(HTML(tabs_color)))
                                )
                            )
-                           
                     )
-                    
                 )
-                
         ),
         tabItem(tabName = "search_que",
                 column(
@@ -126,7 +133,6 @@ body = dashboardBody(
                         dateInput('end_date_plots_search_que',
                                   label = ('End date: yyyy-mm-dd'),
                                   value = ymd("2019-10-30")
-                                  
                         )
                     ),
                     box(title = "Controls",
@@ -137,8 +143,6 @@ body = dashboardBody(
                             "radio_btn_plot_search_que", "Additional info",
                             choices = c("Platform" = "platform", "Country" = "country")
                         )
-                        
-                        
                     )
                 ),
                 column(9,
@@ -149,8 +153,6 @@ body = dashboardBody(
                            plotOutput("plot_searches")
                        )
                 )
-                
-                
         ),
         tabItem(tabName = "str_hist",
                 fluidRow(
@@ -167,7 +169,6 @@ body = dashboardBody(
                                )
                            )
                     )
-                    
                 ),
                 h2("Playlists plots"),
                 fluidRow(
@@ -182,9 +183,7 @@ body = dashboardBody(
                                             choices = c("Number of tracks" = "count", "Playtime" = "time")
                                ),
                                uiOutput("ui_play_time"
-                                        
                                )
-                               
                            )
                     ),
                     column(9,
@@ -202,9 +201,7 @@ body = dashboardBody(
                                             choices = c("Number of tracks" = "count", "Playtime" = "time")
                                ),
                                uiOutput("ui_pop_playlists"
-                                        
                                )
-                               
                            )  
                     ),
                     column(9,
@@ -212,7 +209,6 @@ body = dashboardBody(
                                status = "success", collapsed = FALSE,
                                plotOutput("str_his_plot_pop_playlists")
                            )
-                           
                     )
                 ),
                 h2("Tracks plots"),
@@ -220,24 +216,20 @@ body = dashboardBody(
                     column(3,
                            box(title = "Controls", solidHeader = TRUE, width = NULL,
                                status = "success", collapsible = TRUE, collapsed = FALSE,
-                               radioButtons("skipped_track_count", "Include skipped",
+                               radioButtons("skipped_track_count", "Only skipped",
                                             choices = c("Yes" = TRUE, "No" = FALSE)
                                             
                                ),
                                radioButtons("time_track_count", "Time division",
                                             choices = c("Year" = "year", "Month" = "month", "Week" = "week", "Day" = "day" )
-                                            
                                )
-                               
                            )
                     ),
                     column(9,
                            box(title = "Track count", solidHeader = TRUE, width = NULL,
                                status = "success", collapsible = TRUE, collapsed = FALSE,
                                plotOutput("str_his_plot_track_count")
-                               
                            )
-                           
                     )
                 ),
                 fluidRow(
@@ -264,7 +256,6 @@ body = dashboardBody(
                                status = "success", collapsible = TRUE, collapsed = FALSE,
                                plotOutput("str_his_plot_track_period")
                            )
-                           
                     )
                 ),
                 h2("Sessions Plot"),
@@ -319,7 +310,6 @@ body = dashboardBody(
                 ),
                 h2("Most frequent"),
                 fluidRow(
-                    
                     column(
                         width = 3,
                         box(
@@ -330,7 +320,6 @@ body = dashboardBody(
                                          selected = "artist"),
                             sliderInput("how_many_tables", label = ("Show how many entries"),
                                         min = 1, max = 30, value = 10)
-                            
                         )
                     ),
                     column(width = 4,
@@ -350,7 +339,6 @@ body = dashboardBody(
                             DTOutput("most_played"),
                         )
                     )
-                    
                 ),
                 h2("Longest session of playing with less than 5 minutes breaks between tracks"),
                 fluidRow(
@@ -365,13 +353,10 @@ body = dashboardBody(
                         status = "success",
                         DTOutput("longest_session")
                     )
-                    
                 )
-                
         ),
         tabItem(tabName = "oth_us_data_in",
                 sidebarLayout(
-                    
                     column(3,
                            box(
                                width = NULL,
@@ -380,9 +365,8 @@ body = dashboardBody(
                                          multiple = TRUE,
                                          accept = c(".JSON")),
                                actionButton("submit_streaming_history_u2", label = "Submit" )
-                           )
-                           ##other data input for later 
-                           ,
+                           ),
+                           ##other data input for later                           ,
                            box(
                                width = NULL,
                                status = "success",
@@ -399,13 +383,8 @@ body = dashboardBody(
                                          accept = c(".JSON")),
                                actionButton("submit_playlist_u2", label = "Submit" )
                            )
-                           
-                           
                     ),
-                    
-                    
                     column(9,
-                           
                            tabBox(
                                width = NULL, side = "right", title = "See the data you've uploaded for second user",
                                id = "tabset1",
@@ -423,9 +402,7 @@ body = dashboardBody(
                                )
                            )
                     )
-                    
                 )
-                
         ),
         tabItem(tabName = "plot_compare",
                 fluidRow(
@@ -448,9 +425,6 @@ body = dashboardBody(
                                textInput("u2_name", label = "Input name for second user", 
                                          placeholder = "user 2"),
                                actionButton("take_names", label = "Set names" )
-                               ,
-                               
-                               
                            )
                     ),
                     column(width = 8,
@@ -459,7 +433,6 @@ body = dashboardBody(
                                solidHeader = TRUE, title = "Playtime comparison on selected day",
                                plotOutput("day_compare")
                            )
-                           
                     )
                 )
         ),
@@ -472,7 +445,6 @@ body = dashboardBody(
                                       choices = list("Tracks" = TRUE, "Artists" = FALSE),
                                       selected = FALSE
                          )
-
                      ),
                 box(title = "Show common", solidHeader = TRUE, status = "success",
                     width = 8,
@@ -480,12 +452,36 @@ body = dashboardBody(
                 )
             )
         ),
-        
-        
         tabItem(tabName = "about",
-                h2("About this app"),
-                fluidRow(infoBox(title = "Visits this site to see more",
-                                 value = "Github", href = "https://github.com/StatsIMUWr/SpotifyViz"))
+                h1("About this app"),
+                h4('The project was created during the course "Software development in R".'),
+                fluidRow(
+                    column(6,
+                           h2("Authors"),
+                           tags$ol(
+                               h3("- Magdalena Buszka"),
+                               h3("- Wiktor Jacaszek"),
+                               h3("- Artur Simon")
+                            )
+                    )
+                ),
+                fluidRow(
+                    column(6,
+                           infoBox(title = "Visits this site to see more about package",
+                                   value = "Package", href = "https://github.com/StatsIMUWr/SpotifyViz",
+                                   fill = TRUE, color = "green",
+                                   icon = icon("fab fa-github"), width = NULL
+                            )
+                    ),
+                    column(6,
+                           infoBox(
+                               title = "Visits this site to see more about course",
+                               value = "Course", href = "https://github.com/StatsIMUWr/SoftwareDev_R",
+                               fill = TRUE, color = "green",
+                               icon = icon("fas fa-book"), width = NULL
+                           )
+                    )
+                )
         )
     )
 )

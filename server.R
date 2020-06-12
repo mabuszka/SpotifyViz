@@ -3,68 +3,159 @@ library(shiny)
 
 shinyServer(function(input, output, session) {
   
-  streaming_history_dt <- eventReactive(input$submit_streaming_history,{
-    
-    tryCatch(
-      {
-        
-        read_files <- rbindlist(lapply(input$streaming_history$datapath,
-                                       jsonlite::fromJSON))
-      },
-      error = function(e) {
-        stop(safeError(e))
-      }
-    )
-    
-    
-    streaming_history_dt <- prepare_streaming_history(read_files)
-    streaming_history_dt
+  observeEvent(input$select_streaming_history, { 
+  shinyjs::toggleElement(id = "streaming_history",
+                         condition = input$select_streaming_history == "own")
+  
+  })
+  
+  observeEvent(input$select_search_queries, { 
+    shinyjs::toggleElement(id = "search_queries",
+                           condition = input$select_search_queries == "own")
     
   })
+  
+  observeEvent(input$select_playlist, { 
+    shinyjs::toggleElement(id = "playlist",
+                           condition = input$select_playlist == "own")
+    
+  })
+  
+  streaming_history_dt <- eventReactive(input$submit_streaming_history  ,{
+    
+    if (input$select_streaming_history == "own") {
+      
+      tryCatch(
+        {
+          
+          read_files <- rbindlist(lapply(input$streaming_history$datapath,
+                                         jsonlite::fromJSON))
+        },
+        error = function(e) {
+          stop(safeError(e))
+        }
+      )
+      
+      
+      streaming_history_dt <- prepare_streaming_history(read_files)
+      streaming_history_dt
+    } else if (input$select_streaming_history == "example") {
+      
+      streaming_history_dt = spotifyviz::clean_stream_his
+      streaming_history_dt
+    }
+
+    
+  })
+  
+  
+  # streaming_history_dt <- eventReactive(input$submit_streaming_history  ,{
+  # 
+  #   tryCatch(
+  #     {
+  # 
+  #       read_files <- rbindlist(lapply(input$streaming_history$datapath,
+  #                                      jsonlite::fromJSON))
+  #     },
+  #     error = function(e) {
+  #       stop(safeError(e))
+  #     }
+  #   )
+  # 
+  # 
+  #   streaming_history_dt <- prepare_streaming_history(read_files)
+  #   streaming_history_dt
+  # 
+  # })
   
   output$streaming_historyDT <- renderDataTable(streaming_history_dt())
   
-  
   search_queries_dt <- eventReactive(input$submit_search_queries,{
     
-    tryCatch(
-      {
-        
-        read_files <- data.table(jsonlite::fromJSON(input$search_queries$datapath))
-        read_files <- read_files[,list(date = lubridate::ymd(date), platform, country)]
-      }, 
-      error = function(e) {
-        stop(safeError(e))
-      }
-    )
-    
-    search_queries <- read_files
-    search_queries
+    if (input$select_search_queries == "own") {
+      tryCatch(
+        {
+          
+          read_files <- data.table(jsonlite::fromJSON(input$search_queries$datapath))
+          read_files <- read_files[,list(date = lubridate::ymd(date), platform, country)]
+        }, 
+        error = function(e) {
+          stop(safeError(e))
+        }
+      )
+      
+      search_queries <- read_files
+      search_queries
+    } else if (input$select_search_queries == "example") {
+      spotifyviz::clean_search_queries
+    }
+
   })
+  
+  
+  # search_queries_dt <- eventReactive(input$submit_search_queries,{
+  #   
+  #   tryCatch(
+  #     {
+  #       
+  #       read_files <- data.table(jsonlite::fromJSON(input$search_queries$datapath))
+  #       read_files <- read_files[,list(date = lubridate::ymd(date), platform, country)]
+  #     }, 
+  #     error = function(e) {
+  #       stop(safeError(e))
+  #     }
+  #   )
+  #   
+  #   search_queries <- read_files
+  #   search_queries
+  # })
+  
+  
   output$search_queriesDT <- renderDataTable(search_queries_dt())
   
-  
   playlist_dt <- eventReactive(input$submit_playlist,{
-    tryCatch(
-      {
-        
-        playlists = playlist_shiny(input$playlist$datapath)
-        
-      },
-      error = function(e) {
-        stop(safeError(e))
-      }
-    )
-    
-    playlist_dt <- playlists
-    
-    playlist_dt
-    
+    if (input$select_playlist == "own") {
+      tryCatch(
+        {
+          
+          playlists = playlist_shiny(input$playlist$datapath)
+          
+        },
+        error = function(e) {
+          stop(safeError(e))
+        }
+      )
+      
+      playlist_dt <- playlists
+      
+      playlist_dt
+    } else if (input$select_playlist == "example") {
+      spotifyviz::clean_playlist
+    }
+
   }) 
   
+  
+  # playlist_dt <- eventReactive(input$submit_playlist,{
+  #   tryCatch(
+  #     {
+  #       
+  #       playlists = playlist_shiny(input$playlist$datapath)
+  #       
+  #     },
+  #     error = function(e) {
+  #       stop(safeError(e))
+  #     }
+  #   )
+  #   
+  #   playlist_dt <- playlists
+  #   
+  #   playlist_dt
+  #   
+  # }) 
+  # 
+  
   output$playlistDT <- renderDataTable(playlist_dt())
-  
-  
   
   
   
