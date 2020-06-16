@@ -8,6 +8,8 @@ library(spotifyviz)
 library(shinyjs)
 
 
+#Sys.setenv(LANG = "en")
+Sys.setlocale("LC_ALL","English")
 
 playlist_shiny = function(playlist_raw) {
   song_names_function <- function(x) {
