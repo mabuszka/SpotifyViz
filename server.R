@@ -28,8 +28,8 @@ shinyServer(function(input, output, session) {
       tryCatch(
         {
           
-          read_files <- rbindlist(lapply(input$streaming_history$datapath,
-                                         jsonlite::fromJSON))
+          read_files <- unique(rbindlist(lapply(input$streaming_history$datapath,
+                                         jsonlite::fromJSON)))
         },
         error = function(e) {
           stop(safeError(e))
