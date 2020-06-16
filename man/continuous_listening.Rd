@@ -2,7 +2,7 @@
 % Please edit documentation in R/continuous_listening.R
 \name{continuous_listening}
 \alias{continuous_listening}
-\title{Measure the number of continuous listening sessions.}
+\title{Divides streaming history into a groups of song which where listened one after another.}
 \usage{
 continuous_listening(streaming_history, mins)
 }
@@ -15,7 +15,7 @@ continuous_listening(streaming_history, mins)
 A data table containing streaming history with additional column about listening number.
 }
 \description{
-Listening number informs about number of songs listened in a row.
+The listening number indicates the session  number.
 If distance between beginning of a song and end of a previous one is less than 
 \code{mins} then listening number stays.
 Otherwise increases. Counting begins from the oldest song in streaming history.

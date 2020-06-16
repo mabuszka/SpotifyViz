@@ -1,6 +1,6 @@
 #' Divides streaming history into a groups of song which where listened one after another.
 #' 
-#' The listening number indicates session the number.
+#' The listening number indicates the session  number.
 #' If distance between beginning of a song and end of a previous one is less than 
 #' \code{mins} then listening number stays.
 #' Otherwise increases. Counting begins from the oldest song in streaming history.
