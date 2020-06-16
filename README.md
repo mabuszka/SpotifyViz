@@ -5,25 +5,26 @@
   <!-- badges: end -->
 
 An R tool and Shiny application to explore music tastes based on Spotify data.
-The application is available 03.02.2020.
+The application is available 12.06.2020.
 
-https://wicix.shinyapps.io/SpotifyVis/
+https://asimon.shinyapps.io/SpotifyViz/
 
 
 Main functionalities:
   - data import (from Spotify's json files),
  
-  - cleaning data and extracting implicit data (e.g. weekdays, semester from date)
+  - cleaning data and extracting implicit data (e.g. weekdays)
  
   - filtering and summarizing data
-    - most played / frequency of playing given track, artist, (and maybe genre) in given time period
-    - what percentage of music played is from your playlists / library (or from given playlist) in given time period
+    - most played  artists in given time period
+    - what percentage of music played is from your playlists in given time period
     - how many songs were skipped and which were skipped the most in given time period
     - percentage of time spent listening to spotify in given time period
     - usage of different devices for spotify (based on search history data)
     - usage of spotify in different countries (based on search history data)
-    
-    -test
+    - popularity of different playlists
+    - visualizing hourly/daily lstening habits
+    - the comparison of listesting habits on one day for two uses
     
 
 
