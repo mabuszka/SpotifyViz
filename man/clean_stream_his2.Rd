@@ -5,7 +5,7 @@
 \alias{clean_stream_his2}
 \title{Clean streaming history}
 \format{
-A data table with 100 rows and 7 variables:
+A data.table with 100 rows and 7 variables:
 }
 \usage{
 clean_stream_his2

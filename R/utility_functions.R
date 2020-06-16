@@ -22,7 +22,7 @@ capitalize <- function(string) {
 #' @export
 #'
 #' @examples
-#' from_sec_to_hms(c(60, 134, 1257)
+#' from_sec_to_hms(c(60, 134, 1257))
 #' 
 from_sec_to_hms <- function(x) {
   times <- sapply(x, from_sec_to_hms_single)

@@ -16,6 +16,6 @@ A character vector with format "X h Y min Z s", where Y < 60 and Z < 60
 Change format form number of seconds to number of hours, minutes and seconds.
 }
 \examples{
-from_sec_to_hms(c(60, 134, 1257)
+from_sec_to_hms(c(60, 134, 1257))
 
 }
