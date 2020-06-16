@@ -36,20 +36,15 @@ plot_track_count <-
         streaming_history[, .(skipped  = factor(
           skipped,
           levels = c("TRUE", "FALSE"),
-          labels = c("Yes", "No")
-        ),
+          labels = c("Yes", "No")),
         end_time = end_time)]
       y_lab = "Number of tracks played"
     }
-    
     viz <-
       ggplot(streaming_history, aes(x = as.Date(floor_date(end_time, by)))) +
       labs(y = y_lab, x = "Date") +
       theme_spotifyviz() +
       theme(legend.position = "bottom")
-    
-    
-    
     if (only_skipped) {
       viz <-
         viz + geom_bar(aes(y = ..count..), fill = "#440154FF", colour = "white")
@@ -59,7 +54,6 @@ plot_track_count <-
         scale_fill_manual(name = "Was the track skipped",
                           values = c("#440154FF" , "#7AD151FF"))
     }
-    
     viz <- switch(
       by,
       "year"  = viz + scale_x_date(date_labels = "%Y", date_breaks = ("1 year")),
@@ -67,6 +61,5 @@ plot_track_count <-
       "week"  = viz + scale_x_date(date_labels = "%m.%y", breaks = pretty_breaks),
       "day"   = viz + scale_x_date(date_labels = "%d.%m.%y", breaks = pretty_breaks)
     )
-    
     viz
   }
