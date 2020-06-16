@@ -1,6 +1,6 @@
-#' Measure the number of continuous listening sessions.
+#' Divides streaming history into a groups of song which where listened one after another.
 #' 
-#' Listening number informs about number of songs listened in a row.
+#' The listening number indicates session the number.
 #' If distance between beginning of a song and end of a previous one is less than 
 #' \code{mins} then listening number stays.
 #' Otherwise increases. Counting begins from the oldest song in streaming history.
