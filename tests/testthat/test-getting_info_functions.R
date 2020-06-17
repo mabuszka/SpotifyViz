@@ -1,13 +1,13 @@
 context("Getting info functions")
 
 testthat::test_that(
-  "how_long_listened function test: check types of data, four values and containing of % sign",
+  "measure_how_long_listened function test: check types of data, four values and containing of % sign",
   {
-    a <- how_long_listened(spotifyviz::clean_stream_his, "18.11.04", "18.11.07")
+    a <- measure_how_long_listened(spotifyviz::clean_stream_his, "18.11.04", "18.11.07")
     expect_equal(a, " 5 h 13 min 52 s")
     expect_is(a, "character")
     
-    a <- how_long_listened(spotifyviz::clean_stream_his,
+    a <- measure_how_long_listened(spotifyviz::clean_stream_his,
                            "18.11.04",
                            "18.11.07",
                            as_percentage = TRUE)
@@ -15,14 +15,14 @@ testthat::test_that(
     expect_is(a, "character")
     expect_match(a, "%")
     
-    a <- how_long_listened(spotifyviz::clean_stream_his,
+    a <- measure_how_long_listened(spotifyviz::clean_stream_his,
                            "18.11.04",
                            "18.11.07",
                            for_viewing = FALSE)
     expect_equal(a, 18832)
     expect_is(a, "numeric")
     
-    a <- how_long_listened(
+    a <- measure_how_long_listened(
       spotifyviz::clean_stream_his,
       "18.11.04",
       "18.11.07",
@@ -35,12 +35,12 @@ testthat::test_that(
 )
 
 testthat::test_that(
-  "how_many_skipped function test:: check types of data, two values and containing of % sign",
+  "count_skipped function test:: check types of data, two values and containing of % sign",
   {
-    a <- how_many_skipped(spotifyviz::clean_stream_his, "18.11.04", "18.11.07")
+    a <- count_skipped(spotifyviz::clean_stream_his, "18.11.04", "18.11.07")
     expect_equal(a, 22)
     expect_is(a, "integer")
-    a <- how_many_skipped(spotifyviz::clean_stream_his,
+    a <- count_skipped(spotifyviz::clean_stream_his,
                           "18.11.04",
                           "18.11.07",
                           as_percentage = TRUE)

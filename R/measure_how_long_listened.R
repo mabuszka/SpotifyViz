@@ -27,7 +27,7 @@
 #' @import data.table
 #' @import lubridate
 
-how_long_listened <- function(streaming_history, start_date, end_date, as_percentage = FALSE, 
+measure_how_long_listened <- function(streaming_history, start_date, end_date, as_percentage = FALSE, 
                               for_viewing = TRUE) {
   start_time <- s_played <- NULL
   end_date <- as_date(end_date)

@@ -124,7 +124,7 @@ head(sessions)
 
 ## make_summary_dt
 
-This function makes the table with brief summary of the data filtered to the period of time provided. It uses `how_long_listened` and `how_many_skipped` functions.
+This function makes the table with brief summary of the data filtered to the period of time provided. It uses `measure_how_long_listened` and `count_skipped` functions.
 
 # Example 
 ```{r}
@@ -166,7 +166,7 @@ This function finds the most skipped  (their play time was less than 10s) tracks
 most_skipped(streaming_history, track_or_artist = "track", for_view = T, how_many = 10)
 ```
 
-## how_long_listened
+## measure_how_long_listened
 
 This function calculates how long the user listened to spotify in given time period. It can give the result as the duration or as the percentage of the specified time period. 
 
@@ -179,11 +179,11 @@ This function calculates how long the user listened to spotify in given time per
 # as_percentage = TRUE : show the result as a percentage of the input time period from strat_date to end_date
 # for_view = TRUE : show results in format good for reading but not the best for further computations 
 # 
-how_long_listened(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE, for_viewing = TRUE)
+measure_how_long_listened(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE, for_viewing = TRUE)
 ```
 
 
-## how_many_skipped
+## count_skipped
 
 This function counts how many tracks were skipped (their play time was less than 10s) in given time period. Either as a number or as a percentage of all tracks played in given time period.
 
@@ -196,7 +196,7 @@ This function counts how many tracks were skipped (their play time was less than
 # as_percentage = TRUE : show the result as a percentage of all tracks played from strat_date to end_date
 
 
-how_many_skipped(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE)
+count_skipped(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE)
 ```
 
 ## longest_session 
