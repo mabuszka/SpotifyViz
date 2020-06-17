@@ -29,9 +29,9 @@ make_summary_dt <- function(streaming_history,
     filtered <- filter_streaming_history(streaming_history, start_date, end_date)
     hm_tracks <- filtered[, .N]
     hm_different_tracks <- uniqueN(filtered[, .(track_name)])
-    hm_skipped <- how_many_skipped(streaming_history, start_date, end_date, as_percentage)
+    hm_skipped <- count_skipped(streaming_history, start_date, end_date, as_percentage)
     hm_different_artists <- uniqueN(filtered[, .(artist_name)])
-    hl_listened <- how_long_listened(streaming_history, start_date, end_date, as_percentage)
+    hl_listened <- measure_how_long_listened(streaming_history, start_date, end_date, as_percentage)
     
     summary <- data.table(
       `Tracks played` = hm_tracks,
