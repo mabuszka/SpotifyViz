@@ -5,9 +5,8 @@
   <!-- badges: end -->
 
 An R tool and Shiny application to explore music tastes based on Spotify data.
-The application is available 12.06.2020.
 
-https://asimon.shinyapps.io/SpotifyViz/
+[SpotifyViz app](https://asimon.shinyapps.io/SpotifyViz/)
 
 
 Main functionalities:
@@ -25,6 +24,10 @@ Main functionalities:
     - popularity of different playlists
     - visualizing hourly/daily lstening habits
     - the comparison of listesting habits on one day for two uses
+    
+  Made during the "Software development in R course". [See the course repo.](https://github.com/StatsIMUWr/SoftwareDev_R)
+  
+  Consulted with Mateusz Staniak.
     
 
 
