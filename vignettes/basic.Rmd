@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   message = FALSE ,
   warning = FALSE, 
-  fig.width = 10, 
-  fig.height = 7
+  fig.width = 7, 
+  fig.height = 5
   
 )
 ```
@@ -73,14 +73,19 @@ head(playlists)
 
 # Preparing the additional data
 
-Now, since we have our data in appropriate form, we can start analyzing them.
+## str_his_with_playlists_wide, str_his_with_playlist_long
+This functions make the data table containing information about user streaming history with additional information on whether the track was part of one of the playlist provided by the playlist data table. The wide version gives the output in the wide form, and the long version in the long form.
 
+ 
 ### Example
 
 ```{r}
 # the wide form
-# playlist_dt = playlists : a data table containing user playlists, made with prepare_playlis
-# streaming_history : = streaming_history : part of streaming history of one user, made with complete_streaming_history
+# playlist_dt = playlists : a data table containing user
+# playlists, made with prepare_playlis
+# streaming_history : = streaming_history : part of streaming
+# history of one user,
+# made with complete_streaming_history
 
 playlists_wide <- str_his_with_playlists_wide(playlists, streaming_history)
 
@@ -90,8 +95,10 @@ head(playlists_wide)
 
 # the long form
 
-# playlist_dt = playlists : a data table containing user playlists, made with prepare_playlis
-# streaming_history : = streaming_history : part of streaming history of one user, made with complete_streaming_history
+# playlist_dt = playlists : a data table containing user 
+# playlists, made with prepare_playlis
+# streaming_history : = streaming_history : part of streaming
+# history of one user, made with complete_streaming_history
 
 
 playlist_long <- str_his_with_playlists_long(playlists, streaming_history)
@@ -109,7 +116,9 @@ This function adds the "listening number" to the streaming history data table - 
 ###Example
 
 ```{r}
-# streaming_history = streaming_history : streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history = streaming_history : streaming_history : 
+# part of streaming history of one user, made with 
+# complete_streaming_history
 # mins = 5 : the breaks must be less than 5 minutes
 sessions <- continuous_listening(streaming_history, mins = 5)
 
@@ -127,10 +136,14 @@ This function makes the table with brief summary of the data filtered to the per
 
 # Example 
 ```{r}
-# streaming_history = streaming_history : part of streaming history of one user, made with complete_streaming_history
-# start_date = "2018-01-01" : indicates start of the period of time should be on "2018-01-01"
-# end_date = "2019-01-01" : indicates end of the period of time should be on "2019-01-01"
-# as_percentage  = TRUE  : tracks skipped and time listened to will be a percentegae of all tracks and whole time period.
+# streaming_history = streaming_history : part of streaming
+# history of one user, made with complete_streaming_history
+# start_date = "2018-01-01" : indicates start of the period 
+# of time should be on "2018-01-01"
+# end_date = "2019-01-01" : indicates end of the period
+# of time should be on "2019-01-01"
+# as_percentage  = TRUE  : tracks skipped and time listened 
+# to will be a percentegae of all tracks and whole time period.
 make_summary_dt(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE)
 ```
 
@@ -141,8 +154,10 @@ This function finds the most played tracks or artist and returns a data table wi
 ### Example
 
 ```{r}
-# streaming_history = streaming_history : part of streaming history of one user, made with complete_streaming_history
-# track_or_artist = "artist" : count how many times each artist was played
+# streaming_history = streaming_history : part of streaming
+# history of one user, made with complete_streaming_history
+# track_or_artist = "artist" : count how many times each artist
+# was played
 # show_skipped = FALSE : don't include skipped tracks in the count
 # how_many = 10 : show first ten results
 
@@ -157,9 +172,12 @@ This function finds the most skipped  (their play time was less than 10s) tracks
 ### Example
 
 ```{r}
-# streaming_history = streaming_history : part of streaming history of one user, made with complete_streaming_history
-# track_or_artist = "artist" : count how many times each artist was played
-# for_view = TRUE : show results in format good for reading but not the best for futher computations 
+# streaming_history = streaming_history : part of streaming 
+# history of one user, made with complete_streaming_history
+# track_or_artist = "artist" : count how many times each 
+# artist was played
+# for_view = TRUE : show results in format good for reading 
+# but not the best for futher computations 
 # how_many = 10 : show first ten results
 
 most_skipped(streaming_history, track_or_artist = "track", for_view = T, how_many = 10)
@@ -172,11 +190,16 @@ This function calculates how long the user listened to spotify in given time per
 ### Example
 
 ```{r}
-# streaming_history = streaming_history : part of streaming history of one user, made with complete_streaming_history
-# start_date = "2018-01-01" : filter the data table to only include results later than "2018-01-01"
-# end_date = "2019-01-01" : filter the data table to only include results earlier than "2019-01-01"
-# as_percentage = TRUE : show the result as a percentage of the input time period from strat_date to end_date
-# for_view = TRUE : show results in format good for reading but not the best for further computations 
+# streaming_history = streaming_history : part of streaming 
+# history of one user, made with complete_streaming_history
+# start_date = "2018-01-01" : filter the data table to only 
+# include results later than "2018-01-01"
+# end_date = "2019-01-01" : filter the data table to only 
+# include results earlier than "2019-01-01"
+# as_percentage = TRUE : show the result as a percentage of the 
+# input time period from strat_date to end_date
+# for_view = TRUE : show results in format good for reading but 
+# not the best for further computations 
 # 
 measure_how_long_listened(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE, for_viewing = TRUE)
 ```
@@ -189,10 +212,14 @@ This function counts how many tracks were skipped (their play time was less than
 ### Example
 
 ```{r}
-# streaming_history = streaming_history : part of streaming history of one user, made with complete_streaming_history
-# start_date = "2018-01-01" : filter the data table to only include results later than "2018-01-01"
-# end_date = "2019-01-01" : filter the data table to only include results earlier than "2019-01-01"
-# as_percentage = TRUE : show the result as a percentage of all tracks played from strat_date to end_date
+# streaming_history = streaming_history : part of streaming 
+# history of one user, made with complete_streaming_history
+# start_date = "2018-01-01" : filter the data table to only 
+# include results later than "2018-01-01"
+# end_date = "2019-01-01" : filter the data table to only 
+# include results earlier than "2019-01-01"
+# as_percentage = TRUE : show the result as a percentage 
+# of all tracks played from strat_date to end_date
 
 
 count_skipped(streaming_history, start_date = "2018-01-01", end_date = "2019-01-01", as_percentage = TRUE)
@@ -205,7 +232,9 @@ This function finds the longest listening session (see `continuous_listening`) a
 ### Example
 
 ```{r}
-# streaming_history = streaming_history : streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history = streaming_history : streaming_history : 
+# part of streaming history of one user,
+# made with complete_streaming_history
 # mins = 5 : the breaks must be less than 5 minutes
 long_session <- longest_session(streaming_history, mins = 5)
 
@@ -220,7 +249,8 @@ This function calculates and returns the stats of the single listening session.
 ### Example
 
 ```{r}
-# session_dt = long_session : see the stats of the longest session found earlier with longest_session function 
+# session_dt = long_session : see the stats of the longest 
+# session found earlier with longest_session function 
 make_session_stats(long_session)
 ```
 
@@ -231,7 +261,9 @@ This function shows about length of every session. Excludes skipped tracks.
 ### Example
 
 ```{r}
-# streaming_history = streaming_history : streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history = streaming_history : streaming_history : 
+# part of streaming history of one user,
+# made with complete_streaming_history
 # mins = 5 : the breaks must be less than 5 minutes
 # see the data
 head(sessions_length(streaming_history, mins = 5))
@@ -251,7 +283,9 @@ Sessions length are divided into categories:
 * 6h+  
 
 ```{r}
-# streaming_history = streaming_history : streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history = streaming_history : streaming_history :
+# part of streaming history of one user,
+# made with complete_streaming_history
 # mins = 5 : the breaks must be less than 5 minutes
 
 # see the table
@@ -268,7 +302,8 @@ This function plots number of search queries performed by user on different days
 ### Example
 
 ```{r}
-# search_queries = search_queries : part of search queries of one user, made with search_qeuries_dt
+# search_queries = search_queries : part of search queries
+# of one user, made with search_qeuries_dt
 # additional = "platform" : show which platform the user used
 plot_searches(search_queries, additional = "platform")
 ```
@@ -280,7 +315,8 @@ This function plots the number of tracks or the time played for tracks from user
 
 ## Example
 ```{r}
-# str_his_with_playlist_wide = playlists_wide : use the wide format of the data table with streaming history and playlists
+# str_his_with_playlist_wide = playlists_wide : use the wide
+# format of the data table with streaming history and playlists
 # as_percentage = FALSE : show as a value and not as a percentage
 # time_or_count = "time" : count the sum of playtimes
 # time_unit = "hours" : set the unit of time shown to hours
@@ -295,7 +331,8 @@ This function plots the popularity of  the playlists - either counting the numbe
 ### Example 
 
 ```{r}
-# str_his_with_playlist_long = playlists_long : use the long format of the data table with streaming history and playlists
+# str_his_with_playlist_long = playlists_long : use the long 
+# format of the data table with streaming history and playlists
 # time_or_count = "time" : count the sum of playtimes
 # time_unit = "hours" : set the unit of time shown to hours
 
@@ -309,7 +346,8 @@ This function plots how many tracks were played overtime, split by some period o
 # Example 
 
 ```{r}
-# streaming_history =  streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history =  streaming_history : part of streaming 
+# history of one user, made with complete_streaming_history
 # only_skipped = FALSE : show skipped and played tracks
 # by = "day" : split the dateline by day
 plot_track_count(streaming_history, only_skipped = FALSE, by = "day")
@@ -322,7 +360,8 @@ This function plots either daily or hourly habits of listening of the user.
 # Example
 
 ```{r}
-# streaming_history =  streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history =  streaming_history : part of streaming 
+# history of one user, made with complete_streaming_history
 # include_skipped = FALSE : don't show skipped tracks
 # period = "hour" : show hourly habbits
 # as_percentage = FALSE : don't as the percentage
@@ -342,9 +381,11 @@ This function plots the number of sessions for different session lengths.Session
 * 6h+ 
 
 ```{r}
-# streaming_history =  streaming_history : part of streaming history of one user, made with complete_streaming_history
+# streaming_history =  streaming_history : part of streaming
+# history of one user, made with complete_streaming_history
 # mins = 5 : the breaks must be less than 5 minutes
-# as_percentage = TRUE : show as a percentage of the number of all sessions
+# as_percentage = TRUE : show as a percentage of the number
+# of all sessions
 sessions_visualize(streaming_history, mins = 5, as_percentage = TRUE)
 
 ```
