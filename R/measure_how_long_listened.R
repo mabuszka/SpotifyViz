@@ -32,7 +32,7 @@ measure_how_long_listened <- function(streaming_history, start_date, end_date, a
   start_time <- s_played <- NULL
   end_date <- as_date(end_date)
   start_date <- as_date(start_date)
-  total <- round(streaming_history[start_time >= start_date & start_time <= end_date, sum(s_played)], 0)
+  total <- round(streaming_history[start_time >= start_date & start_time <= as_date(end_date) + duration(86399, "second"), sum(s_played)], 0)
   seconds_in_period <- as.numeric(difftime(end_date, start_date, units = "secs"))
   percent <- round(total / seconds_in_period * 100, digits = 2)
   if (as_percentage & for_viewing) return(paste(percent, "%", sep = ""))

@@ -28,7 +28,7 @@ count_skipped <-
     end_date <- as_date(end_date)
     start_date <- as_date(start_date)
     data <- streaming_history[start_date <= start_time &
-                                end_date >= end_time, ]
+                                as_date(end_date) + duration(86399, "second") >= end_time, ]
     n <- data[skipped == TRUE, .N]
     if (as_percentage) {
       return(paste(round((n / data[, .N]) * 100, digits = 2), "%", sep = ""))
