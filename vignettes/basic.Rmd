@@ -73,8 +73,7 @@ head(playlists)
 
 # Preparing the additional data
 
-## str_his_with_playlists_wide, str_his_with_playlist_long
-This functions make the data table containing information about user streaming history with additional information on whether the track was part of one of the playlist provided by the playlist data table. The wide version gives the output in the wide form, and the long version in the long form.
+Now, since we have our data in appropriate form, we can start analyzing them.
 
 ### Example
 
